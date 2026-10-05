@@ -1,0 +1,9 @@
+# Generated deployment files and local Studio locks
+build/
+*.rbxl.lock
+*.rbxl.autosave
+*.rbxl.auto-recovery
+*.blend1
+*.blend2
+__pycache__/
+*.pyc
