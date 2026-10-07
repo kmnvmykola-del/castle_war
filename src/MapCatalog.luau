@@ -1,9 +1,9 @@
 local Network=require(script.Parent.MapNetwork)
-local Catalog={Items={{Id='TwoBridges',Name='Две переправы'},{Id='LandFrontiers',Name='Сухопутные рубежи'},{Id='RiverPass',Name='Речной проход'}}}
+local Catalog={Items={{Id='TwoBridges',Name='Two Crossings'},{Id='LandFrontiers',Name='Land Frontiers'},{Id='RiverPass',Name='River Pass'}}}
 function Catalog.Definition(id)
     local d=Network.DefaultDefinition()
     if id=='LandFrontiers' then
-        d.Name='Сухопутные рубежи';d.River=false
+        d.Name='Land Frontiers';d.River=false
         for _,n in d.Nodes do
             if n.Kind=='Castle' or n.Kind=='Farm' then n.Z=1
             elseif n.Kind=='Camp' then n.Z=-1 end
@@ -13,7 +13,7 @@ function Catalog.Definition(id)
             elseif n.Id=='SouthWest' then n.X=-2;n.Z=2 end
         end
     elseif id=='RiverPass' then
-        d.Name='Речной проход'
+        d.Name='River Pass'
         for _,n in d.Nodes do
             if n.Id=='NorthTower' then n.X=-1;n.Z=0
             elseif n.Id=='NorthEast' then n.X=1;n.Z=0

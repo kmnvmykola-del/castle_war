@@ -16,7 +16,7 @@ function Network.new(notify,changed)
     self.Directory=Directory.new({Registry=memory:GetSortedMap('KingdomsLobbiesV1'),Locks=memory:GetHashMap('KingdomsLobbyLocksV1'),Matches=self.Core.S.Matches,Now=os.time,Guid=self.Core.S.Guid,Reserve=self.Core.S.Reserve,Capacity=Players.MaxPlayers})
     Teleport.TeleportInitFailed:Connect(function(player,_,_,_,options)
         local connection=self.Connections[player]
-        if connection then connection.InFlight=false;connection.Options=options;connection.NextAttempt=os.clock()+3;self.Notify(player,'Переход задержался. Повторяем подключение…')end
+        if connection then connection.InFlight=false;connection.Options=options;connection.NextAttempt=os.clock()+3;self.Notify(player,'Connection delayed. Retrying…')end
     end)
     if self.Reserved then
         task.spawn(function()
@@ -44,7 +44,7 @@ function Network.new(notify,changed)
                 for player,token in self.Tokens do
                     if player.Parent and not self.Connections[player]then
                         local ok,assignment=pcall(function()
-                            if renew and not self.Core:Renew(player.UserId,token)then self.Tokens[player]=nil;self.Notify(player,'Поиск истёк. Нажми поиск ещё раз.');self.Changed(player);return nil end
+                            if renew and not self.Core:Renew(player.UserId,token)then self.Tokens[player]=nil;self.Notify(player,'Your search expired. Start a new search.');self.Changed(player);return nil end
                             return self.Core:Assignment(player.UserId,token)
                         end)
                         if ok and assignment then self:Connect(player,assignment)end
@@ -71,7 +71,7 @@ function Network:Status(player)
 end
 function Network:Attempt(player,c)
     if c.Attempts>=5 then
-        self.Connections[player]=nil;self.Notify(player,'Не удалось подключиться. Нажми «Повторить подключение» или попробуй вернуться в лобби.');self.Changed(player);return
+        self.Connections[player]=nil;self.Notify(player,'Could not connect. Retry the connection or return to the lobby.');self.Changed(player);return
     end
     c.Attempts+=1;c.InFlight=true;c.SentAt=os.clock()
     local ok=pcall(function()Teleport:TeleportAsync(game.PlaceId,{player},c.Options)end)
@@ -81,38 +81,38 @@ function Network:Connect(player,assignment)
     if self.Connections[player]then return end
     local options=Instance.new('TeleportOptions');options.ReservedServerAccessCode=assignment.AccessCode
     local c={Options=options,Attempts=0,InFlight=false,NextAttempt=0};self.Connections[player]=c
-    self.Notify(player,'Матч готов. Подключаемся к отдельному серверу…');self.Changed(player);self:Attempt(player,c)
+    self.Notify(player,'Match ready. Connecting to a dedicated server…');self.Changed(player);self:Attempt(player,c)
 end
 function Network:Join(player,profile,mode)
-    if self.Reserved and not self.IsHub then return false,'Вернись в лобби для поиска нового матча.'end
-    if self.Connections[player]then return false,'Уже подключаемся к матчу.'end
+    if self.Reserved and not self.IsHub then return false,'Return to the lobby to find a new match.'end
+    if self.Connections[player]then return false,'Already connecting to a match.'end
     if self.Tokens[player]then
         local ok,assignment=pcall(function()return self.Core:Assignment(player.UserId,self.Tokens[player])end)
-        if ok and assignment then self:Connect(player,assignment);return true,'Повторяем подключение.'end
-        return true,'Поиск соперника среди всех лобби…'
+        if ok and assignment then self:Connect(player,assignment);return true,'Retrying the connection.'end
+        return true,'Finding an opponent across all lobbies…'
     end
     local ok,token=pcall(function()return self.Core:Join(player.UserId,game.JobId,profile,mode)end)
-    if not ok then return false,'Поиск временно недоступен. Попробуй ещё раз.'end
+    if not ok then return false,'Matchmaking is temporarily unavailable. Please try again.'end
     self.QueueMode= self.QueueMode or {};self.QueueMode[player]=mode=='Ranked'and 'Ranked'or 'PvP'
-    self.Tokens[player]=token;self.Changed(player);return true,'Поиск соперника среди всех лобби…'
+    self.Tokens[player]=token;self.Changed(player);return true,'Finding an opponent across all lobbies…'
 end
 function Network:Cancel(player)
-    if self.Connections[player]then return false,'Матч уже готов, подключаемся.'end
-    local token=self.Tokens[player];if not token then return true,'Поиск отменён.'end
+    if self.Connections[player]then return false,'Your match is ready. Connecting…'end
+    local token=self.Tokens[player];if not token then return true,'Search cancelled.'end
     local ok,cancelled=pcall(function()return self.Core:Cancel(player.UserId,token)end)
-    if ok and cancelled then self.Tokens[player]=nil;self.Changed(player);return true,'Поиск отменён.'end
-    return false,'Соперник уже найден. Ожидаем подключения.'
+    if ok and cancelled then self.Tokens[player]=nil;self.Changed(player);return true,'Search cancelled.'end
+    return false,'Opponent found. Waiting for the connection.'
 end
 function Network:Solo(player,definition,mapId,difficulty)
-    if self.Reserved and not self.IsHub then return false,'Вернись в лобби для нового матча.'end
-    if self.Connections[player]then return false,'Уже подключаемся к матчу.'end
+    if self.Reserved and not self.IsHub then return false,'Return to the lobby for a new match.'end
+    if self.Connections[player]then return false,'Already connecting to a match.'end
     local cancelled,message=self:Cancel(player);if not cancelled then return false,message end
     self.Connections[player]={Attempts=0,InFlight=true,NextAttempt=math.huge}
     self.Changed(player)
     local ok,assignment=pcall(function()return self.Core:Solo(player.UserId,definition,mapId,difficulty)end)
     self.Connections[player]=nil
-    if not ok then self.Changed(player);return false,'Не удалось создать сервер матча. Попробуй ещё раз.'end
-    self:Connect(player,assignment);return true,'Подключаемся к матчу с ИИ…'
+    if not ok then self.Changed(player);return false,'Could not create the match server. Please try again.'end
+    self:Connect(player,assignment);return true,'Connecting to an AI match…'
 end
 function Network:EnterLobby(player,level)
     if self.Studio then return true end
@@ -127,7 +127,7 @@ function Network:EnterLobby(player,level)
         end
         self.Connections[player]=nil
         if not player.Parent then return end
-        if assignment then self:Connect(player,assignment)else self.Notify(player,'Лобби временно недоступно. Можно повторить переход.');self.Changed(player)end
+        if assignment then self:Connect(player,assignment)else self.Notify(player,'The lobby is temporarily unavailable. You can retry.');self.Changed(player)end
     end)
     return true
 end

@@ -39,21 +39,21 @@ local function gridPath(a,b,occupied,river)
 end
 local function compile(definition,options)
     local incomplete=options and options.AllowIncomplete
-    if typeof(definition)~='table' or typeof(definition.Nodes)~='table' or typeof(definition.Roads)~='table' then return nil,'Нужны здания и дороги.' end
-    if #definition.Nodes>80 or #definition.Roads>160 then return nil,'Карта слишком большая.' end
+    if typeof(definition)~='table' or typeof(definition.Nodes)~='table' or typeof(definition.Roads)~='table' then return nil,'Buildings and roads are required.' end
+    if #definition.Nodes>80 or #definition.Roads>160 then return nil,'The map is too large.' end
     local river=definition.River~=false
-    local M={Sites={},Points={},Edges={},Bridges={},River=river,CellSize=Map.CellSize,Bounds=Map.Bounds,Definition={Name=typeof(definition.Name)=='string' and string.sub(definition.Name,1,60) or 'Моя карта',River=river,Nodes={},Roads={}}}
+    local M={Sites={},Points={},Edges={},Bridges={},River=river,CellSize=Map.CellSize,Bounds=Map.Bounds,Definition={Name=typeof(definition.Name)=='string' and string.sub(definition.Name,1,60) or 'My Map',River=river,Nodes={},Roads={}}}
     local known,occupied,buildings={}, {},{}
     local castles={}
     for _,n in definition.Nodes do
-        if typeof(n)~='table' or typeof(n.Id)~='string' or #n.Id>40 or not n.Id:match('^[%w_]+$') or known[n.Id] then return nil,'У каждой точки должно быть своё имя.' end
-        if not integer(n.X) or not integer(n.Z) or n.X<Map.Bounds.MinX or n.X>Map.Bounds.MaxX or n.Z<Map.Bounds.MinZ or n.Z>Map.Bounds.MaxZ then return nil,'Размести объект в клетке поля.' end
-        if river and n.X==0 then return nil,'В русле реки размещаются только мосты дорог.' end
-        if n.Kind~='Junction' and not Config.Buildings[n.Kind] then return nil,'Неизвестное здание.' end
+        if typeof(n)~='table' or typeof(n.Id)~='string' or #n.Id>40 or not n.Id:match('^[%w_]+$') or known[n.Id] then return nil,'Each point must have a unique ID.' end
+        if not integer(n.X) or not integer(n.Z) or n.X<Map.Bounds.MinX or n.X>Map.Bounds.MaxX or n.Z<Map.Bounds.MinZ or n.Z>Map.Bounds.MaxZ then return nil,'Place the object in a cell within the map.' end
+        if river and n.X==0 then return nil,'Only road bridges can cross the riverbed.' end
+        if n.Kind~='Junction' and not Config.Buildings[n.Kind] then return nil,'Unknown building type.' end
         local key=cell(n.X,n.Z)
-        if occupied[key] then return nil,'В клетке уже есть объект.' end
+        if occupied[key] then return nil,'This cell is already occupied.' end
         local owner=n.Owner or 0
-        if owner~=0 and owner~=1 and owner~=2 then return nil,'Неизвестная сторона.' end
+        if owner~=0 and owner~=1 and owner~=2 then return nil,'Unknown team.' end
         local copy={Id=n.Id,Kind=n.Kind,X=n.X,Z=n.Z,Owner=owner}
         table.insert(M.Definition.Nodes,copy);known[n.Id]=copy;occupied[key]=true
         local center=Vector3.new(n.X*Map.CellSize,0,n.Z*Map.CellSize)
@@ -64,7 +64,7 @@ local function compile(definition,options)
             M.Points[n.Id]=entrance
             table.insert(M.Sites,{Id=n.Id,Kind=n.Kind,Position=center,Entrance=entrance,Owner=owner,Zone=n.X<0 and 1 or 2,Initial=initial[n.Kind]})
             if n.Kind=='Castle' and owner~=0 then
-                if castles[owner] and not incomplete then return nil,'Нужен один замок каждой стороны.' end
+                if castles[owner] and not incomplete then return nil,'Each team needs exactly one castle.' end
                 castles[owner]=n.Id
             end
         end
@@ -72,7 +72,7 @@ local function compile(definition,options)
     if not incomplete then
         local counts={0,0}
         for _,s in M.Sites do if s.Kind=='Castle' and s.Owner~=0 then counts[s.Owner]+=1 end end
-        if counts[1]~=1 or counts[2]~=1 then return nil,'Размести один синий и один красный замок.' end
+        if counts[1]~=1 or counts[2]~=1 then return nil,'Place one Blue castle and one Red castle.' end
     end
     local vertices,adjacency,segments,bridgeKeys={},{},{},{}
     local raw={}
@@ -105,12 +105,12 @@ local function compile(definition,options)
     end
     local seen={}
     for _,edge in definition.Roads do
-        if typeof(edge)~='table' or not known[edge[1]] or not known[edge[2]] or edge[1]==edge[2] then return nil,'Дорога соединяет две существующие разные точки.' end
+        if typeof(edge)~='table' or not known[edge[1]] or not known[edge[2]] or edge[1]==edge[2] then return nil,'A road must connect two different existing points.' end
         local a,b=known[edge[1]],known[edge[2]]
         local key=a.Id<b.Id and a.Id..'|'..b.Id or b.Id..'|'..a.Id
         if seen[key] then continue end;seen[key]=true
         local cells=gridPath(a,b,buildings,river)
-        if not cells then return nil,'Для дороги '..a.Id..' → '..b.Id..' нет свободных клеток.' end
+        if not cells then return nil,'Road '..a.Id..' → '..b.Id..' has no free cells.' end
         table.insert(M.Definition.Roads,{a.Id,b.Id})
         local points={}
         for i,p in cells do
@@ -242,14 +242,14 @@ local function compile(definition,options)
         remember({points,ids});return points,ids
     end
     if not incomplete then
-        if not M.Route(castles[1],castles[2],true) then return nil,'Соедини замки дорогами и переправой.' end
-        for _,s in M.Sites do if not M.Route(castles[1],s.Id,true) then return nil,'Здание '..s.Id..' не соединено с дорожной сетью.' end end
+        if not M.Route(castles[1],castles[2],true) then return nil,'Connect the castles with roads and a crossing.' end
+        for _,s in M.Sites do if not M.Route(castles[1],s.Id,true) then return nil,'Building '..s.Id..' is disconnected from the road network.' end end
     end
     return M
 end
 Map.Create=compile
 function Map.DefaultDefinition()
-    local d={Name='Две переправы',River=true,Nodes={},Roads={}}
+    local d={Name='Two Crossings',River=true,Nodes={},Roads={}}
     local function add(id,kind,x,z,owner) table.insert(d.Nodes,{Id=id,Kind=kind,X=x,Z=z,Owner=owner or 0}) end
     for side=1,2 do
         local s=side==1 and -1 or 1

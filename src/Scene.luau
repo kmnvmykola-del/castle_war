@@ -3,85 +3,100 @@ local Map=require(script.Parent.MapData)
 local Art=require(script.Parent.Art)
 local RoadCosmetics=require(script.Parent.RoadCosmetics)
 local Scene={}
+local function buildingRoot(position,ground)
+    return CFrame.new(position.X,ground,position.Z)*CFrame.Angles(0,Config.BuildingYaw,0)
+end
 local function part(parent,name,size,cf,color,material)
     local p=Instance.new('Part');p.Name=name;p.Size=size;p.CFrame=cf;p.Color=color;p.Material=material or Enum.Material.SmoothPlastic
     p.Anchored=true;p.CanCollide=false;p.CanTouch=false;p.CanQuery=false;p.Parent=parent;return p
 end
-function Scene.Build(parent,activeMap,viewerSide)
-    activeMap=activeMap or Map;Art.Prepare()
-    for _,p in parent:GetChildren() do
-        if p:IsA('SpawnLocation') or p.Name=='Baseplate' and p:IsA('BasePart') then
-            p.Transparency=1;p.CanCollide=false;p.CanQuery=false
-            for _,d in p:GetDescendants() do if d:IsA('Decal') or d:IsA('Texture') then d.Transparency=1 end end
-        end
+local function buildNode(folder,site,viewerSide)
+    local model=Instance.new('Model');model.Name=site.Id;model:SetAttribute('SiteId',site.Id);model.Parent=folder
+    local foundation=part(model,'Foundation',Vector3.new(27,.16,27),CFrame.new(site.Position.X,.035,site.Position.Z),Color3.fromRGB(157,157,128),Enum.Material.Cobblestone)
+    local teamColor=Config.TeamColor(site.Owner,viewerSide)
+    local borders={}
+    for _,edge in {{0,-13.15,27,.7},{0,13.15,27,.7},{-13.15,0,.7,27},{13.15,0,.7,27}}do
+        table.insert(borders,part(model,'Team Border',Vector3.new(edge[3],.06,edge[4]),CFrame.new(site.Position.X+edge[1],.145,site.Position.Z+edge[2]),teamColor))
     end
-    local old=parent:FindFirstChild('KingdomsScene');if old then old:Destroy() end
-    Art.Prune()
-    local folder=Instance.new('Folder');folder.Name='KingdomsScene';folder.Parent=parent
-    local grid=Instance.new('Folder');grid.Name='Сетка';grid.Parent=folder
-    local h=activeMap.CellSize/2;local b=activeMap.Bounds
-    local extent=(b.MaxX+.5)*activeMap.CellSize;local depth=(b.MaxZ-b.MinZ+1)*activeMap.CellSize
-    if activeMap.River then for _,side in {-1,1} do
-        part(folder,'Берег',Vector3.new(extent-h,3,depth),CFrame.new(side*(extent+h)/2,-1.5,0),Color3.fromRGB(120,147,92),Enum.Material.Grass)
+    foundation.Color=Color3.fromRGB(157,157,140):Lerp(teamColor,.18)
+    local base=Art.Bounds(site.Kind..'_Base');local ground=.115-base.Minimum.Y
+    local root=buildingRoot(site.Position,ground)
+    local pick=part(model,'Selection',Vector3.new(29,Config.Buildings[site.Kind].Height,29),CFrame.new(site.Position.X,Config.Buildings[site.Kind].Height/2,site.Position.Z),Color3.new(1,1,1))
+    pick.Transparency=1;pick.CanQuery=true;pick:SetAttribute('SiteId',site.Id);model.PrimaryPart=pick
+    local pieces,roots,heights={},{},{}
+    for level=1,3 do
+        local name=site.Kind..(level==1 and '_Base' or '_Upgrade'..level)
+        local template=Art.Bounds(name);local min,max=template.Minimum,template.Maximum
+        roots[level]=buildingRoot(site.Position,.115-min.Y);heights[level]=.115+max.Y-min.Y
+        if level==1 then local mesh=Art.Clone(name,model,roots[level]);mesh:SetAttribute('RequiredLevel',level);table.insert(pieces,mesh)end
     end
-    local water=part(folder,'Река',Vector3.new(activeMap.CellSize,.15,depth),CFrame.new(0,-.12,0),Color3.fromRGB(77,143,164),Enum.Material.Glass);water.Transparency=.12
-    else part(folder,'Равнина',Vector3.new(extent*2,3,depth),CFrame.new(0,-1.5,0),Color3.fromRGB(120,147,92),Enum.Material.Grass)end
-    for x=b.MinX,b.MaxX do for z=b.MinZ,b.MaxZ do
-        if activeMap.River and x==0 then continue end
-        local shade=(x+z)%2==0 and Color3.fromRGB(149,170,121) or Color3.fromRGB(130,154,107)
-        local tile=part(grid,'Клетка',Vector3.new(activeMap.CellSize-.35,.025,activeMap.CellSize-.35),CFrame.new(x*32,.017,z*32),shade)
-        tile:SetAttribute('CellX',x);tile:SetAttribute('CellZ',z);tile.Transparency=1
-    end end
-    local roads=Instance.new('Folder');roads.Name='Дороги';roads.Parent=folder
+    pick.Size=Vector3.new(29,heights[3]+4,29);pick.CFrame=CFrame.new(site.Position.X,(heights[3]+4)/2,site.Position.Z)
+    local ruins=site.Kind=='Tower' and Art.Clone('Tower_Ruins',model,root) or nil;if ruins then ruins.Transparency=1 end
+    local height=heights[1]
+    local pole=Art.Clone('FlagPole',model,CFrame.new(site.Position.X,height-.9,site.Position.Z))
+    local flag=Art.Clone('FlagCloth',model,CFrame.new(site.Position.X,height+1.4,site.Position.Z),teamColor)
+    local labelPoint=site.Position+Vector3.new(0,height+4,0)
+    return {Owner=site.Owner,Model=model,Pick=pick,Parts=pieces,Level=1,Flag=flag,Pole=pole,Heights=heights,Kind=site.Kind,Ruins=ruins,Position=site.Position,LabelPoint=labelPoint,Foundation=foundation,Borders=borders}
+end
+local function buildRoads(folder,activeMap)
+    local gates={}
+    local roads=Instance.new('Folder');roads.Name='Roads';roads.Parent=folder
     local roadRecords={}
     for index,edge in activeMap.Edges do
         local a,c=activeMap.GraphPoints[edge[1]],activeMap.GraphPoints[edge[2]]
         local center=(a+c)/2+Vector3.new(0,.075,0)
-        local road=part(roads,'Дорога',Vector3.new(4.6,.12,(a-c).Magnitude+.08),CFrame.lookAt(center,c+Vector3.new(0,.075,0)),Color3.fromRGB(202,183,137),Enum.Material.Sand)
+        local road=part(roads,'Road',Vector3.new(4.6,.12,(a-c).Magnitude+.08),CFrame.lookAt(center,c+Vector3.new(0,.075,0)),Color3.fromRGB(202,183,137),Enum.Material.Sand)
         road:SetAttribute('From',edge[1]);road:SetAttribute('To',edge[2])
         roadRecords[index]={Base=road,Edge=edge,A=a,B=c,Parts={},Skin=nil}
     end
     for _,p in activeMap.GraphPoints do
-        part(roads,'Перекрёсток',Vector3.new(4.6,.12,4.6),CFrame.new(p.X,.075,p.Z),Color3.fromRGB(202,183,137),Enum.Material.Sand)
+        part(roads,'Junction',Vector3.new(4.6,.12,4.6),CFrame.new(p.X,.075,p.Z),Color3.fromRGB(202,183,137),Enum.Material.Sand)
     end
     for _,bridge in activeMap.Bridges do
-        Art.Clone('Bridge',folder,CFrame.new(bridge.Position.X,-.1,bridge.Position.Z))
-        local gate=part(folder,'Переправа',Vector3.new(1.1,4.2,7),CFrame.new(bridge.Position.X,2,bridge.Position.Z),Color3.fromRGB(83,53,32),Enum.Material.WoodPlanks);gate:SetAttribute('Gate',true)
+        Art.Clone('Bridge',roads,CFrame.new(bridge.Position.X,-.1,bridge.Position.Z))
+        local gate=part(roads,'Crossing',Vector3.new(1.1,4.2,7),CFrame.new(bridge.Position.X,2,bridge.Position.Z),Color3.fromRGB(83,53,32),Enum.Material.WoodPlanks);gate:SetAttribute('Gate',true);table.insert(gates,gate)
     end
+    return roads,roadRecords,gates
+end
+local function buildJunction(folder,n)
+    local pick=part(folder,n.Id,Vector3.new(8,.35,8),CFrame.new(n.X*32,.15,n.Z*32),Color3.fromRGB(211,191,143),Enum.Material.Cobblestone)
+    pick.CanQuery=true;pick:SetAttribute('SiteId',n.Id);pick:SetAttribute('CellX',n.X);pick:SetAttribute('CellZ',n.Z)
+    return pick
+end
+local function samePosition(a,b)return a.X==b.X and a.Y==b.Y and a.Z==b.Z end
+local function sameRoutes(a,b)
+    if #a.Edges~=#b.Edges or #a.Bridges~=#b.Bridges then return false end
+    for i,edge in a.Edges do
+        local other=b.Edges[i]
+        if edge[1]~=other[1] or edge[2]~=other[2] or edge.Crossing~=other.Crossing then return false end
+    end
+    for id,p in a.GraphPoints do if not b.GraphPoints[id] or not samePosition(p,b.GraphPoints[id])then return false end end
+    for id in b.GraphPoints do if not a.GraphPoints[id]then return false end end
+    for i,bridge in a.Bridges do if not samePosition(bridge.Position,b.Bridges[i].Position)then return false end end
+    return true
+end
+local function buildScene(folder,activeMap,viewerSide)
+    local grid=Instance.new('Folder');grid.Name='Grid';grid.Parent=folder
+    local h=activeMap.CellSize/2;local b=activeMap.Bounds
+    local extent=(b.MaxX+.5)*activeMap.CellSize;local depth=(b.MaxZ-b.MinZ+1)*activeMap.CellSize
+    if activeMap.River then for _,side in {-1,1} do
+        part(folder,'Riverbank',Vector3.new(extent-h,3,depth),CFrame.new(side*(extent+h)/2,-1.5,0),Color3.fromRGB(120,147,92),Enum.Material.Grass)
+    end
+    local water=part(folder,'River',Vector3.new(activeMap.CellSize,.15,depth),CFrame.new(0,-.12,0),Color3.fromRGB(77,143,164),Enum.Material.Glass);water.Transparency=.12
+    else part(folder,'Plain',Vector3.new(extent*2,3,depth),CFrame.new(0,-1.5,0),Color3.fromRGB(120,147,92),Enum.Material.Grass)end
+    for x=b.MinX,b.MaxX do for z=b.MinZ,b.MaxZ do
+        if activeMap.River and x==0 then continue end
+        local shade=(x+z)%2==0 and Color3.fromRGB(149,170,121) or Color3.fromRGB(130,154,107)
+        local tile=part(grid,'Cell',Vector3.new(activeMap.CellSize-.35,.025,activeMap.CellSize-.35),CFrame.new(x*32,.017,z*32),shade)
+        tile:SetAttribute('CellX',x);tile:SetAttribute('CellZ',z);tile.Transparency=1
+    end end
+    local roads,roadRecords,gates=buildRoads(folder,activeMap)
     local nodes={}
-    for _,site in activeMap.Sites do
-        local model=Instance.new('Model');model.Name=site.Id;model:SetAttribute('SiteId',site.Id);model.Parent=folder
-        local foundation=part(model,'Площадка',Vector3.new(27,.16,27),CFrame.new(site.Position.X,.035,site.Position.Z),Color3.fromRGB(157,157,128),Enum.Material.Cobblestone)
-        local teamColor=Config.TeamColor(site.Owner,viewerSide)
-        local borders={}
-        for _,edge in {{0,-13.15,27,.7},{0,13.15,27,.7},{-13.15,0,.7,27},{13.15,0,.7,27}}do
-            table.insert(borders,part(model,'Сторона',Vector3.new(edge[3],.06,edge[4]),CFrame.new(site.Position.X+edge[1],.145,site.Position.Z+edge[2]),teamColor))
-        end
-        foundation.Color=Color3.fromRGB(157,157,140):Lerp(teamColor,.18)
-        local base=Art.Bounds(site.Kind..'_Base');local ground=.115-base.Minimum.Y
-        local root=CFrame.new(site.Position.X,ground,site.Position.Z)
-        local pick=part(model,'Выбор',Vector3.new(29,Config.Buildings[site.Kind].Height,29),CFrame.new(site.Position.X,Config.Buildings[site.Kind].Height/2,site.Position.Z),Color3.new(1,1,1))
-        pick.Transparency=1;pick.CanQuery=true;pick:SetAttribute('SiteId',site.Id);model.PrimaryPart=pick
-        local pieces,roots,heights={},{},{}
-        for level=1,3 do
-            local name=site.Kind..(level==1 and '_Base' or '_Upgrade'..level)
-            local template=Art.Bounds(name);local min,max=template.Minimum,template.Maximum
-            roots[level]=CFrame.new(site.Position.X,.115-min.Y,site.Position.Z);heights[level]=.115+max.Y-min.Y
-            if level==1 then local mesh=Art.Clone(name,model,roots[level]);mesh:SetAttribute('RequiredLevel',level);table.insert(pieces,mesh)end
-        end
-        pick.Size=Vector3.new(29,heights[3]+4,29);pick.CFrame=CFrame.new(site.Position.X,(heights[3]+4)/2,site.Position.Z)
-        local ruins=site.Kind=='Tower' and Art.Clone('Tower_Ruins',model,root) or nil;if ruins then ruins.Transparency=1 end
-        local height=heights[1]
-        local pole=Art.Clone('FlagPole',model,CFrame.new(site.Position.X,height-.9,site.Position.Z))
-        local flag=Art.Clone('FlagCloth',model,CFrame.new(site.Position.X,height+1.4,site.Position.Z),teamColor)
-        local labelPoint=site.Position+Vector3.new(0,height+4,0)
-        nodes[site.Id]={Model=model,Pick=pick,Parts=pieces,Level=1,Flag=flag,Pole=pole,Heights=heights,Kind=site.Kind,Ruins=ruins,Position=site.Position,LabelPoint=labelPoint,Foundation=foundation,Borders=borders}
-    end
+    for _,site in activeMap.Sites do nodes[site.Id]=buildNode(folder,site,viewerSide)end
     local junctions={}
     for _,n in activeMap.Definition.Nodes do
         if n.Kind=='Junction' then
-            local pick=part(folder,n.Id,Vector3.new(8,.35,8),CFrame.new(n.X*32,.15,n.Z*32),Color3.fromRGB(211,191,143),Enum.Material.Cobblestone)
-            pick.CanQuery=true;pick:SetAttribute('SiteId',n.Id);junctions[n.Id]=pick
+            junctions[n.Id]=buildJunction(folder,n)
         end
     end
     for i=1,34 do
@@ -89,8 +104,66 @@ function Scene.Build(parent,activeMap,viewerSide)
         Art.Clone('Tree',folder,CFrame.new(side*(42+(i*43)%220),0,(i%3==0 and -1 or 1)*(146+(i*7)%19))*CFrame.Angles(0,i*1.23,0))
     end
     for _,p in {{-244,-145},{244,145},{-220,160},{220,-160},{-24,-161},{24,161}} do Art.Clone('Rock',folder,CFrame.new(p[1],0,p[2])) end
-    local units=Instance.new('Folder');units.Name='Армии';units.Parent=folder
-    return {Folder=folder,Nodes=nodes,Junctions=junctions,Units=units,Grid=grid,Map=activeMap,ViewerSide=viewerSide or 1,Roads=roads,RoadRecords=roadRecords}
+    local units=Instance.new('Folder');units.Name='Armies';units.Parent=folder
+    return {Folder=folder,Nodes=nodes,Junctions=junctions,Units=units,Grid=grid,Map=activeMap,ViewerSide=viewerSide or 1,Roads=roads,RoadRecords=roadRecords,Gates=gates}
+end
+-- Keep the displayed scene alive until its replacement is complete.
+function Scene.Build(parent,activeMap,viewerSide)
+    activeMap=activeMap or Map;Art.Prepare()
+    for _,p in parent:GetChildren()do
+        if p:IsA('SpawnLocation') or p.Name=='Baseplate' and p:IsA('BasePart')then
+            p.Transparency=1;p.CanCollide=false;p.CanQuery=false
+            for _,d in p:GetDescendants()do if d:IsA('Decal') or d:IsA('Texture')then d.Transparency=1 end end
+        end
+    end
+    local old=parent:FindFirstChild('KingdomsScene')
+    local folder=Instance.new('Folder');folder.Name='KingdomsScene'
+    local ok,result=pcall(buildScene,folder,activeMap,viewerSide or 1)
+    if not ok then folder:Destroy();Art.Prune();error(result)end
+    folder.Parent=parent
+    if old then old:Destroy()end
+    Art.Prune()
+    return result
+end
+-- Editor edits retain scenery, grid, unchanged buildings and unchanged roads.
+-- Stage new objects first so failed mesh allocation leaves the map usable.
+function Scene.SyncEditor(scene,activeMap)
+    local before=scene.Map
+    local a,b=before.Bounds,activeMap.Bounds
+    if before.River~=activeMap.River or before.CellSize~=activeMap.CellSize
+        or a.MinX~=b.MinX or a.MaxX~=b.MaxX or a.MinZ~=b.MinZ or a.MaxZ~=b.MaxZ then
+        return Scene.Build(scene.Folder.Parent,activeMap,scene.ViewerSide)
+    end
+    local staging=Instance.new('Folder')
+    local nodes,junctions={},{}
+    local roads,records,gates
+    local ok,reason=pcall(function()
+        for _,site in activeMap.Sites do
+            local existing=scene.Nodes[site.Id]
+            if existing and existing.Kind==site.Kind and existing.Owner==site.Owner and samePosition(existing.Position,site.Position)then
+                nodes[site.Id]=existing
+            else nodes[site.Id]=buildNode(staging,site,scene.ViewerSide)end
+        end
+        for _,n in activeMap.Definition.Nodes do if n.Kind=='Junction'then
+            local existing=scene.Junctions[n.Id]
+            if existing and existing:GetAttribute('CellX')==n.X and existing:GetAttribute('CellZ')==n.Z then junctions[n.Id]=existing
+            else junctions[n.Id]=buildJunction(staging,n)end
+        end end
+        if not sameRoutes(before,activeMap)then roads,records,gates=buildRoads(staging,activeMap)end
+    end)
+    if not ok then staging:Destroy();Art.Prune();error(reason)end
+    for id,n in nodes do if scene.Nodes[id]~=n then n.Model.Parent=scene.Folder end end
+    for id,n in scene.Nodes do if nodes[id]~=n then n.Model:Destroy()end end
+    for id,p in junctions do if scene.Junctions[id]~=p then p.Parent=scene.Folder end end
+    for id,p in scene.Junctions do if junctions[id]~=p then p:Destroy()end end
+    if roads then
+        roads.Parent=scene.Folder;scene.Roads:Destroy()
+        scene.Roads=roads;scene.RoadRecords=records;scene.Gates=gates;scene.RoadAppearance=nil
+    end
+    staging:Destroy()
+    scene.Nodes=nodes;scene.Junctions=junctions;scene.Map=activeMap
+    Art.Prune()
+    return scene
 end
 function Scene.GridVisible(scene,visible)
     for _,p in scene.Grid:GetChildren() do p.Transparency=visible and .5 or 1 end
@@ -105,7 +178,7 @@ function Scene.Update(scene,state)
         if n.Level~=s.Level then
             for _,p in n.Parts do p:Destroy()end;n.Parts={};n.Level=s.Level
             local name=n.Kind..(s.Level==1 and '_Base'or '_Upgrade'..s.Level);local bounds=Art.Bounds(name)
-            local mesh=Art.Clone(name,n.Model,CFrame.new(n.Position.X,.115-bounds.Minimum.Y,n.Position.Z));mesh:SetAttribute('RequiredLevel',s.Level);table.insert(n.Parts,mesh)
+            local mesh=Art.Clone(name,n.Model,buildingRoot(n.Position,.115-bounds.Minimum.Y));mesh:SetAttribute('RequiredLevel',s.Level);table.insert(n.Parts,mesh)
         end
         for _,p in n.Parts do p.Transparency=not collapsed and p:GetAttribute('RequiredLevel')==s.Level and 0 or 1 end
         local height=collapsed and 1.8 or n.Heights[s.Level]
@@ -117,21 +190,26 @@ function Scene.Update(scene,state)
                 for _,p in n.Parts do p.Transparency=1 end
                 local name=n.Kind..(s.Level==1 and '_Base'or '_Upgrade'..s.Level)
                 local template=Art.Bounds(name);local ground=.115-template.Minimum.Y
-                n.Styled=Art.Clone(name,n.Model,CFrame.new(n.Position.X,ground,n.Position.Z),nil,skin)
+                n.Styled=Art.Clone(name,n.Model,buildingRoot(n.Position,ground),nil,skin)
             end
-            n.Decor=Instance.new('Folder');n.Decor.Name='Оформление';n.Decor.Parent=n.Model
+            n.Decor=Instance.new('Folder');n.Decor.Name='Cosmetics';n.Decor.Parent=n.Model
             if s.Owner>0 and not collapsed then
                 local front=({Village=3.32,Castle=s.Level==1 and 5.50 or 9.75,Barracks=3.82,Archery=2.4,Camp=2.3,Tower=2.78,Farm=.25})[n.Kind]
-                local dx=n.Kind=='Archery'and -1 or n.Kind=='Farm'and -2 or 0
+                local dx=n.Kind=='Archery'and 1 or n.Kind=='Farm'and 2 or 0
                 local y=n.Kind=='Castle'and (s.Level==1 and 4.3 or 3.0)or n.Kind=='Tower'and 4.1 or n.Kind=='Camp'and 2.3 or 2.1
-                local plaque=Art.Clone(skin..'_Herald',n.Decor,CFrame.new(n.Position.X+dx,y,n.Position.Z+front))
-                plaque.Name='Герб'
-                Art.Clone(skin..'_RoofCrest',n.Decor,CFrame.new(n.Position.X,height-.1,n.Position.Z))
+                local plaque=Art.Clone(skin..'_Herald',n.Decor,buildingRoot(n.Position+Vector3.new(dx,0,front),y))
+                plaque.Name='Heraldry'
+                Art.Clone(skin..'_RoofCrest',n.Decor,buildingRoot(n.Position,height-.1))
+                if Art.Modules[skin..'_Gateway']then
+                    local offset=Config.DoorOffsets[n.Kind];if typeof(offset)=='table'then offset=offset[s.Level]end
+                    local gate=Art.Clone(skin..'_Gateway',n.Decor,buildingRoot(n.Position+offset+Vector3.new(0,0,.28),.12))
+                    gate.Name='Premium Gateway'
+                end
             end
             n.Appearance=appearance
         elseif n.Styled then for _,p in n.Parts do p.Transparency=1 end end
-        n.Pole.CFrame=CFrame.new(n.Position.X,height-.9,n.Position.Z)*CFrame.new(Art.Cache.FlagPole:GetAttribute('Center'))
-        n.Flag.CFrame=CFrame.new(n.Position.X,height+1.4,n.Position.Z)*CFrame.new(Art.Cache.FlagCloth:GetAttribute('Center'))
+        n.Pole.CFrame=CFrame.new(n.Position.X,height-.9,n.Position.Z)*CFrame.new(Art.Cache.FlagPole:GetAttribute('Center'))*(n.Pole:GetAttribute('MeshRotation')or CFrame.identity)
+        n.Flag.CFrame=CFrame.new(n.Position.X,height+1.4,n.Position.Z)*CFrame.new(Art.Cache.FlagCloth:GetAttribute('Center'))*(n.Flag:GetAttribute('MeshRotation')or CFrame.identity)
         n.LabelPoint=n.Position+Vector3.new(0,height+4,0)
         if n.Ruins then n.Ruins.Transparency=collapsed and 0 or 1 end
     end
@@ -149,7 +227,7 @@ function Scene.Update(scene,state)
                     for tile=1,count do
                         local position=record.A:Lerp(record.B,(tile-.5)/count)+Vector3.new(0,.08,0)
                         local p=Art.Clone(skin..'_RoadTile',scene.Roads,CFrame.lookAt(position,position+(record.B-record.A)))
-                        p.Size=Vector3.new(4.60,p.Size.Y,length/count+.055);p.Name='Своя дорога';p:SetAttribute('Owner',side)
+                        p.Size=Vector3.new(4.60,p.Size.Y,length/count+.055);p.Name='Owned Road';p:SetAttribute('Owner',side)
                         table.insert(record.Parts,p)
                     end
                 end
@@ -158,7 +236,7 @@ function Scene.Update(scene,state)
         end
         scene.RoadAppearance=signature
     end
-    for _,p in scene.Folder:GetChildren() do if p:GetAttribute('Gate') then p.Transparency=state.Time>=Config.PrepTime and 1 or 0 end end
+    for _,p in scene.Gates do p.Transparency=state.Time>=Config.PrepTime and 1 or 0 end
 end
 return Scene
 

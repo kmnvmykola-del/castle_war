@@ -1,9 +1,11 @@
 -- Approved progression and cosmetic economy. Combat never reads these values.
 local P={XPPerLevel=200,CoinsPerLevel=100,CalibrationMatches=10,CalibrationWin=100,CalibrationLoss=25,RankWin=25,RankLoss=25}
-P.Skins=require(script.Parent.SkinStyles).Items
+local Styles=require(script.Parent.SkinStyles)
+P.Skins=Styles.Items
+P.Rarities=Styles.Rarities
 P.ChestPrice=300
--- Replace ProductId with the IDs of products created for this published experience.
-P.Products={{Id='Small',Coins=500,Price=49,ProductId=0},{Id='Medium',Coins=1500,Price=129,ProductId=0},{Id='Large',Coins=3500,Price=249,ProductId=0}}
+-- Developer products belonging to Frontier Kingdoms (universe 10769541065).
+P.Products={{Id='Small',Coins=500,Price=49,ProductId=3716851182},{Id='Medium',Coins=1500,Price=129,ProductId=3716851330},{Id='Large',Coins=3500,Price=249,ProductId=3716851499}}
 local function number(value,default)
     return typeof(value)=='number' and value==value and value~=math.huge and value~=-math.huge and math.max(0,math.floor(value)) or default or 0
 end
@@ -26,8 +28,26 @@ function P.Public(d)
     result.LevelXP=d.XP%P.XPPerLevel;result.LobbyBand=P.Band(d.Level);result.Skins=table.clone(d.Skins);return result
 end
 function P.ChestPool(d)
-    local pool={};for _,skin in P.Skins do if skin.Id~='Default'and not d.Skins[skin.Id]then table.insert(pool,skin.Id)end end
-    return pool,table.concat(pool,'|')
+    -- Odds stay fixed when the inventory changes; owning commons never makes
+    -- a mythic guaranteed. Duplicates give the advertised coin compensation.
+    local pool,signature,total={}, {'v013',tostring(P.ChestPrice)},0
+    for _,skin in P.Skins do if skin.Id~='Default'then
+        table.insert(pool,skin.Id);table.insert(signature,skin.Id..':'..skin.Weight..':'..skin.DuplicateCoins);total+=skin.Weight
+    end end
+    return pool,table.concat(signature,'|'),total
+end
+function P.CollectionCount(d)
+    local count=0;for _,skin in P.Skins do if d.Skins[skin.Id]==true then count+=1 end end;return count
+end
+function P.ChestRewards(d)
+    local pool,signature,total=P.ChestPool(d);local rewards={}
+    for _,id in pool do local skin=P.Skin(id);table.insert(rewards,{Id=id,Weight=skin.Weight,Total=total,Chance=skin.Weight/total*100,Owned=d.Skins[id]==true,Refund=skin.DuplicateCoins})end
+    return rewards,signature
+end
+function P.DrawChest(roll)
+    local pool,_,total=P.ChestPool();local cursor=math.clamp(roll,0,1)*total
+    for _,id in pool do cursor-=P.Skin(id).Weight;if cursor<0 then return id end end
+    return pool[#pool]
 end
 function P.Apply(d,result)
     if d.Matches[result.Id]then return nil end

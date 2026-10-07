@@ -223,7 +223,7 @@ function Engine:RouteForSide(side,from,to,preferred)
     local _,blocked=self.Map.Route(from,to,open,preferred or 'Auto')
     for i=2,#(blocked or {})-1 do
         local s=self.Sites[blocked[i]]
-        if s and s.Owner~=side then return nil,nil,'Нельзя пройти: сначала захвати промежуточное здание «'..Config.Buildings[s.Kind].Name..'». Доступного обхода нет.' end
+        if s and s.Owner~=side then return nil,nil,'Route blocked: capture the intermediate '..Config.Buildings[s.Kind].Name..' first. No alternative route is available.' end
     end
     return nil
 end
@@ -238,14 +238,14 @@ function Engine:ReleaseArchers()
     end
 end
 function Engine:Send(side,sources,targetId,percent,filter,preferred)
-    if self.Phase=='Waiting' or self.Phase=='Ended' then return false,'Бой ещё не начался или уже завершён.' end
+    if self.Phase=='Waiting' or self.Phase=='Ended' then return false,'The battle has not started or has already ended.' end
     local target=self.Sites[targetId]
-    if not target then return false,'Выбери здание на карте.' end
-    if typeof(percent)~='number' or percent~=percent then return false,'Неверная доля отряда.' end
+    if not target then return false,'Select a building on the map.' end
+    if typeof(percent)~='number' or percent~=percent then return false,'Invalid troop percentage.' end
     percent=math.clamp(percent,1,100)
-    if filter~='All' and not Config.Units[filter] then return false,'Неверный тип бойцов.' end
+    if filter~='All' and not Config.Units[filter] then return false,'Invalid unit type.' end
     if preferred~='North' and preferred~='South' then preferred='Auto' end
-    if typeof(sources)~='table' or #sources>80 then return false,'Неверный список зданий.' end
+    if typeof(sources)~='table' or #sources>80 then return false,'Invalid building list.' end
     local sent=0
     local blockedReason=nil
     local seen={}
@@ -326,8 +326,8 @@ function Engine:Send(side,sources,targetId,percent,filter,preferred)
             end
         end
     end
-    if sent==0 then return false,blockedReason or (self.Time<Config.PrepTime and 'Переправы закрыты до окончания подготовки, либо нет выбранных бойцов.' or 'Нет подходящих бойцов или пути к цели.') end
-    return true,'Отправлено: '..sent
+    if sent==0 then return false,blockedReason or (self.Time<Config.PrepTime and 'Crossings stay closed during preparation, or no selected units are available.' or 'No available units or route to the target.') end
+    return true,'Units sent: '..sent
 end
 function Engine:UpgradeCost(site)
     if site.Level>=3 then return nil end
@@ -342,13 +342,13 @@ function Engine:UpgradeCost(site)
 end
 function Engine:Upgrade(side,id)
     local site=self.Sites[id]
-    if not site or site.Owner~=side then return false,'Улучшать можно только своё здание.' end
-    if self.Phase=='Waiting' or self.Phase=='Ended' then return false,'Улучшение доступно во время боя.' end
-    if site.Level>=3 then return false,'Достигнут третий уровень.' end
-    if site.Kind=='Tower' and site.Health<=0 then return false,'Отправь отряд для восстановления башни.' end
-    if site.UpgradeUntil then return false,'Строительство уже идёт.' end
+    if not site or site.Owner~=side then return false,'You can only upgrade your own buildings.' end
+    if self.Phase=='Waiting' or self.Phase=='Ended' then return false,'Upgrades are available during battle.' end
+    if site.Level>=3 then return false,'Maximum level reached.' end
+    if site.Kind=='Tower' and site.Health<=0 then return false,'Send troops to rebuild the tower.' end
+    if site.UpgradeUntil then return false,'Construction is already in progress.' end
     local consume,affordable=self:UpgradeCost(site)
-    if not affordable then return false,'В гарнизоне нужно '..Config.UpgradeCost[site.Level+1]..' человек.' end
+    if not affordable then return false,'The garrison needs '..Config.UpgradeCost[site.Level+1]..' units.' end
     local list=table.clone(site.Garrison)
     for _,kind in {'Peasant','Runner','Defender','Archer'} do
         local left=consume[kind]
@@ -359,20 +359,20 @@ function Engine:Upgrade(side,id)
     end
     site.TrainClock=0
     site.UpgradeUntil=self.Time+Config.UpgradeDuration[site.Level+1]
-    return true,'Начато улучшение до уровня '..(site.Level+1)
+    return true,'Upgrading to level '..(site.Level+1)
 end
 function Engine:SetSupply(side,id,targetId,reserve,filter)
     local site,target=self.Sites[id],self.Sites[targetId]
-    if not site or site.Owner~=side then return false,'Выбери своё здание.' end
-    if not targetId then site.Supply=nil return true,'Автоснабжение отключено.' end
-    if not target or target.Owner~=side or target==site then return false,'Для снабжения выбери другое своё здание.' end
-    if typeof(reserve)~='number' or reserve~=reserve then return false,'Укажи резерв.' end
+    if not site or site.Owner~=side then return false,'Select one of your buildings.' end
+    if not targetId then site.Supply=nil return true,'Auto-supply disabled.' end
+    if not target or target.Owner~=side or target==site then return false,'Select another friendly building to supply.' end
+    if typeof(reserve)~='number' or reserve~=reserve then return false,'Set a reserve amount.' end
     filter=filter or 'All'
-    if filter~='All' and not Config.Units[filter] then return false,'Неверный тип бойцов.' end
+    if filter~='All' and not Config.Units[filter] then return false,'Invalid unit type.' end
     reserve=math.clamp(math.floor(reserve),0,400)
     local clock=site.Supply and site.Supply.Clock or 0
     site.Supply={Target=target.Id,Reserve=reserve,Filter=filter,Clock=clock}
-    return true,'Линия снабжения включена.'
+    return true,'Supply line enabled.'
 end
 function Engine:RemoveUnit(u)
     self:Detach(u)

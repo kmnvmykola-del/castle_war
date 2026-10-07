@@ -5,120 +5,321 @@ local Config=require(script.Parent.Config)
 local Tween=game:GetService('TweenService')
 local Collection={}
 function Collection.Build(u,m,hooks)
-    local C=UI.Colors;local function call(key,...)if hooks[key]then hooks[key](...)end end
-    local function label(parent,name,text,y,h,size)local l=UI.Label(parent,name,text,UDim2.new(1,-8,0,h),UDim2.fromOffset(0,y),size or 13);l.TextWrapped=true;return l end
-    local function viewport(page,name,y,h)
-        local v=Instance.new('ViewportFrame');v.Name=name;v.Size=UDim2.new(1,-8,0,h);v.Position=UDim2.fromOffset(0,y);v.BackgroundColor3=C.Inset;v.BorderSizePixel=0;v.Ambient=Color3.fromRGB(196,196,202);v.LightColor=Color3.fromRGB(255,246,219);v.LightDirection=Vector3.new(-1,-1,-1);v.Parent=page
+    local C=UI.Colors
+    local T={Panel=Color3.fromRGB(22,34,48),Inset=Color3.fromRGB(29,46,63),Line=Color3.fromRGB(60,81,99),Text=Color3.fromRGB(239,242,242),Muted=Color3.fromRGB(156,178,192),Gold=Color3.fromRGB(232,193,119),Mint=Color3.fromRGB(106,199,175)}
+    local function call(key,...)if hooks[key]then hooks[key](...)end end
+    local function color(hex)return Color3.fromRGB(tonumber(hex:sub(2,3),16),tonumber(hex:sub(4,5),16),tonumber(hex:sub(6,7),16))end
+    local function round(p,r)
+        for _,child in p:GetChildren()do if child:IsA('UICorner')then child.CornerRadius=UDim.new(0,r);return end end
+        local corner=Instance.new('UICorner');corner.CornerRadius=UDim.new(0,r);corner.Parent=p
+    end
+    local function stroke(p,tint)
+        local s=Instance.new('UIStroke');s.Color=tint or T.Line;s.Thickness=1;s.Transparency=.35;s.Parent=p;return s
+    end
+    local function gradient(p,a,b)
+        local g=Instance.new('UIGradient');g.Color=ColorSequence.new(a,b);g.Rotation=110;g.Parent=p;return g
+    end
+    local function panel(parent,name)
+        local f=UI.Frame(parent,name,UDim2.new(),UDim2.new(),T.Panel);round(f,12);stroke(f);return f
+    end
+    local function label(parent,name,text,y,h,size)
+        local l=UI.Label(parent,name,text,UDim2.new(1,-8,0,h),UDim2.fromOffset(0,y),size or 13)
+        l.TextColor3=T.Text;l.TextWrapped=true;return l
+    end
+    local function button(parent,name,text,fn)
+        local b=UI.Button(parent,name,text,UDim2.new(),UDim2.new(),fn);b.BackgroundColor3=T.Inset;b.TextSize=12;round(b,8);return b
+    end
+    local function enabled(b,active,accent)
+        b.Active=active;b.AutoButtonColor=active;b.BackgroundColor3=active and accent or T.Inset;b.TextColor3=active and T.Panel or T.Muted
+    end
+    local function page(name)
+        local p=m.Pages[name]
+        if p then for _,child in p:GetChildren()do child:Destroy()end
+        else p=Instance.new('ScrollingFrame');p.Name=name;p.BackgroundTransparency=1;p.BorderSizePixel=0;p.Visible=false;p.Parent=u.Card;m.Pages[name]=p end
+        p.Active=true;p.ScrollBarThickness=3;p.ScrollBarImageColor3=T.Muted;p.ScrollingDirection=Enum.ScrollingDirection.Y
+        return p
+    end
+    local function viewport(parent,name,y,h)
+        local v=Instance.new('ViewportFrame');v.Name=name;v.Size=UDim2.new(1,-8,0,h);v.Position=UDim2.fromOffset(0,y);v.BackgroundColor3=T.Inset;v.BorderSizePixel=0
+        v.Ambient=Color3.fromRGB(196,209,219);v.LightColor=Color3.fromRGB(255,242,211);v.LightDirection=Vector3.new(-1,-1,-1);v.Parent=parent;round(v,10)
+        -- A gradient on ViewportFrame also tints its rendered models.
         local cam=Instance.new('Camera');cam.Parent=v;v.CurrentCamera=cam
         local world=Instance.new('WorldModel');world.Parent=v;return v,cam,world
     end
     local function army(parent,id)
-        for i,kind in {'Defender','Archer','Runner','Peasant'}do local model=Art.Unit(kind,parent,Config.Colors[1],id);Art.Pose(model,CFrame.new((i-2.5)*1.4,0,0)*CFrame.Angles(0,math.pi,0),0,false,false)end
+        for i,kind in {'Defender','Archer','Runner','Peasant'}do
+            local model=Art.Unit(kind,parent,Config.Colors[1],id)
+            Art.Pose(model,CFrame.new((i-2.5)*1.4,0,0)*CFrame.Angles(0,math.pi,0),0,false,false)
+        end
     end
-    local function armyCamera(cam)cam.CFrame=CFrame.lookAt(Vector3.new(0,2.2,6.0),Vector3.new(0,1.15,0));cam.FieldOfView=36 end
-    local page=m.Pages.Shop
-    for _,child in page:GetChildren()do child:Destroy()end
-    page.CanvasSize=UDim2.fromOffset(0,595)
-    m.Balance=label(page,'Balance','Монеты: —',0,30,15);m.Balance.Size=UDim2.new(.5,0,0,30);m.Balance.TextColor3=C.Gold
-    UI.Button(page,'Chests','Сундуки →',UDim2.new(.5,-8,0,32),UDim2.fromScale(.5,0),function()call('Chests')end)
-    m.ViewMode='Army';m.ViewButtons={}
-    for i,item in {{'Army','Армия'},{'Buildings','Базы'},{'Roads','Дороги'}}do
-        local b=UI.Button(page,item[1],item[2],UDim2.new(1/3,-5,0,30),UDim2.new((i-1)/3,0,0,40),function()m.ViewMode=item[1];m.SelectSkin(m.Skin)end);b.TextSize=12;m.ViewButtons[item[1]]=b
+    local function armyCamera(cam)cam.CFrame=CFrame.lookAt(Vector3.new(0,2.2,6),Vector3.new(0,1.15,0));cam.FieldOfView=36 end
+    local function owns(id)return m.Profile~=nil and m.Profile.Skins[id]==true end
+    local function coinPrice(skin)
+        return skin.RobuxPrice and ((typeof(m.PremiumPrices[skin.Id])=='number'and m.PremiumPrices[skin.Id]or skin.RobuxPrice)..' Robux')or (skin.Price..' coins')
     end
-    local vp,cam,world=viewport(page,'Preview',78,165);m.World=world
-    m.PreviewLoading=label(page,'Loading','',82,24,12)
-    m.SkinName=label(page,'SkinName','',250,34,14)
-    local list=Instance.new('ScrollingFrame');list.Name='SkinList';list.Position=UDim2.fromOffset(0,290);list.Size=UDim2.new(1,-8,0,113);list.BackgroundColor3=C.Panel;list.BorderSizePixel=0;list.ScrollBarThickness=4;list.CanvasSize=UDim2.fromOffset(0,math.ceil(#P.Skins/3)*46);list.Parent=page
-    m.SkinButtons={}
-    for i,skin in P.Skins do local b=UI.Button(list,skin.Id,skin.Name,UDim2.new(1/3,-5,0,41),UDim2.new((i-1)%3/3,0,0,math.floor((i-1)/3)*46),function()call('PreviewSkin',skin.Id)end);b.TextSize=11;b.TextWrapped=true;m.SkinButtons[skin.Id]=b end
-    m.Buy=UI.Button(page,'Buy','',UDim2.new(.5,-8,0,40),UDim2.fromOffset(0,413),function()call('BuySkin',m.Skin)end)
-    m.Equip=UI.Button(page,'Equip','Надеть',UDim2.new(.5,-4,0,40),UDim2.new(.5,0,0,413),function()call('EquipSkin',m.Skin)end)
-    local hint=label(page,'Hint','Один набор: армия, здания и свои дороги. Характеристики прежние.',460,33,11);hint.TextColor3=C.Muted
-    label(page,'CoinsTitle','Монеты за Robux',498,23,12);m.Products={}
-    for i,product in P.Products do local b=UI.Button(page,product.Id,product.Coins..' монет\n'..(product.ProductId>0 and product.Price..' Robux'or 'Не подключено'),UDim2.new(1/3,-5,0,48),UDim2.new((i-1)/3,0,0,525),function()call('CoinPack',product.Id)end);b.TextSize=11;b.TextWrapped=true;b.Active=product.ProductId>0;b.AutoButtonColor=b.Active;m.Products[product.Id]=b end
-    local oldRefresh=m.RefreshShop
+    m.SetPages={};m.PremiumPrices=m.PremiumPrices or {}
+    local function shell(name,accent,selected)
+        local p=page(name)
+        local view={Page=p,Filter='All',Selected=selected,Mode='Army',Buttons={},Cards={},Tabs={},Filters={},Serial=0,Accent=accent}
+        m.SetPages[name]=view
+        view.Balance=label(p,'Balance','',0,25,15);view.Balance.Font=Enum.Font.GothamMedium;view.Balance.TextColor3=accent;view.Balance.Size=UDim2.new(.5,-8,0,25)
+        view.Subtitle=label(p,'Subtitle',name=='Inventory'and 'Your sets, ready for the next match' or 'Give your kingdom a complete new look',27,20,11);view.Subtitle.TextColor3=T.Muted;view.Subtitle.Size=UDim2.new(.5,-8,0,20)
+        local other=button(p,'Other',name=='Inventory'and 'Visit Shop →'or 'Inventory →',function()call(name=='Inventory'and 'Shop'or 'Inventory')end)
+        other.Size=UDim2.new(.26,-6,0,34);other.Position=UDim2.new(.5,0,0,4)
+        local cases=button(p,'Cases','Chests →',function()call('Chests')end);cases.Size=UDim2.new(.24,-8,0,34);cases.Position=UDim2.new(.76,0,0,4);cases.TextColor3=T.Gold
+        view.Catalog=panel(p,'Catalog');view.Detail=panel(p,'SelectedSet')
+        view.List=Instance.new('ScrollingFrame');view.List.Name='Sets';view.List.Active=true;view.List.BackgroundTransparency=1;view.List.BorderSizePixel=0;view.List.ScrollBarThickness=3;view.List.ScrollBarImageColor3=T.Muted;view.List.ScrollingDirection=Enum.ScrollingDirection.Y;view.List.Parent=view.Catalog
+        view.Empty=label(view.List,'Empty','',12,76,13);view.Empty.TextColor3=T.Muted;view.Empty.Visible=false
+        view.Name=label(view.Detail,'SetName','',14,46,20);view.Name.Position=UDim2.fromOffset(16,14);view.Name.Size=UDim2.new(1,-32,0,46);view.Name.Font=Enum.Font.GothamMedium
+        view.Rarity=label(view.Detail,'Rarity','',62,22,11);view.Rarity.Position=UDim2.fromOffset(16,62);view.Rarity.Size=UDim2.new(1,-32,0,22)
+        view.View,view.Camera,view.World=viewport(view.Detail,'Preview',94,190)
+        view.Loading=label(view.View,'Loading','',0,28,12);view.Loading.TextXAlignment=Enum.TextXAlignment.Center;view.Loading.Size=UDim2.new(1,0,1,0)
+        for i,item in {{'Army','Army'},{'Buildings','Buildings'},{'Roads','Roads'}}do
+            local b=button(view.Detail,item[1],item[2],function()view.Mode=item[1];m.SelectSkin(view.Selected)end);b.TextSize=11;view.Tabs[item[1]]=b
+        end
+        view.Description=label(view.Detail,'Contents','Army, buildings and roads in one set',0,34,11);view.Description.TextColor3=T.Muted
+        view.Hint=label(view.Detail,'Hint','',0,26,10);view.Hint.TextColor3=T.Muted;view.Hint.TextXAlignment=Enum.TextXAlignment.Center
+        return view
+    end
+    local function filters(view,items,y)
+        local row=UI.Frame(view.Catalog,'Filters',UDim2.new(1,-28,0,28),UDim2.fromOffset(14,y));row.BackgroundTransparency=1
+        for i,item in items do
+            local b=button(row,item[1],item[2],function()view.Filter=item[1];view.List.CanvasPosition=Vector2.new(0,0);m.RefreshShop()end)
+            b.TextSize=11;b.Size=UDim2.new(1/#items,-6,0,28);b.Position=UDim2.new((i-1)/#items,0,0,0);view.Filters[item[1]]=b
+        end
+    end
+    -- Inventory contains owned sets only and has a single equipment action.
+    local inventory=shell('Inventory',T.Mint,'Default')
+    label(inventory.Catalog,'Heading','MY SETS',14,22,12).Position=UDim2.fromOffset(14,14)
+    filters(inventory,{{'All','All Owned'},{'Rare','Rare +'},{'Mythic','Mythic'}},46)
+    inventory.Progress=UI.Frame(inventory.Page,'Progress',UDim2.new(.47,0,0,2),UDim2.fromOffset(0,53),T.Inset)
+    inventory.ProgressFill=UI.Frame(inventory.Progress,'Fill',UDim2.fromScale(0,1),UDim2.new(),T.Mint)
+    inventory.Equip=button(inventory.Detail,'Equip','Equip Set',function()if inventory.Equip.Active then call('EquipSkin',inventory.Selected)end end)
+    inventory.Hint.Text='Your new look applies from the next match'
+    m.Equip=inventory.Equip
+    -- Shop is a sales catalogue: currency filters, mythic offers and purchases.
+    local shop=shell('Shop',T.Gold,'Storm')
+    shop.Featured=panel(shop.Catalog,'MythicCollection');gradient(shop.Featured,Color3.fromRGB(66,49,45),Color3.fromRGB(34,34,49))
+    local featuredTitle=label(shop.Featured,'Title','MYTHIC COLLECTION',6,20,11);featuredTitle.Position=UDim2.fromOffset(10,6);featuredTitle.TextColor3=T.Gold
+    shop.FeaturedButtons={}
+    for i,item in {{'Storm','Storm'},{'Dragon','Dragon'},{'Oracle','Stars'}}do
+        local b=button(shop.Featured,item[1],item[2]..' · '..P.Skin(item[1]).RobuxPrice..' R$',function()shop.Filter='Robux';m.SelectSkin(item[1])end)
+        b.Size=UDim2.new(1/3,-8,0,32);b.Position=UDim2.new((i-1)/3,6,0,30);b.TextSize=11;shop.FeaturedButtons[item[1]]=b
+    end
+    filters(shop,{{'All','All'},{'Coins','Coins'},{'Robux','Robux'},{'Available','Unowned'}},96)
+    shop.Buy=button(shop.Detail,'Buy','',function()
+        if not shop.Buy.Active then return end
+        if P.Skin(shop.Selected).RobuxPrice then call('PremiumSkin',shop.Selected)else call('BuySkin',shop.Selected)end
+    end)
+    shop.ToInventory=button(shop.Detail,'ToInventory','View in Inventory →',function()
+        local id=shop.Selected;if owns(id)then call('Inventory');m.SelectSkin(id)end
+    end);shop.ToInventory.Visible=false
+    m.Buy=shop.Buy;m.Balance=shop.Balance;m.SkinName=shop.Name;m.World=shop.World;m.SkinButtons=shop.Buttons
+    shop.Coins=panel(shop.Page,'CoinPacks')
+    local coinsTitle=label(shop.Coins,'Title','GET MORE COINS',8,22,11);coinsTitle.Position=UDim2.fromOffset(14,8);coinsTitle.TextColor3=T.Gold
+    m.Products={}
+    for i,product in P.Products do
+        local b=button(shop.Coins,product.Id,product.Coins..' coins · '..(product.ProductId>0 and 'Loading…'or 'Coming Soon'),function()if m.Products[product.Id].Active then call('CoinPack',product.Id)end end)
+        b.Size=UDim2.new(1/3,-18,0,36);b.Position=UDim2.new((i-1)/3,14,0,34);b.TextSize=11;b.TextWrapped=true;enabled(b,false,T.Gold);m.Products[product.Id]=b
+    end
+    local function card(view,skin)
+        local b=button(view.List,skin.Id,'',function()call('PreviewSkin',skin.Id)end);b.Text=''
+        local tint=color(P.Rarities[skin.Rarity].Color);local line=stroke(b,tint)
+        local strip=UI.Frame(b,'RarityLine',UDim2.new(1,-16,0,2),UDim2.fromOffset(8,0),tint);round(strip,2)
+        local emblem=UI.Frame(b,'Emblem',UDim2.fromOffset(26,32),UDim2.fromOffset(12,12),color(skin.Cloth));round(emblem,7);stroke(emblem,color(skin.Trim))
+        UI.Frame(emblem,'Cross',UDim2.fromOffset(3,20),UDim2.fromOffset(12,6),color(skin.Trim))
+        UI.Frame(emblem,'Crossbar',UDim2.fromOffset(16,3),UDim2.fromOffset(5,13),color(skin.Armor))
+        local title=label(b,'Name',skin.Name,7,40,12);title.Position=UDim2.fromOffset(48,7);title.Size=UDim2.new(1,-56,0,40);title.Font=Enum.Font.GothamMedium
+        local rarity=label(b,'Tier',P.Rarities[skin.Rarity].Name,48,18,10);rarity.Position=UDim2.fromOffset(12,48);rarity.Size=UDim2.new(1,-24,0,18);rarity.TextColor3=tint
+        local status=label(b,'Status','',68,20,11);status.Position=UDim2.fromOffset(12,68);status.Size=UDim2.new(1,-24,0,20);status.Font=Enum.Font.GothamMedium
+        view.Buttons[skin.Id]=b;view.Cards[skin.Id]={Button=b,Status=status,Stroke=line};return b
+    end
+    for _,skin in P.Skins do if skin.Id~='Default'then card(shop,skin)end end
+    local function inventoryMatch(view,skin)
+        return view.Filter=='All'or view.Filter=='Mythic'and skin.Rarity=='Mythic'or view.Filter=='Rare'and (skin.Rarity=='Rare'or skin.Rarity=='Epic'or skin.Rarity=='Mythic')
+    end
+    local function shopMatch(view,skin)
+        return view.Filter=='All'or view.Filter=='Coins'and not skin.RobuxPrice or view.Filter=='Robux'and skin.RobuxPrice~=nil or view.Filter=='Available'and not owns(skin.Id)
+    end
+    local function grid(view)
+        local width=u.Card.Size.X.Offset
+        local columns=width>=700 and 2 or width>=450 and 3 or 2
+        local index=0
+        for _,skin in P.Skins do
+            local b=view.Buttons[skin.Id]
+            if b then
+                b.Visible=view==inventory and owns(skin.Id)and inventoryMatch(view,skin)or view==shop and shopMatch(view,skin)
+                local selected=skin.Id==view.Selected;local entry=view.Cards[skin.Id]
+                b.BackgroundColor3=selected and Color3.fromRGB(41,64,82)or T.Inset
+                entry.Stroke.Transparency=selected and 0 or .55;entry.Stroke.Thickness=selected and 2 or 1
+                entry.Status.Text=view==inventory and (m.Profile and m.Profile.Equipped==skin.Id and '✓ Equipped' or 'In your collection')or owns(skin.Id)and '✓ Owned'or coinPrice(skin)
+                entry.Status.TextColor3=view==inventory and T.Mint or owns(skin.Id)and T.Mint or T.Gold
+                if b.Visible then
+                    b.Size=UDim2.new(1/columns,-8,0,96);b.Position=UDim2.new(index%columns/columns,0,0,math.floor(index/columns)*104);index+=1
+                end
+            end
+        end
+        view.List.CanvasSize=UDim2.fromOffset(0,math.ceil(index/columns)*104)
+        view.Empty.Visible=index==0;view.Empty.Text=view==inventory and 'No sets of this rarity yet.\nFind new sets in the shop and chests.'or 'You already own every set in this category.'
+        for key,b in view.Filters do b.BackgroundColor3=key==view.Filter and view.Accent or T.Inset;b.TextColor3=key==view.Filter and T.Panel or T.Muted end
+    end
     function m.RefreshShop()
-        oldRefresh();local skin=P.Skin(m.Skin)
-        if skin.ChestOnly and not(m.Profile and m.Profile.Skins[m.Skin])then m.Buy.Text='Из сундука';m.Buy.Active=false;m.Buy.BackgroundColor3=C.Inset end
-        m.SkinName.Text=skin.Name..(skin.ChestOnly and ' · из сундука'or skin.Price>0 and ' · '..skin.Price..' монет'or ' · бесплатно')
-        if m.Profile and m.Profile.Skins[m.Skin]then m.SkinName.Text=skin.Name..' · в коллекции'end
+        local d=m.Profile
+        for _,skin in P.Skins do
+            if owns(skin.Id)and not inventory.Buttons[skin.Id]then card(inventory,skin)
+            elseif not owns(skin.Id)and inventory.Buttons[skin.Id]then inventory.Buttons[skin.Id]:Destroy();inventory.Buttons[skin.Id]=nil;inventory.Cards[skin.Id]=nil end
+        end
+        if not owns(inventory.Selected)then inventory.Selected=d and d.Equipped or 'Default'end
+        local count=d and P.CollectionCount(d)or 0
+        inventory.Balance.Text='Your collection · '..count..' / '..#P.Skins
+        inventory.ProgressFill.Size=UDim2.fromScale(count/#P.Skins,1)
+        shop.Balance.Text='Wallet · '..(d and d.Coins or '—')..' coins'
+        for _,view in {inventory,shop}do
+            local skin=P.Skin(view.Selected);local equipped=d and d.Equipped==skin.Id;local tint=color(P.Rarities[skin.Rarity].Color)
+            view.Name.Text=skin.Name;view.Rarity.Text=P.Rarities[skin.Rarity].Name..'  /  COMPLETE SET';view.Rarity.TextColor3=tint
+            view.Description.Text='4 unit types · all buildings and levels\nHeraldry, roof crests and matching roads'
+            grid(view)
+            for key,b in view.Tabs do b.BackgroundColor3=key==view.Mode and view.Accent or T.Inset;b.TextColor3=key==view.Mode and T.Panel or T.Muted end
+            if u.Page==view.Page.Name then m.Skin=view.Selected end
+            if view==inventory then
+                view.Equip.Text=equipped and '✓ Set Equipped'or 'Equip Set';enabled(view.Equip,owns(skin.Id)and not equipped,T.Mint)
+            else
+                local has=owns(skin.Id);local action=view.Buy
+                view.ToInventory.Visible=has;action.Visible=not has
+                if has then action.Text='Already owned';enabled(action,false,T.Gold);view.Hint.Text='Already unlocked — equip this set in your inventory'
+                elseif skin.RobuxPrice then
+                    local price=m.PremiumPrices[skin.Id]
+                    action.Text=typeof(price)=='number'and ('Buy · '..price..' Robux')or (coinPrice(skin)..' · '..(skin.GamePassId>0 and 'Checking…'or 'Coming Soon'))
+                    enabled(action,d~=nil and typeof(price)=='number'and not game:GetService('RunService'):IsStudio(),T.Gold)
+                    local _,_,total=P.ChestPool();view.Hint.Text='Chest chance: '..string.format('%.1f',skin.Weight/total*100)..'% · cosmetic only'
+                else
+                    action.Text='Buy · '..skin.Price..' coins';enabled(action,d~=nil and d.Coins>=skin.Price,T.Gold)
+                    local needed=skin.Price-(d and d.Coins or 0)
+                    view.Hint.Text=d and needed>0 and ('Need '..needed..' more '..(needed==1 and 'coin'or 'coins'))or 'Also available from a Kingdom Chest'
+                end
+            end
+        end
+        for id,b in shop.FeaturedButtons do b.BackgroundColor3=id==shop.Selected and Color3.fromRGB(100,77,48)or T.Inset;b.TextColor3=id==shop.Selected and T.Gold or T.Text end
+    end
+    function m.CollectionLayout()
+        local width=u.Card.Size.X.Offset;local height=u.Card.Size.Y.Offset-134
+        local wide=width>=700
+        local body=math.max(360,height-68)
+        for _,view in {inventory,shop}do
+            local catalogHeight=wide and body or (view==shop and 340 or 280)
+            local detailHeight=wide and body or 440
+            view.Catalog.Size=wide and UDim2.new(.53,-10,0,catalogHeight)or UDim2.new(1,-8,0,catalogHeight)
+            view.Catalog.Position=UDim2.fromOffset(0,66)
+            view.Detail.Size=wide and UDim2.new(.47,-6,0,detailHeight)or UDim2.new(1,-8,0,detailHeight)
+            view.Detail.Position=wide and UDim2.new(.53,2,0,66)or UDim2.fromOffset(0,78+catalogHeight)
+            local start=view==inventory and 84 or 136
+            view.List.Position=UDim2.fromOffset(14,start);view.List.Size=UDim2.new(1,-28,0,catalogHeight-start-14)
+            if view==shop then shop.Featured.Size=UDim2.new(1,-28,0,72);shop.Featured.Position=UDim2.fromOffset(14,12)end
+            local previewHeight=detailHeight-256
+            view.View.Position=UDim2.fromOffset(14,92);view.View.Size=UDim2.new(1,-28,0,previewHeight)
+            for i,key in {'Army','Buildings','Roads'}do local b=view.Tabs[key];b.Size=UDim2.new(1/3,-16,0,28);b.Position=UDim2.new((i-1)/3,14-(i-1)*28/3,0,100+previewHeight)end
+            view.Description.Position=UDim2.fromOffset(16,134+previewHeight);view.Description.Size=UDim2.new(1,-32,0,34)
+            local action=view==inventory and view.Equip or view.Buy
+            action.Position=UDim2.new(0,14,1,-76);action.Size=UDim2.new(1,-28,0,42)
+            if view==shop then view.ToInventory.Position=action.Position;view.ToInventory.Size=action.Size end
+            view.Hint.Position=UDim2.new(0,14,1,-29);view.Hint.Size=UDim2.new(1,-28,0,26)
+            local endY=wide and 66+body or 78+catalogHeight+detailHeight
+            view.Page.CanvasSize=UDim2.fromOffset(0,endY+6)
+            if view==shop then
+                shop.Coins.Position=UDim2.fromOffset(0,endY+14);shop.Coins.Size=UDim2.new(1,-8,0,84)
+                shop.Page.CanvasSize=UDim2.fromOffset(0,endY+106)
+            end
+            grid(view)
+        end
     end
     function m.SelectSkin(id)
-        if not P.Skin(id)then return end;m.Skin=id;m.PreviewSerial=(m.PreviewSerial or 0)+1
-        local serial=m.PreviewSerial;local mode=m.ViewMode
-        for key,b in m.ViewButtons do b.BackgroundColor3=key==mode and C.Blue or C.Inset end
-        for key,b in m.SkinButtons do b.BackgroundColor3=key==id and C.Blue or C.Inset end
-        m.RefreshShop();m.PreviewLoading.Text='Загружаем модели…'
-        for _,child in world:GetChildren()do child:Destroy()end;Art.Prune()
-        local temp=Instance.new('Model');temp.Name='Набор'
-        if mode=='Army'then army(temp,id)
-        elseif mode=='Buildings'then
-            local base=Art.Bounds('Castle_Upgrade3');local ground=-base.Minimum.Y;local height=base.Maximum.Y+ground
-            Art.Clone('Castle_Upgrade3',temp,CFrame.new(0,ground,0),nil,id)
-            Art.Clone(id..'_Herald',temp,CFrame.new(0,3,9.75));Art.Clone(id..'_RoofCrest',temp,CFrame.new(0,height-.1,0))
-        else for i=-1,1 do Art.Clone(id..'_RoadTile',temp,CFrame.new(0,0,i*4))end end
-        if serial~=m.PreviewSerial then temp:Destroy();return end
-        for _,child in world:GetChildren()do child:Destroy()end;temp.Parent=world;m.PreviewLoading.Text=''
-        if mode=='Army'then armyCamera(cam)
-        elseif mode=='Buildings'then cam.CFrame=CFrame.lookAt(Vector3.new(28,29,47),Vector3.new(0,8,0));cam.FieldOfView=36
-        else cam.CFrame=CFrame.lookAt(Vector3.new(6,8,11),Vector3.new(0,.15,0));cam.FieldOfView=42 end
+        local view=m.SetPages[u.Page];if not view or not P.Skin(id)then return end
+        if view==inventory and not owns(id)or view==shop and id=='Default'then return end
+        view.Selected=id;m.Skin=id;m.RefreshShop()
+        view.Serial+=1;local serial=view.Serial;local mode=view.Mode
+        for _,child in view.World:GetChildren()do child:Destroy()end;Art.Prune();view.Loading.Text='Loading set…'
+        local temp=Instance.new('Model');temp.Name=id..'_Preview'
+        local ok,reason=pcall(function()
+            if mode=='Army'then army(temp,id)
+            elseif mode=='Buildings'then
+                local bounds=Art.Bounds('Castle_Upgrade3');local ground=-bounds.Minimum.Y;local height=bounds.Maximum.Y+ground
+                local facing=CFrame.Angles(0,Config.BuildingYaw,0)
+                Art.Clone('Castle_Upgrade3',temp,CFrame.new(0,ground,0)*facing,nil,id)
+                Art.Clone(id..'_Herald',temp,CFrame.new(0,3,9.75)*facing);Art.Clone(id..'_RoofCrest',temp,CFrame.new(0,height-.1,0)*facing)
+                if Art.Modules[id..'_Gateway']then Art.Clone(id..'_Gateway',temp,CFrame.new(0,.12,9.28)*facing)end
+            else
+                for i=-1,1 do Art.Clone(id..'_RoadTile',temp,CFrame.new(0,0,i*4))end
+            end
+        end)
+        if serial~=view.Serial then temp:Destroy();return end
+        if not ok then temp:Destroy();view.Loading.Text='Could not load the preview.\nSelect the set again.';warn(reason);Art.Prune();return end
+        for _,child in view.World:GetChildren()do child:Destroy()end;temp.Parent=view.World;view.Loading.Text=''
+        if mode=='Army'then armyCamera(view.Camera)
+        elseif mode=='Buildings'then view.Camera.CFrame=CFrame.lookAt(Vector3.new(28,29,47),Vector3.new(0,8,0));view.Camera.FieldOfView=36
+        else view.Camera.CFrame=CFrame.lookAt(Vector3.new(6,8,11),Vector3.new(0,.15,0));view.Camera.FieldOfView=42 end
     end
-    page=Instance.new('ScrollingFrame');page.Name='Chests';page.BackgroundTransparency=1;page.BorderSizePixel=0;page.ScrollBarThickness=4;page.Visible=false;page.Parent=u.Card;m.Pages.Chests=page
-    m.ChestBalance=label(page,'Balance','Монеты: —',0,30,15);m.ChestBalance.Size=UDim2.new(.5,0,0,30);m.ChestBalance.TextColor3=C.Gold
-    UI.Button(page,'Collection','Коллекция →',UDim2.new(.5,-8,0,32),UDim2.fromScale(.5,0),function()call('Shop')end)
-    local chestView,chestCam,chestWorld=viewport(page,'Preview',42,150)
-    m.ChestResult=label(page,'Result','Один новый набор. Повторов нет.',196,44,14);m.ChestResult.TextColor3=C.Gold
-    m.ChestOdds=label(page,'Odds','Загружаем награды…',244,48,12)
-    m.ChestBuy=UI.Button(page,'Open','Купить и открыть · 300',UDim2.new(1,-8,0,42),UDim2.fromOffset(0,302),function()call('OpenChest')end)
-    m.ChestSkin=UI.Button(page,'ViewReward','Посмотреть полученный набор',UDim2.new(1,-8,0,34),UDim2.fromOffset(0,354),function()if m.LastChestSkin then call('Shop');m.SelectSkin(m.LastChestSkin)end end);m.ChestSkin.Visible=false
-    m.ChestRewards=label(page,'Rewards','',400,50,12);m.ChestRewards.TextYAlignment=Enum.TextYAlignment.Top
+    local chest=page('Chests')
+    m.ChestBalance=label(chest,'Balance','',0,30,15);m.ChestBalance.Size=UDim2.new(.5,0,0,30);m.ChestBalance.TextColor3=C.Gold
+    UI.Button(chest,'Inventory','Inventory →',UDim2.new(.5,-8,0,30),UDim2.fromScale(.5,0),function()call('Inventory')end)
+    label(chest,'CaseName','Kingdom Chest · complete cosmetic set',40,28,17)
+    local chestView,chestCam,chestWorld=viewport(chest,'Preview',78,150)
+    m.ChestResult=label(chest,'Result','Army, buildings and roads in one set.',235,44,14);m.ChestResult.TextColor3=C.Gold
+    m.ChestOdds=label(chest,'Odds','',283,55,12)
+    m.ChestBuy=UI.Button(chest,'Open','Buy & Open · 300 coins',UDim2.new(1,-8,0,44),UDim2.fromOffset(0,346),function()call('OpenChest')end)
+    label(chest,'Duplicates','Odds stay fixed. Duplicates refund 100 / 150 / 200 / 250 coins, depending on rarity.',398,44,11).TextColor3=C.Muted
+    m.ChestSkin=UI.Button(chest,'ViewReward','View Set in Inventory',UDim2.new(1,-8,0,34),UDim2.fromOffset(0,450),function()if m.LastChestSkin then call('Inventory');m.SelectSkin(m.LastChestSkin)end end);m.ChestSkin.Visible=false
+    m.ChestRewards=label(chest,'Rewards','',496,50,12);m.ChestRewards.TextYAlignment=Enum.TextYAlignment.Top
     function m.ChestPreview(id)
         m.ChestPreviewSerial=(m.ChestPreviewSerial or 0)+1;local serial=m.ChestPreviewSerial
-        for _,child in chestWorld:GetChildren()do child:Destroy()end;Art.Prune()
-        local temp=Instance.new('Model')
-        if id then army(temp,id)else Art.Clone('CollectionChest',temp,CFrame.identity)end
-        if serial~=m.ChestPreviewSerial then temp:Destroy();return end
+        for _,child in chestWorld:GetChildren()do child:Destroy()end;Art.Prune();local temp=Instance.new('Model')
+        local ok,reason=pcall(function()if id then army(temp,id)else Art.Clone('CollectionChest',temp,CFrame.identity)end end)
+        if serial~=m.ChestPreviewSerial or not ok then temp:Destroy();if not ok then warn(reason)end;return end
         for _,child in chestWorld:GetChildren()do child:Destroy()end;temp.Parent=chestWorld
         if id then armyCamera(chestCam)else chestCam.CFrame=CFrame.lookAt(Vector3.new(2.9,2.2,4),Vector3.new(0,.7,0));chestCam.FieldOfView=36 end
     end
     function m.RefreshChest()
-        m.ChestBalance.Text='Монеты: '..(m.Profile and m.Profile.Coins or '—')
-        local info=m.ChestInfo;local pool=info and info.Pool or {};local count=#pool
-        local enabled=info and info.Allowed and count>0 and m.Profile and m.Profile.Coins>=info.Price and not m.ChestPending
-        m.ChestBuy.Active=enabled==true;m.ChestBuy.AutoButtonColor=m.ChestBuy.Active;m.ChestBuy.BackgroundColor3=m.ChestBuy.Active and C.Blue or C.Inset
-        m.ChestBuy.Text=m.ChestPending and 'Открываем…'or count==0 and info and 'Коллекция собрана'or 'Купить и открыть · '..(info and info.Price or 300)
-        if not info or info.Pending then m.ChestOdds.Text='Проверяем доступность сундуков…'
-        elseif not info.Allowed then m.ChestOdds.Text='Случайные покупки недоступны для этого аккаунта Roblox.'
-        elseif count==0 then m.ChestOdds.Text='Все 25 наборов уже в коллекции.'
-        else m.ChestOdds.Text='Осталось '..count..' наборов. Каждый: 1/'..count..' (≈ '..string.format('%.4f',100/count)..'%).'end
-        local lines={'Возможные награды до покупки:'}
-        for _,id in pool do table.insert(lines,P.Skin(id).Name..' — 1/'..count..' (≈ '..string.format('%.4f',100/count)..'%)')end
-        m.ChestRewards.Text=table.concat(lines,'\n');m.ChestRewards.Size=UDim2.new(1,-8,0,24+#pool*40);page.CanvasSize=UDim2.fromOffset(0,440+#pool*40)
+        local info=m.ChestInfo;local d=m.Profile
+        m.ChestBalance.Text='Coins: '..(d and d.Coins or '—')
+        m.ChestBuy.Active=info~=nil and info.Allowed==true and not info.Complete and d~=nil and d.Coins>=info.Price and not m.ChestPending
+        m.ChestBuy.AutoButtonColor=m.ChestBuy.Active;m.ChestBuy.BackgroundColor3=m.ChestBuy.Active and C.Blue or C.Inset
+        m.ChestBuy.Text=m.ChestPending and 'Opening…'or info and info.Complete and 'Collection Complete'or 'Buy & Open · '..(info and info.Price or P.ChestPrice)..' coins'
+        if not info or info.Pending then m.ChestOdds.Text='Checking chest availability…'
+        elseif not info.Allowed then m.ChestOdds.Text='Random purchases are unavailable for this Roblox account.'
+        elseif info.Complete then m.ChestOdds.Text='All 25 sets are already in your inventory.'
+        else m.ChestOdds.Text='Common: 60% · Rare: 30%\nEpic: 9% · Mythic: 1%'end
+        local rewards=info and info.Rewards or P.ChestRewards(P.Normalize());local lines={'All possible rewards and exact odds:'}
+        for _,r in rewards do
+            local skin=P.Skin(r.Id)
+            table.insert(lines,skin.Name..' · '..P.Rarities[skin.Rarity].Name..' — '..string.format('%.6f',r.Chance)..'% ('..r.Weight..'/'..r.Total..')'..(r.Owned and ' · duplicate: +'..r.Refund..' coins'or ''))
+        end
+        m.ChestRewards.Text=table.concat(lines,'\n');m.ChestRewards.Size=UDim2.new(1,-8,0,28+#rewards*44);chest.CanvasSize=UDim2.fromOffset(0,540+#rewards*44)
     end
-    local apply=m.Apply
     function m.HidePreviews()
-        m.PreviewSerial=(m.PreviewSerial or 0)+1;m.ChestPreviewSerial=(m.ChestPreviewSerial or 0)+1
-        for _,child in world:GetChildren()do child:Destroy()end
-        for _,child in chestWorld:GetChildren()do child:Destroy()end
-        Art.Prune()
+        m.ChestPreviewSerial=(m.ChestPreviewSerial or 0)+1
+        for _,view in m.SetPages do view.Serial+=1;for _,child in view.World:GetChildren()do child:Destroy()end end
+        for _,child in chestWorld:GetChildren()do child:Destroy()end;Art.Prune()
     end
-    local show=u.ShowMenu
-    function u.ShowMenu(name)
-        if name~='Shop'and name~='Chests'then m.HidePreviews()
-        elseif name=='Shop'then for _,child in chestWorld:GetChildren()do child:Destroy()end;Art.Prune()
-        else for _,child in world:GetChildren()do child:Destroy()end;Art.Prune()end
-        show(name)
-    end
+    local show=u.Show
+    function u.Show(name,inGame)m.HidePreviews();show(name,inGame)end
+    local apply=m.Apply
     function m.Apply(data)
+        local active=m.SetPages[u.Page];local previous=active and active.Selected
         apply(data)
+        if data.Profile and active and previous~=active.Selected then m.SelectSkin(active.Selected)end
         if data.ChestInfo then m.ChestInfo=data.ChestInfo end
         if data.ChestDone then m.ChestPending=false;m.ChestRequest=nil end
         m.RefreshChest()
         if data.Chest then
-            m.LastChestSkin=data.Chest.Skin;m.ChestSkin.Visible=true;m.ChestResult.Text='Получено: '..P.Skin(data.Chest.Skin).Name
-            local flash=Tween:Create(chestView,TweenInfo.new(.3),{BackgroundColor3=C.Gold});flash:Play()
-            task.delay(.3,function()m.ChestPreview(data.Chest.Skin);Tween:Create(chestView,TweenInfo.new(.4),{BackgroundColor3=C.Inset}):Play()end)
+            local result=data.Chest;local skin=P.Skin(result.Skin);m.LastChestSkin=skin.Id;m.ChestSkin.Visible=true
+            m.ChestResult.Text=(result.Duplicate and 'Duplicate: 'or 'Set unlocked: ')..skin.Name..(result.Duplicate and '\nRefunded: '..result.Refund..' coins'or '')
+            m.ChestResult.TextColor3=color(P.Rarities[skin.Rarity].Color)
+            if u.Page=='Chests'then
+                Tween:Create(chestView,TweenInfo.new(.3),{BackgroundColor3=color(P.Rarities[skin.Rarity].Color)}):Play()
+                local resultSerial=m.ChestPreviewSerial
+                task.delay(.3,function()if u.Page=='Chests'and m.ChestPreviewSerial==resultSerial then m.ChestPreview(skin.Id);Tween:Create(chestView,TweenInfo.new(.4),{BackgroundColor3=C.Inset}):Play()end end)
+            end
         end
     end
+    m.RefreshShop();m.RefreshChest();u.Layout()
 end
 return Collection

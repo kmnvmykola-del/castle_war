@@ -18,17 +18,22 @@ local Editor=require(root.MapEditor)
 local Music=require(root.Music)
 local Meta=require(root.MetaUI)
 local Progression=require(root.Progression)
+local BattleGuide=require(root.BattleGuide)
 local command=root:WaitForChild('Command')
 local camera=workspace.CurrentCamera
 local state,scene,editor=nil,nil,nil
 local function viewSide()local side=state and state.ViewerSide or player:GetAttribute('KingdomSide');return side==2 and 2 or 1 end
 local editorActive,loaded,custom=false,false,false
+local editorRenderBusy,pendingEditorRender=false,nil
+local renderedEditor,renderedEditorRevision=nil,-1
 local tutorialShown=false
 local savedMap,revision=nil,-1
 local chosenMap='TwoBridges'
 local selected,primary={},nil
 local percent,orderMode=50,false
-local prefs={Music=.22,Camera=1,Zoom=1,Grid=false,Labels=true}
+local prefs={Music=.22,Effects=.55,Camera=1,Zoom=1,Grid=false,Labels=true,BattleTutorialDone=false}
+local guide=BattleGuide.new()
+local preferencesLoaded=false
 local center,targetCenter=Vector3.zero,Vector3.zero
 local zoom,targetZoom=300,300
 local visuals,highlights,labels,previews={},{},{},{}
@@ -39,9 +44,10 @@ local meta=Meta.Build(u,hooks)
 if Run:IsStudio()then _G.KingdomsMeta=meta end
 local accountAction=root:WaitForChild('AccountAction')
 local sound=Music.Start()
+UI.PlaySound=sound.PlayEffect
 local world=Instance.new('ScreenGui');world.Name='KingdomsWorldLabels';world.ResetOnSpawn=false;world.DisplayOrder=-1;world.Parent=player.PlayerGui
 local function playing()return state and (state.Phase=='Preparation' or state.Phase=='Battle')end
-local function canControl()return loaded and not u.Menu.Visible and not u.Code.Visible and not u.Tutorial.Visible and (playing() or editorActive)end
+local function canControl()return loaded and not editorRenderBusy and not u.Menu.Visible and not u.Code.Visible and not u.Tutorial.Visible and (playing() or editorActive)end
 local function notify(text)u.ToastText.Text=tostring(text);u.Toast.Visible=true;toastUntil=os.clock()+5 end
 local function clearPreviews()for _,p in previews do p:Destroy()end;previews={}end
 local function clearHighlights()for _,h in highlights do h:Destroy()end;highlights={}end
@@ -69,26 +75,28 @@ local function refreshPanel()
     for _,id in showIds do local t=state.Sites[id];inside+=t.Population;capacity+=t.Capacity
         for _,kind in Config.Types do counts[kind]+=t.Inside[kind];waiting+=t.Counts[kind]-t.Inside[kind]end
     end
-    u.Building.Text=#showIds>1 and 'Здания: '..#showIds or Config.Buildings[scene.Nodes[primary].Kind].Name..' '..({'I','II','III'})[s.Level]
+    u.Building.Text=#showIds>1 and 'Buildings: '..#showIds or Config.Buildings[scene.Nodes[primary].Kind].Name..' '..({'I','II','III'})[s.Level]
     u.Building.TextSize=15
     for _,kind in Config.Types do u.Roster[kind].Text=Config.Units[kind].Name..': '..counts[kind]end
-    u.Percent.Frame.Label.Text='Отправить · '..inside..'/'..capacity..(waiting>0 and ' · ждут '..waiting or '')
+    u.Percent.Frame.Label.Text='Send · '..inside..'/'..capacity..(waiting>0 and ' · waiting: '..waiting or '')
     local cost=Config.UpgradeCost[s.Level+1]
     local possible=#showIds==1 and s.Owner==viewSide() and cost and not s.Upgrade and s.Population>=cost and (not s.Health or s.Health>0)
-    if #showIds>1 then u.Upgrade.Text='Для улучшения выбери одно здание'
-    elseif s.Owner~=viewSide() then u.Upgrade.Text=s.Owner==0 and 'Нейтральное здание' or 'Здание противника'
-    elseif s.Health and s.Health<=0 then u.Upgrade.Text='Разрушена · отправь отряд'
-    elseif s.Upgrade then u.Upgrade.Text='Улучшение · '..math.ceil(s.Upgrade)..' с'
-    elseif not cost then u.Upgrade.Text='Уровень III'
-    else u.Upgrade.Text='Улучшить · '..cost..' чел.'end
+    if #showIds>1 then u.Upgrade.Text='Select one building to upgrade'
+    elseif s.Owner~=viewSide() then u.Upgrade.Text=s.Owner==0 and 'Neutral building' or 'Enemy building'
+    elseif s.Health and s.Health<=0 then u.Upgrade.Text='Destroyed · send troops'
+    elseif s.Upgrade then u.Upgrade.Text='Upgrading · '..math.ceil(s.Upgrade)..' s'
+    elseif not cost then u.Upgrade.Text='Level III'
+    else u.Upgrade.Text='Upgrade · '..cost..' troops'end
     u.Upgrade.Active=possible==true;u.Upgrade.AutoButtonColor=u.Upgrade.Active;u.Upgrade.BackgroundColor3=possible and UI.Colors.Blue or UI.Colors.Inset
-    u.TouchOrder.Active=#ids>0;u.TouchOrder.BackgroundColor3=orderMode and UI.Colors.Blue or UI.Colors.Inset;u.TouchOrder.Text=orderMode and 'Выбери цель' or 'Приказ →'
+    u.TouchOrder.Active=#ids>0;u.TouchOrder.BackgroundColor3=orderMode and UI.Colors.Blue or UI.Colors.Inset;u.TouchOrder.Text=orderMode and 'Select a target' or 'Order →'
 end
 local function choose(id,add)
     if not id or not state or not state.Sites[id]then deselect();return end
     local own=state.Sites[id].Owner==viewSide()
     if not add or not own then selected={}end
     if own then if add and selected[id]then selected[id]=nil;primary=next(selected)else selected[id]=true;primary=id end else primary=id end
+    sound.PlayEffect('Select')
+    guide:Select(state.Sites[id].Owner);u.UpdateBattleGuide(guide.Active,guide.Step)
     orderMode=false;selectionMarks();refreshPanel()
 end
 local function atScreen(p)
@@ -107,6 +115,8 @@ local function send(id)
     local sources=ownedSelection()
     if not playing() or #sources==0 or not state.Sites[id] or percent==0 then return end
     command:FireServer('Send',{Sources=sources,Target=id,Percent=percent,Filter='All',Route='Auto'})
+    guide:Order(id,state.Sites[id].Owner)
+    sound.PlayEffect('Order')
     clearPreviews()
     for _,source in sources do
         local points=scene.Map.Route(source,id,state.Time>=Config.PrepTime,'Auto',function(via)
@@ -114,20 +124,25 @@ local function send(id)
         end)
         if points then for i=2,#points do
             local a,b=points[i-1],points[i]
-            local p=Instance.new('Part');p.Name='Маршрут';p.Anchored=true;p.CanQuery=false;p.CanCollide=false;p.CanTouch=false;p.Material=Enum.Material.Neon;p.Color=UI.Colors.Gold;p.Transparency=.25;p.Size=Vector3.new(.25,.08,(a-b).Magnitude)
+            local p=Instance.new('Part');p.Name='Route';p.Anchored=true;p.CanQuery=false;p.CanCollide=false;p.CanTouch=false;p.Material=Enum.Material.Neon;p.Color=UI.Colors.Gold;p.Transparency=.25;p.Size=Vector3.new(.25,.08,(a-b).Magnitude)
             p.CFrame=CFrame.lookAt((a+b)/2+Vector3.new(0,.4,0),b+Vector3.new(0,.4,0));p.Parent=scene.Folder;table.insert(previews,p)
         end end
     end
     previewUntil=os.clock()+2.5;orderMode=false;selectionMarks();mark(id,UI.Colors.Gold);refreshPanel()
 end
+local function syncLabels()
+    for id,l in labels do if not scene.Nodes[id]then l:Destroy();labels[id]=nil end end
+    for id in scene.Nodes do
+        if labels[id]then continue end
+        local l=UI.Label(world,id,'',UDim2.fromOffset(50,22),UDim2.fromOffset(0,0),12);l.TextXAlignment=Enum.TextXAlignment.Center;l.BackgroundColor3=UI.Colors.Panel;l.BackgroundTransparency=.12
+        local c=Instance.new('UICorner');c.CornerRadius=UDim.new(0,4);c.Parent=l;labels[id]=l
+    end
+end
 local function rebuild(map)
     clearPreviews();clearHighlights();visuals={};labels={};ghost=nil
     for _,p in world:GetChildren()do p:Destroy()end
     scene=Scene.Build(workspace,map,editorActive and 1 or viewSide());Scene.GridVisible(scene,editorActive or prefs.Grid)
-    for id in scene.Nodes do
-        local l=UI.Label(world,id,'',UDim2.fromOffset(50,22),UDim2.fromOffset(0,0),12);l.TextXAlignment=Enum.TextXAlignment.Center;l.BackgroundColor3=UI.Colors.Panel;l.BackgroundTransparency=.12
-        local c=Instance.new('UICorner');c.CornerRadius=UDim.new(0,4);c.Parent=l;labels[id]=l
-    end
+    syncLabels()
     selectionMarks()
 end
 local function previewMap()
@@ -135,46 +150,84 @@ local function previewMap()
     return chosenMap=='Random' and Default or assert(Catalog.Create(chosenMap))
 end
 local function mapName()
-    local name=chosenMap=='Random' and 'Случайная карта' or 'Две переправы'
+    local name=chosenMap=='Random' and 'Random Map' or 'Two Crossings'
     for _,item in Catalog.Items do if item.Id==chosenMap then name=item.Name end end
     if custom and savedMap then name=savedMap.Name end
-    u.MapChoice.Text='Карта: '..name..'  ▾';u.MapButtons.Custom.Active=savedMap~=nil;u.MapButtons.Custom.TextColor3=savedMap and UI.Colors.Text or UI.Colors.Muted
-    u.MapButtons.Custom.Text=savedMap and 'Моя: '..savedMap.Name or 'Сохранённая карта отсутствует'
+    u.MapChoice.Text='Map: '..name..'  ▾';u.MapButtons.Custom.Active=savedMap~=nil;u.MapButtons.Custom.TextColor3=savedMap and UI.Colors.Text or UI.Colors.Muted
+    u.MapButtons.Custom.Text=savedMap and 'My map: '..savedMap.Name or 'No saved map'
     for id,b in u.MapButtons do b.BackgroundColor3=id==(custom and 'Custom' or chosenMap)and UI.Colors.Blue or UI.Colors.Inset end
 end
-local function editorUpdate(definition,hint)
-    local map,reason=Network.Create(definition,{AllowIncomplete=true});if not map then notify(reason);return end
-    rebuild(map);u.EditorHint.Text=hint;u.MapName.Text=definition.Name or 'Моя карта'
-    u.Owner.Text='Сторона: '..(editor.Owner==1 and 'синие' or editor.Owner==2 and 'красные' or 'нейтральные')
+local function editorUpdate(definition,hint,geometryRevision,compiled)
+    u.EditorHint.Text=hint;u.MapName.Text=definition.Name or 'My Map'
+    u.Owner.Text='Team: '..(editor.Owner==1 and 'Blue' or editor.Owner==2 and 'Red' or 'Neutral')
     u.Owner.BackgroundColor3=Config.Colors[editor.Owner==0 and 3 or editor.Owner]
-    u.Editor.Toolbar.Tools.River.Text='Река: '..(definition.River~=false and 'да' or 'нет')
+    u.Editor.Toolbar.Tools.River.Text='River: '..(definition.River~=false and 'On' or 'Off')
     for kind,b in u.KindButtons do b.BackgroundColor3=editor.Tool=='Place' and editor.Kind==kind and UI.Colors.Blue or UI.Colors.Inset end
     for _,b in u.Editor.Toolbar.Tools:GetChildren()do if b:IsA('TextButton') and b~=u.Owner then b.BackgroundColor3=b.Name==editor.Tool and UI.Colors.Blue or UI.Colors.Inset end end
     selectionMarks()
+    if renderedEditor==editor and renderedEditorRevision==geometryRevision then return end
+    pendingEditorRender={Editor=editor,Definition=definition,Revision=geometryRevision,Map=compiled}
+    if editorRenderBusy then return end
+    -- New mesh types may yield. Coalesce requests and apply them serially.
+    editorRenderBusy=true
+    while pendingEditorRender do
+        local job=pendingEditorRender;pendingEditorRender=nil
+        if not editorActive or editor~=job.Editor or renderedEditor==editor and renderedEditorRevision==job.Revision then continue end
+        local ok,reason=pcall(function()
+            local map,invalid=job.Map,nil
+            if not map then map,invalid=Network.Create(job.Definition,{AllowIncomplete=true})end
+            if not map then error(invalid)end
+            if renderedEditor~=job.Editor then rebuild(map)
+            else
+                local oldFolder=scene.Folder
+                scene=Scene.SyncEditor(scene,map)
+                if scene.Folder~=oldFolder then ghost=nil end
+                Scene.GridVisible(scene,true);syncLabels();selectionMarks()
+            end
+            renderedEditor=job.Editor;renderedEditorRevision=job.Revision
+        end)
+        if not ok then warn('Kingdoms editor: '..tostring(reason));notify('Could not update the map. '..tostring(reason))end
+    end
+    editorRenderBusy=false
 end
 local function exitEditor()
+    if editorRenderBusy then notify('Loading map models…');return false end
     editorActive=false;u.Editor.Visible=false;u.Code.Visible=false;u.Tutorial.Visible=false;if ghost then ghost:Destroy();ghost=nil end
     deselect();Scene.GridVisible(scene,prefs.Grid);u.Show('Main',false);mapName()
 end
 local function codeWindow(importing)
-    u.Code.Visible=true;u.CodeApply.Visible=importing;u.CodeTitle.Text=importing and 'Загрузить карту' or 'Код карты'
-    u.CodeHint.Text=importing and 'Вставь сохранённый код карты.' or 'Скопируй весь код и сохрани его в текстовом файле. Он позволяет перенести карту между запусками.'
+    u.Code.Visible=true;u.CodeApply.Visible=importing;u.CodeTitle.Text=importing and 'Import Map' or 'Map Code'
+    u.CodeHint.Text=importing and 'Paste your saved map code.' or 'Copy the entire code and save it in a text file to use your map in another session.'
     u.CodeText.Text=importing and '' or editor:Export();u.Layout()
 end
 local function savePrefs()command:FireServer('Prefs',prefs)end
+local function finishBattleGuide()
+    guide:Close();u.UpdateBattleGuide(false,guide.Step);prefs.BattleTutorialDone=true;savePrefs()
+end
+local function beginBattleGuide()
+    if preferencesLoaded and playing()and state.Mode=='AI'and not prefs.BattleTutorialDone and not guide.Active then
+        guide:Begin(state);u.UpdateBattleGuide(true,guide.Step)
+    end
+end
 local function refreshSettings()
-    sound.Volume=prefs.Music;u.Music.Set(prefs.Music);u.Camera.Set((prefs.Camera-.5)/1.5);u.Zoom.Set((prefs.Zoom-.5)/1.5)
+    sound.SetVolume(prefs.Music);sound.SetEffectsVolume(prefs.Effects);u.Music.Set(prefs.Music);u.Effects.Set(prefs.Effects);u.Camera.Set((prefs.Camera-.5)/1.5);u.Zoom.Set((prefs.Zoom-.5)/1.5)
     u.Camera.Text.Text=string.format('%.1f×',prefs.Camera);u.Zoom.Text.Text=string.format('%.1f×',prefs.Zoom)
-    u.Grid.Text='Сетка: '..(prefs.Grid and 'включена' or 'выключена');u.Labels.Text='Численность зданий: '..(prefs.Labels and 'включена' or 'выключена')
+    u.Grid.Text='Grid: '..(prefs.Grid and 'On' or 'Off');u.Labels.Text='Building Counts: '..(prefs.Labels and 'On' or 'Off')
     if scene then Scene.GridVisible(scene,editorActive or prefs.Grid)end
 end
 hooks.Menu=function()u.Show('Main',playing());u.Panel.Visible=false;u.SyncHUD()end
 hooks.Info=function()u.InfoExpanded=not u.InfoExpanded;refreshPanel();u.SyncHUD()end
 hooks.TutorialClose=function()u.Tutorial.Visible=false end
+hooks.BattleGuideSkip=finishBattleGuide
+hooks.BattleGuideReplay=function()
+    prefs.BattleTutorialDone=false;savePrefs();guide:Close()
+    if playing()and state.Mode=='AI'then u.Menu.Visible=false;beginBattleGuide();refreshPanel()
+    else notify('The battle guide will appear in your next AI match.')end
+end
 hooks.Deselect=deselect
 hooks.Percent=function(v)percent=v end
 hooks.Upgrade=function()if #ownedSelection()==1 and primary and u.Upgrade.Active then command:FireServer('Upgrade',{Site=primary})end end
-hooks.TouchOrder=function()if #ownedSelection()>0 then orderMode=not orderMode;refreshPanel();if orderMode then notify('Коснись здания, куда отправить отряд.')end end end
+hooks.TouchOrder=function()if #ownedSelection()>0 then orderMode=not orderMode;refreshPanel();if orderMode then notify('Tap the building you want to send troops to.')end end end
 hooks.MapChoice=function()if not playing()then u.Show('Maps',false);mapName()end end
 hooks.SelectMap=function(id)
     if id=='Custom' and not savedMap then return end
@@ -186,7 +239,8 @@ hooks.AI=function()if state and state.Queueing then command:FireServer('CancelPv
 hooks.Online=function()if not loaded then return end;command:FireServer(state and state.Queueing and 'CancelPvP' or 'JoinPvP',{})end
 hooks.Ranked=function()if not loaded then return end;command:FireServer(state and state.Queueing and 'CancelPvP'or 'JoinRanked',{})end
 hooks.Profile=function()u.Show('Profile',playing())end
-hooks.Shop=function()if not loaded then return end;u.Show('Shop',playing());meta.SelectSkin(meta.Profile and meta.Profile.Equipped or 'Default')end
+hooks.Inventory=function()if not loaded then return end;u.Show('Inventory',playing());meta.SelectSkin(meta.Profile and meta.Profile.Equipped or 'Default')end
+hooks.Shop=function()if not loaded then return end;u.Show('Shop',playing());meta.SelectSkin(meta.SetPages.Shop.Selected)end
 hooks.PreviewSkin=function(id)meta.SelectSkin(id)end
 hooks.Chests=function()u.Show('Chests',playing());meta.ChestPreview();meta.RefreshChest()end
 hooks.OpenChest=function()
@@ -197,21 +251,30 @@ hooks.OpenChest=function()
     task.delay(6,function()if meta.ChestPending and meta.ChestRequest==request then accountAction:FireServer('OpenChest',{RequestId=request,Signature=signature})end end)
 end
 hooks.BuySkin=function(id)if meta.Buy.Active then accountAction:FireServer('Buy',{Skin=id})end end
-hooks.EquipSkin=function(id)if meta.Equip.Active then accountAction:FireServer('Equip',{Skin=id})end end
+hooks.EquipSkin=function(id)if meta.Profile and meta.Profile.Skins[id]and meta.Profile.Equipped~=id then accountAction:FireServer('Equip',{Skin=id})end end
+hooks.PremiumSkin=function(id)if meta.Buy.Active then accountAction:FireServer('Premium',{Skin=id})end end
 hooks.CoinPack=function(id)accountAction:FireServer('Coins',{Product=id})end
-hooks.Board=function(kind)meta.BoardKind=kind;if meta.Boards[kind]then meta.Apply({Board=meta.Boards[kind]})else meta.Mine.Text='Загружаем таблицу…'end;accountAction:FireServer('Board',{Kind=kind})end
+hooks.Board=function(kind)meta.BoardKind=kind;if meta.Boards[kind]then meta.Apply({Board=meta.Boards[kind]})else meta.Mine.Text='Loading leaderboard…'end;accountAction:FireServer('Board',{Kind=kind})end
 hooks.Leaders=function()u.Show('Leaders',playing());hooks.Board('Rank')end
 hooks.MetaBack=function()u.Show('Main',playing())end
 hooks.RefreshProfile=function()command:FireServer('Ready',{});accountAction:FireServer('Refresh',{})end
 root:WaitForChild('Account').OnClientEvent:Connect(function(data)
     meta.Apply(data)
-    if data.Reward and not data.Reward.AlreadyApplied then notify('Матч учтён: +'..data.Reward.XP..' опыта'..(data.Reward.Coins>0 and ', +'..data.Reward.Coins..' монет'or ''))end
+    if data.Chest then sound.PlayEffect('Chest')end
+    if data.Error then sound.PlayEffect('Error')end
+    if data.Reward and not data.Reward.AlreadyApplied then notify('Match recorded: +'..data.Reward.XP..' XP'..(data.Reward.Coins>0 and ', +'..data.Reward.Coins..' coins'or ''))end
 end)
 task.spawn(function()
+    meta.PremiumPrices={}
+    for _,skin in Progression.Skins do if skin.GamePassId and skin.GamePassId>0 then
+        local ok,info=pcall(function()return game:GetService('MarketplaceService'):GetProductInfoAsync(skin.GamePassId,Enum.InfoType.GamePass)end)
+        meta.PremiumPrices[skin.Id]=ok and info.IsForSale and info.PriceInRobux or false
+        meta.RefreshShop()
+    end end
     for _,pack in Progression.Products do if pack.ProductId>0 then
         local ok,info=pcall(function()return game:GetService('MarketplaceService'):GetProductInfoAsync(pack.ProductId,Enum.InfoType.Product)end)
         local button=meta.Products[pack.Id]
-        if ok and info.IsForSale then button.Text=pack.Coins..' монет\n'..info.PriceInRobux..' Robux'else button.Active=false;button.Text=pack.Coins..' монет\nНедоступно'end
+        if ok and info.IsForSale then button.Text=pack.Coins..' coins\n'..info.PriceInRobux..' Robux';button.Active=not Run:IsStudio();button.AutoButtonColor=button.Active else button.Active=false;button.Text=pack.Coins..' coins\nUnavailable'end
     end end
 end)
 hooks.Editor=function()
@@ -232,7 +295,8 @@ hooks.Back=function()
     if u.Page=='Mode'and state and state.Queueing then command:FireServer('CancelPvP',{})end
     u.Show(u.Page=='Maps'and 'Difficulty' or u.Page=='Difficulty'and 'Mode' or 'Main',playing())
 end
-hooks.Music=function(v,done)prefs.Music=v;sound.Volume=v;if done then savePrefs()end end
+hooks.Music=function(v,done)prefs.Music=v;sound.SetVolume(v);if done then savePrefs()end end
+hooks.Effects=function(v,done)prefs.Effects=v;sound.SetEffectsVolume(v);if done then savePrefs()end end
 hooks.Camera=function(v,done)prefs.Camera=v;u.Camera.Text.Text=string.format('%.1f×',v);if done then savePrefs()end end
 hooks.Zoom=function(v,done)prefs.Zoom=v;u.Zoom.Text.Text=string.format('%.1f×',v);if done then savePrefs()end end
 hooks.Grid=function()prefs.Grid=not prefs.Grid;refreshSettings();savePrefs()end
@@ -243,6 +307,7 @@ local function validatedEditor()
 end
 hooks.SaveMap=function()local map=validatedEditor();if map then command:FireServer('SaveMap',{Definition=map.Definition})end end
 hooks.TestMap=function()
+    if editorRenderBusy then notify('Loading map models…');return end
     local map=validatedEditor();if not map then return end
     savedMap=map.Definition;custom=true;exitEditor();u.Show('Difficulty',false)
 end
@@ -259,14 +324,14 @@ hooks.EditorTool=function(tool)
     else editor:SetTool(tool)end
 end
 hooks.EditorKind=function(kind)editor.Definition.Name=u.MapName.Text;editor:SetKind(kind)end
-hooks.ImportApply=function()local ok,reason=editor:Import(u.CodeText.Text);if ok then u.Code.Visible=false;notify('Карта загружена.')else notify(reason)end end
+hooks.ImportApply=function()local ok,reason=editor:Import(u.CodeText.Text);if ok then u.Code.Visible=false;notify('Map imported.')else notify(reason)end end
 hooks.CodeClose=function()u.Code.Visible=false end
 local function arrow(e)
-    local p=Instance.new('Part');p.Name='Стрела';p.Size=Vector3.new(.07,.07,1.1);p.Material=Enum.Material.Wood;p.Color=UI.Colors.Gold;p.Anchored=true;p.CanQuery=false;p.CanCollide=false;p.CanTouch=false;p.CFrame=CFrame.lookAt(e.From,e.To);p.Parent=scene.Folder
+    local p=Instance.new('Part');p.Name='Arrow';p.Size=Vector3.new(.07,.07,1.1);p.Material=Enum.Material.Wood;p.Color=UI.Colors.Gold;p.Anchored=true;p.CanQuery=false;p.CanCollide=false;p.CanTouch=false;p.CFrame=CFrame.lookAt(e.From,e.To);p.Parent=scene.Folder
     Tween:Create(p,TweenInfo.new(.3,Enum.EasingStyle.Linear),{CFrame=CFrame.lookAt(e.To,e.To+(e.To-e.From))}):Play();Debris:AddItem(p,.33)
 end
 local function garrisonSwing(e)
-    local blade=Instance.new('Part');blade.Name='Удар гарнизона';blade.Size=Vector3.new(.09,.09,Config.MeleeContact)
+    local blade=Instance.new('Part');blade.Name='Garrison Swing';blade.Size=Vector3.new(.09,.09,Config.MeleeContact)
     blade.Material=Enum.Material.Metal;blade.Color=Color3.fromRGB(224,228,229)
     blade.Anchored=true;blade.CanQuery=false;blade.CanCollide=false;blade.CanTouch=false
     local center=(e.From+e.To)/2;local facing=CFrame.lookAt(center,e.To)
@@ -278,6 +343,7 @@ local function applySnapshot(snapshot)
     local previous=state and state.Phase;state=snapshot;if not loaded then return end
     u.InPrivate=state.PrivateMatch;u.Connecting=state.Connecting
     local active=playing()
+    sound.SetContext(state.Phase=='Battle'and 'Battle'or 'Menu')
     if active and revision~=state.MapRevision then
         local map,reason=Network.Create(state.Map);if not map then notify(reason);return end
         revision=state.MapRevision;rebuild(map);deselect()
@@ -286,34 +352,40 @@ local function applySnapshot(snapshot)
     if active and previous~='Preparation' and previous~='Battle'then meta.HidePreviews();u.Menu.Visible=false;u.Editor.Visible=false;editorActive=false;u.Code.Visible=false end
     u.HUD.Visible=active and not editorActive
     if active then
+        beginBattleGuide()
+        if guide:Observe(state)then finishBattleGuide();notify('Great work! Capture the enemy castle to win.')end
+        u.UpdateBattleGuide(guide.Active,guide.Step)
         Scene.Update(scene,state)
         local alive={}
         for _,d in state.Units do
             local id,kind,side,x,z=d[1],d[2],d[3],d[4],d[5];alive[id]=true
             local skin=state.Skins and state.Skins[side]or 'Default'
-            if not visuals[id] or visuals[id].Kind~=kind or visuals[id].Skin~=skin then if visuals[id]then visuals[id].Model:Destroy()end;visuals[id]={Kind=kind,Skin=skin,Model=Art.Unit(kind,scene.Units,Config.TeamColor(side,viewSide()),skin),Position=Vector3.new(x,.25,z)}end
+            local color=Config.TeamColor(side,viewSide())
+            if not visuals[id] or visuals[id].Kind~=kind or visuals[id].Skin~=skin or visuals[id].Color~=color then if visuals[id]then visuals[id].Model:Destroy()end;visuals[id]={Kind=kind,Skin=skin,Color=color,Model=Art.Unit(kind,scene.Units,color,skin),Position=Vector3.new(x,.25,z)}end
             local v=visuals[id];local y=d[11]or .25
             for _,b in scene.Map.Bridges do if math.abs(x)<17 and math.abs(z-b.Position.Z)<4 then y=.7;break end end
             v.Goal=Vector3.new(x,y,z);v.Heading=Vector3.new(d[7],0,d[8]);v.Attacking=d[9]
         end
         for id,v in visuals do if not alive[id]then v.Model:Destroy();visuals[id]=nil end end
-        for _,e in state.Events do if e.Type=='Arrow'then arrow(e)elseif e.Type=='GarrisonSwing'then garrisonSwing(e)elseif e.Type=='Capture'and e.Side==viewSide() and scene.Nodes[e.Site]then notify('Захвачено: '..Config.Buildings[scene.Nodes[e.Site].Kind].Name)end end
+        for _,e in state.Events do if e.Type=='Arrow'then arrow(e)elseif e.Type=='GarrisonSwing'then garrisonSwing(e)elseif e.Type=='Capture'and e.Side==viewSide() and scene.Nodes[e.Site]then notify('Captured: '..Config.Buildings[scene.Nodes[e.Site].Kind].Name)end end
         for id,s in state.Sites do local l=labels[id];if l then l.Text=tostring(s.Population);l.TextColor3=Config.TeamColor(s.Owner,viewSide())end end
         local total=state.Totals[viewSide()];local time=string.format('%02d:%02d',math.floor(state.Time/60),math.floor(state.Time%60))
-        u.Summary.Text='Еда: '..math.floor(state.Food[viewSide()])..'\nСеляне: '..total.Peasant..'\nВремя: '..time..'\n'..(scene.Map.River and (state.Time<60 and 'Мосты: '..math.ceil(60-state.Time)..' с' or 'Мосты открыты')or 'Карта без реки')
+        u.Summary.Text='Food: '..math.floor(state.Food[viewSide()])..'\nPeasants: '..total.Peasant..'\nTime: '..time..'\n'..(scene.Map.River and (state.Time<60 and 'Bridges: '..math.ceil(60-state.Time)..' s' or 'Bridges open')or 'No river')
     elseif previous=='Preparation' or previous=='Battle'then
+        guide:Close();u.UpdateBattleGuide(false,guide.Step)
         deselect();for _,v in visuals do v.Model:Destroy()end;visuals={};u.Show('Main',false)
-        u.Result.Text=state.Phase=='Ended'and (state.Winner==0 and 'Ничья' or state.Winner==viewSide() and 'Победа' or 'Поражение') or ''
+        u.Result.Text=state.Phase=='Ended'and (state.Winner==0 and 'Draw' or state.Winner==viewSide() and 'Victory' or 'Defeat') or ''
+        if state.Phase=='Ended'and state.Winner~=0 then sound.PlayEffect(state.Winner==viewSide()and 'Victory'or 'Defeat')end
         targetCenter=Vector3.zero;targetZoom=300
     end
     meta.QueueMode=state.Queueing and state.QueueMode or nil
-    u.Online.Text=state.Connecting and 'Подключаемся…' or state.Queueing and state.QueueMode~='Ranked'and 'Отменить поиск' or 'Обычный · 1 на 1'
+    u.Online.Text=state.Connecting and 'Connecting…' or state.Queueing and state.QueueMode~='Ranked'and 'Cancel Search' or 'Casual · 1v1'
     u.Online.Active=not state.Connecting
     u.Ranked.Active=not state.Connecting
-    u.Ranked.Text=state.Queueing and state.QueueMode=='Ranked'and 'Отменить ранговый поиск'or 'Ранговый · '..(meta.Profile and meta.Profile.Rank or 0)
-    u.QueueStatus.Text=state.Connecting and 'Подключаемся к отдельному серверу матча…' or state.Queueing and (state.Studio and 'Studio: ждём второго тестового игрока.'or state.QueueMode=='Ranked'and 'Подбираем соперника по рангу среди всех лобби…'or 'Ищем соперника своего уровня…') or 'Карта в матче с игроком выбирается случайно.'
-    if state.PrivateMatch and not active then u.Play.Text='В лобби';u.EditorButton.Active=false;u.EditorButton.TextColor3=UI.Colors.Muted
-        if state.Phase=='Waiting'then u.Result.Text='Ожидаем подключения участников матча…'end
+    u.Ranked.Text=state.Queueing and state.QueueMode=='Ranked'and 'Cancel Ranked Search'or 'Ranked · '..(meta.Profile and meta.Profile.Rank or 0)
+    u.QueueStatus.Text=state.Connecting and 'Connecting to a dedicated match server…' or state.Queueing and (state.Studio and 'Studio: waiting for a second test player.'or state.QueueMode=='Ranked'and 'Finding an opponent of a similar rank across all lobbies…'or 'Finding an opponent of a similar level…') or 'PvP matches use a random map.'
+    if state.PrivateMatch and not active then u.Play.Text='Back to Lobby';u.EditorButton.Active=false;u.EditorButton.TextColor3=UI.Colors.Muted
+        if state.Phase=='Waiting'then u.Result.Text='Waiting for match players to connect…'end
     end
     refreshPanel()
 end
@@ -329,24 +401,28 @@ local function receiveSnapshot(snapshot)
         local newest=pendingSnapshot;pendingSnapshot=nil
         newest.Events=pendingEvents;pendingEvents={}
         local ok,reason=pcall(applySnapshot,newest)
-        if not ok then warn('Kingdoms snapshot: '..tostring(reason));notify('Не удалось обновить модели. '..tostring(reason))end
+        if not ok then warn('Kingdoms snapshot: '..tostring(reason));notify('Could not update the models. '..tostring(reason))end
     end
     snapshotBusy=false
 end
 root:WaitForChild('Snapshot').OnClientEvent:Connect(receiveSnapshot)
-root:WaitForChild('Feedback').OnClientEvent:Connect(notify)
+root:WaitForChild('Feedback').OnClientEvent:Connect(function(message,ok)notify(message);if ok~=true then sound.PlayEffect('Error')end end)
 root:WaitForChild('EditorData').OnClientEvent:Connect(function(data)
     if data.Map then savedMap=data.Map;if data.Saved then custom=true end;mapName()end
     if data.Prefs then for k,v in data.Prefs do if prefs[k]~=nil then prefs[k]=v end end;refreshSettings()end
+    preferencesLoaded=true;beginBattleGuide()
     if data.Saved then
-        if data.Persistent then notify('Карта сохранена.')else notify('Карта сохранена в этом запуске. Скопируй код для следующих запусков.');if editorActive then codeWindow(false)end end
+        if data.Persistent then notify('Map saved.')else notify('Map saved for this session. Copy its code to use it in future sessions.');if editorActive then codeWindow(false)end end
     end
 end)
 local pointer,panMouse,pinch=nil,false,false
 local function pan(a,b)local old,new=ground(a),ground(b);if old and new then targetCenter+=old-new end end
 local function editorClick(p)
     local hit=ground(p);if not hit then return end
+    local previousRevision,from,moving=editor.GeometryRevision,editor.From,editor.Moving
     editor.Definition.Name=u.MapName.Text;editor:Click(atScreen(p),math.round(hit.X/32),math.round(hit.Z/32))
+    if editor.GeometryRevision~=previousRevision then sound.PlayEffect('Place')
+    elseif editor.From~=from or editor.Moving~=moving then sound.PlayEffect('Select')end
 end
 local function dragSelect(a,b,add)
     if not add then selected={};primary=nil end
@@ -355,6 +431,7 @@ local function dragSelect(a,b,add)
         if visible and state.Sites[id].Owner==viewSide() and p.X>=math.min(a.X,b.X)and p.X<=math.max(a.X,b.X)and p.Y>=math.min(a.Y,b.Y)and p.Y<=math.max(a.Y,b.Y)then selected[id]=true;primary=primary or id end
     end
     orderMode=false;selectionMarks();refreshPanel()
+    if next(selected)then sound.PlayEffect('Select')end
 end
 UIS.InputBegan:Connect(function(input,processed)
     if UIS:GetFocusedTextBox()then return end
@@ -414,11 +491,12 @@ UIS.TouchPinch:Connect(function(_,scale,_,phase,processed)
     if phase==Enum.UserInputState.End then pointer=nil;pinch=false end
 end)
 local function updateGhost()
+    if editorRenderBusy then return end
     if not editorActive or u.Code.Visible or u.Tutorial.Visible or not editor or editor.Tool~='Place' and not editor.Moving then if ghost then ghost.Transparency=1 end;return end
     local p=UIS:GetMouseLocation()-GuiService:GetGuiInset();if pointer and pointer.Touch then p=pointer.Last end
     local hit=ground(p);if not hit then return end
     local x,z=math.round(hit.X/32),math.round(hit.Z/32)
-    if not ghost then ghost=Instance.new('Part');ghost.Name='Клетка размещения';ghost.Size=Vector3.new(29,.08,29);ghost.Anchored=true;ghost.CanQuery=false;ghost.CanTouch=false;ghost.CanCollide=false;ghost.Material=Enum.Material.Neon;ghost.Parent=scene.Folder end
+    if not ghost then ghost=Instance.new('Part');ghost.Name='Placement Cell';ghost.Size=Vector3.new(29,.08,29);ghost.Anchored=true;ghost.CanQuery=false;ghost.CanTouch=false;ghost.CanCollide=false;ghost.Material=Enum.Material.Neon;ghost.Parent=scene.Folder end
     ghost.Transparency=.65;ghost.Position=Vector3.new(x*32,.18,z*32);ghost.Color=editor:CanPlace(x,z,editor.Moving)and Color3.fromRGB(106,190,135)or Color3.fromRGB(220,100,83)
 end
 Run.RenderStepped:Connect(function(dt)
@@ -447,7 +525,16 @@ Run.RenderStepped:Connect(function(dt)
 end)
 u.Play.Active=false;u.EditorButton.Active=false
 local ok,reason=pcall(function()rebuild(Default)end)
-if not ok then u.Result.Text='Ошибка загрузки моделей';notify(reason);warn('Kingdoms: '..tostring(reason));return end
-loaded=true;u.Play.Active=true;u.EditorButton.Active=true;u.Result.Text='ЛКМ — выбрать · ПКМ — приказ';refreshSettings();mapName();u.Show('Main',false)
+if not ok then
+    local message=tostring(reason)
+    if message:find('Imported models are not installed',1,true)or message:find('Missing imported model',1,true)then
+        u.Result.Text='3D models are not installed'
+        if Run:IsStudio()or game.CreatorType==Enum.CreatorType.User and game.CreatorId==player.UserId then
+            notify('Import the model catalogue and run the mesh installer in Studio before publishing.')
+        else notify('3D models are currently unavailable. Please try again later.')end
+    else u.Result.Text='Could not load models';notify('Model loading failed. Please rejoin the game.')end
+    warn('Kingdoms: '..message);return
+end
+loaded=true;u.Play.Active=true;u.EditorButton.Active=true;u.Result.Text='Left-click: select · Right-click: order';refreshSettings();mapName();u.Show('Main',false)
 command:FireServer('Ready',{})
 if state then receiveSnapshot(state)end

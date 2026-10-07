@@ -1,0 +1,5674 @@
+{
+  "version": 1,
+  "signature": "bd3872582d1ecc17ef2dc3f9462869bd729e5dc61cacb224b93bb909b98925a9",
+  "file": "KingdomsMeshCatalogue.glb",
+  "bytes": 53081920,
+  "sha256": "335a576b26e82ab6b5059c3fa0f3080303155cfff50820c56e660504256490e6",
+  "models": 806,
+  "studioFile": "KingdomsMeshCatalogue.gltf",
+  "gltfSha256": "36321bf5a19b9bb17b7d8634d02da3f416f4f2a8e9a24d04b993b7008b319924",
+  "binSha256": "6c8abc6a2301463e75b7a7ef8d8a3049f29b365b1b48b05ca7508e721f16c0d4",
+  "meshParts": 1969,
+  "teamColours": {
+    "Blue": [
+      65,
+      145,
+      224
+    ],
+    "Red": [
+      222,
+      72,
+      78
+    ],
+    "Neutral": [
+      155,
+      160,
+      163
+    ]
+  },
+  "triangleCount": 1281544,
+  "records": [
+    {
+      "name": "Amber_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Amber_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Amber_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Archer_Torso",
+      "variants": 3,
+      "vertices": 2548,
+      "triangles": 1124,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Defender_Head",
+      "variants": 1,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Amber_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2704,
+      "triangles": 1080,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Amber_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Amber_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Defender_Torso",
+      "variants": 3,
+      "vertices": 2640,
+      "triangles": 1064,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Herald",
+      "variants": 1,
+      "vertices": 1768,
+      "triangles": 696,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Amber_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Amber_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2008,
+      "triangles": 868,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Amber_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Amber_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Amber_Runner_Torso",
+      "variants": 3,
+      "vertices": 2104,
+      "triangles": 912,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archer_Head",
+      "variants": 4,
+      "vertices": 3640,
+      "triangles": 1260,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archer_LeftArm",
+      "variants": 4,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Archer_LeftLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archer_RightArm",
+      "variants": 4,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archer_RightLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archer_Torso",
+      "variants": 4,
+      "vertices": 1316,
+      "triangles": 608,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archery_Base",
+      "variants": 1,
+      "vertices": 10530,
+      "triangles": 4668,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archery_Upgrade2",
+      "variants": 1,
+      "vertices": 19180,
+      "triangles": 8416,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Archery_Upgrade3",
+      "variants": 1,
+      "vertices": 31440,
+      "triangles": 13652,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Barracks_Base",
+      "variants": 1,
+      "vertices": 10650,
+      "triangles": 4652,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Barracks_Upgrade2",
+      "variants": 1,
+      "vertices": 19304,
+      "triangles": 8400,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Barracks_Upgrade3",
+      "variants": 1,
+      "vertices": 31632,
+      "triangles": 13636,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Bridge",
+      "variants": 1,
+      "vertices": 4032,
+      "triangles": 1932,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Camp_Base",
+      "variants": 1,
+      "vertices": 3266,
+      "triangles": 1404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Camp_Upgrade2",
+      "variants": 1,
+      "vertices": 11888,
+      "triangles": 5152,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Camp_Upgrade3",
+      "variants": 1,
+      "vertices": 24162,
+      "triangles": 10388,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Castle_Base",
+      "variants": 1,
+      "vertices": 27994,
+      "triangles": 12548,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Castle_Upgrade2",
+      "variants": 1,
+      "vertices": 21786,
+      "triangles": 8000,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Castle_Upgrade3",
+      "variants": 1,
+      "vertices": 21946,
+      "triangles": 8000,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "CollectionChest",
+      "variants": 1,
+      "vertices": 3360,
+      "triangles": 1276,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Crusader_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Crusader_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Archer_Torso",
+      "variants": 3,
+      "vertices": 1804,
+      "triangles": 828,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Defender_Head",
+      "variants": 1,
+      "vertices": 4184,
+      "triangles": 1488,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Crusader_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 1960,
+      "triangles": 784,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Crusader_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Crusader_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Defender_Torso",
+      "variants": 3,
+      "vertices": 1896,
+      "triangles": 768,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Crusader_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Crusader_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1264,
+      "triangles": 572,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Crusader_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Crusader_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Crusader_Runner_Torso",
+      "variants": 3,
+      "vertices": 1360,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Dark_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dark_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Archer_Torso",
+      "variants": 3,
+      "vertices": 2242,
+      "triangles": 1004,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Defender_Head",
+      "variants": 1,
+      "vertices": 4592,
+      "triangles": 1620,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Dark_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2400,
+      "triangles": 960,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Dark_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Dark_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Defender_Torso",
+      "variants": 3,
+      "vertices": 2334,
+      "triangles": 944,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Herald",
+      "variants": 1,
+      "vertices": 1464,
+      "triangles": 576,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Dark_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Dark_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1702,
+      "triangles": 748,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_RoofCrest",
+      "variants": 1,
+      "vertices": 960,
+      "triangles": 396,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Dark_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Dark_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dark_Runner_Torso",
+      "variants": 3,
+      "vertices": 1798,
+      "triangles": 792,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Default_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Default_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Default_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Defender_Head",
+      "variants": 1,
+      "vertices": 3896,
+      "triangles": 1356,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Defender_LeftArm",
+      "variants": 4,
+      "vertices": 1768,
+      "triangles": 696,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Defender_LeftLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Defender_RightArm",
+      "variants": 4,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Defender_RightLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Defender_Torso",
+      "variants": 4,
+      "vertices": 1408,
+      "triangles": 548,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Archer_Head",
+      "variants": 1,
+      "vertices": 4044,
+      "triangles": 1404,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dragon_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1960,
+      "triangles": 836,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dragon_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Archer_RightArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Archer_Torso",
+      "variants": 3,
+      "vertices": 3142,
+      "triangles": 1352,
+      "degenerateRemoved": 48
+    },
+    {
+      "name": "Dragon_Defender_Head",
+      "variants": 1,
+      "vertices": 4044,
+      "triangles": 1404,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dragon_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2768,
+      "triangles": 1092,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Dragon_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1590,
+      "triangles": 652,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Defender_Torso",
+      "variants": 3,
+      "vertices": 2506,
+      "triangles": 1052,
+      "degenerateRemoved": 48
+    },
+    {
+      "name": "Dragon_Gateway",
+      "variants": 1,
+      "vertices": 2140,
+      "triangles": 900,
+      "degenerateRemoved": 48
+    },
+    {
+      "name": "Dragon_Herald",
+      "variants": 1,
+      "vertices": 1456,
+      "triangles": 576,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Dragon_Peasant_Head",
+      "variants": 1,
+      "vertices": 4404,
+      "triangles": 1524,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dragon_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2602,
+      "triangles": 1096,
+      "degenerateRemoved": 48
+    },
+    {
+      "name": "Dragon_RoadTile",
+      "variants": 1,
+      "vertices": 912,
+      "triangles": 444,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_Head",
+      "variants": 1,
+      "vertices": 4044,
+      "triangles": 1404,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Dragon_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 1032,
+      "triangles": 428,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1590,
+      "triangles": 652,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 916,
+      "triangles": 404,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Dragon_Runner_Torso",
+      "variants": 3,
+      "vertices": 2506,
+      "triangles": 1052,
+      "degenerateRemoved": 48
+    },
+    {
+      "name": "Ember_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Ember_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Ember_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Archer_Torso",
+      "variants": 3,
+      "vertices": 1508,
+      "triangles": 696,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Defender_Head",
+      "variants": 3,
+      "vertices": 5696,
+      "triangles": 1956,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Ember_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 1960,
+      "triangles": 784,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Ember_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Ember_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Defender_Torso",
+      "variants": 3,
+      "vertices": 1600,
+      "triangles": 636,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Ember_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Ember_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Peasant_Torso",
+      "variants": 3,
+      "vertices": 968,
+      "triangles": 440,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Ember_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Ember_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Ember_Runner_Torso",
+      "variants": 3,
+      "vertices": 1064,
+      "triangles": 484,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Farm_Base",
+      "variants": 1,
+      "vertices": 18508,
+      "triangles": 7364,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Farm_Upgrade2",
+      "variants": 1,
+      "vertices": 26978,
+      "triangles": 11000,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Farm_Upgrade3",
+      "variants": 1,
+      "vertices": 27318,
+      "triangles": 11132,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "FlagCloth",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "FlagPole",
+      "variants": 1,
+      "vertices": 48,
+      "triangles": 28,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Archer_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Forest_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Forest_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Archer_Torso",
+      "variants": 3,
+      "vertices": 3564,
+      "triangles": 1440,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Defender_Head",
+      "variants": 1,
+      "vertices": 4512,
+      "triangles": 1572,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Forest_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 3720,
+      "triangles": 1396,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Forest_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Forest_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Defender_Torso",
+      "variants": 3,
+      "vertices": 3656,
+      "triangles": 1380,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Herald",
+      "variants": 1,
+      "vertices": 2784,
+      "triangles": 1012,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Forest_Peasant_Head",
+      "variants": 3,
+      "vertices": 4296,
+      "triangles": 1484,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Forest_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Peasant_Torso",
+      "variants": 3,
+      "vertices": 3024,
+      "triangles": 1184,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_RoofCrest",
+      "variants": 1,
+      "vertices": 768,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Runner_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Forest_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Forest_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Forest_Runner_Torso",
+      "variants": 3,
+      "vertices": 3120,
+      "triangles": 1228,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Frost_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Frost_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Archer_Torso",
+      "variants": 3,
+      "vertices": 2668,
+      "triangles": 1168,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Defender_Head",
+      "variants": 1,
+      "vertices": 4104,
+      "triangles": 1444,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Frost_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2896,
+      "triangles": 1168,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Frost_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Frost_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Defender_Torso",
+      "variants": 3,
+      "vertices": 2760,
+      "triangles": 1108,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Herald",
+      "variants": 1,
+      "vertices": 1768,
+      "triangles": 696,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Frost_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Frost_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2128,
+      "triangles": 912,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_RoofCrest",
+      "variants": 1,
+      "vertices": 168,
+      "triangles": 80,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Frost_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Frost_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Frost_Runner_Torso",
+      "variants": 3,
+      "vertices": 2224,
+      "triangles": 956,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Griffin_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Griffin_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Archer_Torso",
+      "variants": 3,
+      "vertices": 1946,
+      "triangles": 872,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Defender_Head",
+      "variants": 1,
+      "vertices": 4592,
+      "triangles": 1620,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Griffin_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2400,
+      "triangles": 960,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Griffin_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Griffin_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Defender_Torso",
+      "variants": 3,
+      "vertices": 2038,
+      "triangles": 812,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Herald",
+      "variants": 1,
+      "vertices": 1464,
+      "triangles": 576,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Griffin_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Griffin_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1406,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_RoofCrest",
+      "variants": 1,
+      "vertices": 960,
+      "triangles": 396,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Griffin_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Griffin_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Griffin_Runner_Torso",
+      "variants": 3,
+      "vertices": 1502,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Grove_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Grove_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Archer_Torso",
+      "variants": 3,
+      "vertices": 2124,
+      "triangles": 960,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Defender_Head",
+      "variants": 1,
+      "vertices": 4360,
+      "triangles": 1532,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Grove_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2280,
+      "triangles": 916,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Grove_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Grove_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Defender_Torso",
+      "variants": 3,
+      "vertices": 2216,
+      "triangles": 900,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Herald",
+      "variants": 1,
+      "vertices": 1344,
+      "triangles": 532,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Grove_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Grove_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 704,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_RoofCrest",
+      "variants": 1,
+      "vertices": 768,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Grove_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Grove_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Grove_Runner_Torso",
+      "variants": 3,
+      "vertices": 1680,
+      "triangles": 748,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Iron_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Iron_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Archer_Torso",
+      "variants": 3,
+      "vertices": 1924,
+      "triangles": 872,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Defender_Head",
+      "variants": 1,
+      "vertices": 4184,
+      "triangles": 1488,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Iron_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2152,
+      "triangles": 872,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Iron_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Iron_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Defender_Torso",
+      "variants": 3,
+      "vertices": 2016,
+      "triangles": 812,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Iron_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Iron_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1384,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Iron_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Iron_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Iron_Runner_Torso",
+      "variants": 3,
+      "vertices": 1480,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Lion_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Lion_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Archer_Torso",
+      "variants": 3,
+      "vertices": 2668,
+      "triangles": 1168,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Defender_Head",
+      "variants": 3,
+      "vertices": 5696,
+      "triangles": 1956,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Lion_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2704,
+      "triangles": 1080,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Lion_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Lion_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Defender_Torso",
+      "variants": 3,
+      "vertices": 2760,
+      "triangles": 1108,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Herald",
+      "variants": 1,
+      "vertices": 1768,
+      "triangles": 696,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Lion_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Lion_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2128,
+      "triangles": 912,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Lion_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Lion_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Lion_Runner_Torso",
+      "variants": 3,
+      "vertices": 2224,
+      "triangles": 956,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Mariner_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Mariner_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Archer_Torso",
+      "variants": 3,
+      "vertices": 3748,
+      "triangles": 1648,
+      "degenerateRemoved": 192
+    },
+    {
+      "name": "Mariner_Defender_Head",
+      "variants": 1,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Mariner_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 4300,
+      "triangles": 1796,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Mariner_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Mariner_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Defender_Torso",
+      "variants": 3,
+      "vertices": 3840,
+      "triangles": 1588,
+      "degenerateRemoved": 192
+    },
+    {
+      "name": "Mariner_Herald",
+      "variants": 1,
+      "vertices": 3384,
+      "triangles": 1412,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Mariner_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Mariner_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Peasant_Torso",
+      "variants": 3,
+      "vertices": 3208,
+      "triangles": 1392,
+      "degenerateRemoved": 192
+    },
+    {
+      "name": "Mariner_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Mariner_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Mariner_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Mariner_Runner_Torso",
+      "variants": 3,
+      "vertices": 3304,
+      "triangles": 1436,
+      "degenerateRemoved": 192
+    },
+    {
+      "name": "Moon_Archer_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Moon_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Moon_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Archer_Torso",
+      "variants": 3,
+      "vertices": 3256,
+      "triangles": 1388,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Defender_Head",
+      "variants": 1,
+      "vertices": 4512,
+      "triangles": 1572,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Moon_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 3408,
+      "triangles": 1344,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Moon_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Moon_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Defender_Torso",
+      "variants": 3,
+      "vertices": 3348,
+      "triangles": 1328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Herald",
+      "variants": 1,
+      "vertices": 2480,
+      "triangles": 960,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Moon_Peasant_Head",
+      "variants": 3,
+      "vertices": 4296,
+      "triangles": 1484,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Moon_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2716,
+      "triangles": 1132,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Runner_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Moon_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Moon_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Moon_Runner_Torso",
+      "variants": 3,
+      "vertices": 2812,
+      "triangles": 1176,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Archer_Head",
+      "variants": 3,
+      "vertices": 4248,
+      "triangles": 1496,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Nomad_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Nomad_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Archer_Torso",
+      "variants": 3,
+      "vertices": 1804,
+      "triangles": 828,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Defender_Head",
+      "variants": 3,
+      "vertices": 4504,
+      "triangles": 1592,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Nomad_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 1960,
+      "triangles": 784,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Nomad_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Nomad_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Defender_Torso",
+      "variants": 3,
+      "vertices": 1896,
+      "triangles": 768,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Nomad_Peasant_Head",
+      "variants": 3,
+      "vertices": 4288,
+      "triangles": 1504,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Nomad_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1264,
+      "triangles": 572,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Runner_Head",
+      "variants": 3,
+      "vertices": 4248,
+      "triangles": 1496,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Nomad_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Nomad_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Nomad_Runner_Torso",
+      "variants": 3,
+      "vertices": 1360,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Archer_Head",
+      "variants": 1,
+      "vertices": 3900,
+      "triangles": 1388,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Oracle_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1904,
+      "triangles": 824,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Oracle_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Archer_RightArm",
+      "variants": 3,
+      "vertices": 848,
+      "triangles": 340,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Archer_Torso",
+      "variants": 3,
+      "vertices": 2060,
+      "triangles": 936,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Defender_Head",
+      "variants": 1,
+      "vertices": 3900,
+      "triangles": 1388,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Oracle_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2092,
+      "triangles": 828,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Oracle_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1630,
+      "triangles": 668,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Oracle_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Defender_Torso",
+      "variants": 3,
+      "vertices": 1424,
+      "triangles": 636,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Gateway",
+      "variants": 1,
+      "vertices": 1972,
+      "triangles": 916,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Herald",
+      "variants": 1,
+      "vertices": 1768,
+      "triangles": 696,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Oracle_Peasant_Head",
+      "variants": 1,
+      "vertices": 4260,
+      "triangles": 1508,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Oracle_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 848,
+      "triangles": 340,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 1260,
+      "triangles": 516,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1520,
+      "triangles": 680,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_RoadTile",
+      "variants": 1,
+      "vertices": 1788,
+      "triangles": 776,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_RoofCrest",
+      "variants": 1,
+      "vertices": 168,
+      "triangles": 80,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Runner_Head",
+      "variants": 1,
+      "vertices": 3900,
+      "triangles": 1388,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Oracle_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 944,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1630,
+      "triangles": 668,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Oracle_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 680,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Oracle_Runner_Torso",
+      "variants": 3,
+      "vertices": 1424,
+      "triangles": 636,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_Head",
+      "variants": 4,
+      "vertices": 3680,
+      "triangles": 1268,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_LeftArm",
+      "variants": 4,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_LeftLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_RightArm",
+      "variants": 4,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_RightLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Peasant_Torso",
+      "variants": 4,
+      "vertices": 776,
+      "triangles": 352,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Raven_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Raven_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Archer_Torso",
+      "variants": 3,
+      "vertices": 2242,
+      "triangles": 1004,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Defender_Head",
+      "variants": 1,
+      "vertices": 4592,
+      "triangles": 1620,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Raven_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2400,
+      "triangles": 960,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Raven_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Raven_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Defender_Torso",
+      "variants": 3,
+      "vertices": 2334,
+      "triangles": 944,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Herald",
+      "variants": 1,
+      "vertices": 1464,
+      "triangles": 576,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Raven_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Raven_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1702,
+      "triangles": 748,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_RoofCrest",
+      "variants": 1,
+      "vertices": 960,
+      "triangles": 396,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Raven_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Raven_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Raven_Runner_Torso",
+      "variants": 3,
+      "vertices": 1798,
+      "triangles": 792,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rock",
+      "variants": 1,
+      "vertices": 1080,
+      "triangles": 360,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rose_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Rose_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Archer_Torso",
+      "variants": 3,
+      "vertices": 3476,
+      "triangles": 1328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Defender_Head",
+      "variants": 1,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rose_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 3928,
+      "triangles": 1416,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Rose_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Rose_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Defender_Torso",
+      "variants": 3,
+      "vertices": 3568,
+      "triangles": 1268,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Herald",
+      "variants": 1,
+      "vertices": 2992,
+      "triangles": 1032,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Rose_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rose_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Peasant_Torso",
+      "variants": 3,
+      "vertices": 2936,
+      "triangles": 1072,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rose_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Rose_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rose_Runner_Torso",
+      "variants": 3,
+      "vertices": 3032,
+      "triangles": 1116,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Archer_Head",
+      "variants": 3,
+      "vertices": 3896,
+      "triangles": 1356,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Royal_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Royal_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Archer_Torso",
+      "variants": 3,
+      "vertices": 2028,
+      "triangles": 916,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Defender_Head",
+      "variants": 1,
+      "vertices": 4632,
+      "triangles": 1672,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Royal_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2184,
+      "triangles": 872,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Royal_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Royal_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Defender_Torso",
+      "variants": 3,
+      "vertices": 2120,
+      "triangles": 856,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Herald",
+      "variants": 1,
+      "vertices": 1248,
+      "triangles": 488,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Royal_Peasant_Head",
+      "variants": 3,
+      "vertices": 3936,
+      "triangles": 1364,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Royal_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1488,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Runner_Head",
+      "variants": 3,
+      "vertices": 3896,
+      "triangles": 1356,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Royal_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Royal_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Royal_Runner_Torso",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 704,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Archer_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rune_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Rune_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Archer_Torso",
+      "variants": 3,
+      "vertices": 1940,
+      "triangles": 872,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Defender_Head",
+      "variants": 1,
+      "vertices": 4512,
+      "triangles": 1572,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rune_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2392,
+      "triangles": 960,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Rune_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Rune_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Defender_Torso",
+      "variants": 3,
+      "vertices": 2032,
+      "triangles": 812,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Herald",
+      "variants": 1,
+      "vertices": 1456,
+      "triangles": 576,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Rune_Peasant_Head",
+      "variants": 3,
+      "vertices": 4296,
+      "triangles": 1484,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rune_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1400,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_RoofCrest",
+      "variants": 1,
+      "vertices": 168,
+      "triangles": 80,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Runner_Head",
+      "variants": 3,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Rune_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Rune_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Rune_Runner_Torso",
+      "variants": 3,
+      "vertices": 1496,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Runner_Head",
+      "variants": 4,
+      "vertices": 3640,
+      "triangles": 1260,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Runner_LeftArm",
+      "variants": 4,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Runner_LeftLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Runner_RightArm",
+      "variants": 4,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Runner_RightLeg",
+      "variants": 4,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Runner_Torso",
+      "variants": 4,
+      "vertices": 872,
+      "triangles": 396,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sapphire_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Sapphire_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Archer_Torso",
+      "variants": 3,
+      "vertices": 2476,
+      "triangles": 1080,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Defender_Head",
+      "variants": 1,
+      "vertices": 4104,
+      "triangles": 1444,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sapphire_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2704,
+      "triangles": 1080,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Sapphire_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Sapphire_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Defender_Torso",
+      "variants": 3,
+      "vertices": 2568,
+      "triangles": 1020,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Herald",
+      "variants": 1,
+      "vertices": 1576,
+      "triangles": 608,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Sapphire_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sapphire_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1936,
+      "triangles": 824,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_RoofCrest",
+      "variants": 1,
+      "vertices": 168,
+      "triangles": 80,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sapphire_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1562,
+      "triangles": 632,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Sapphire_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 584,
+      "triangles": 264,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sapphire_Runner_Torso",
+      "variants": 3,
+      "vertices": 2032,
+      "triangles": 868,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Stag_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Stag_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Archer_Torso",
+      "variants": 3,
+      "vertices": 2124,
+      "triangles": 960,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Defender_Head",
+      "variants": 1,
+      "vertices": 4360,
+      "triangles": 1532,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Stag_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2280,
+      "triangles": 916,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Stag_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Stag_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Defender_Torso",
+      "variants": 3,
+      "vertices": 2216,
+      "triangles": 900,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Herald",
+      "variants": 1,
+      "vertices": 1344,
+      "triangles": 532,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Stag_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Stag_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 704,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_RoofCrest",
+      "variants": 1,
+      "vertices": 768,
+      "triangles": 308,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Stag_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Stag_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Stag_Runner_Torso",
+      "variants": 3,
+      "vertices": 1680,
+      "triangles": 748,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Archer_Head",
+      "variants": 1,
+      "vertices": 3644,
+      "triangles": 1272,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Storm_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1944,
+      "triangles": 836,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Storm_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Archer_RightArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Archer_Torso",
+      "variants": 3,
+      "vertices": 2168,
+      "triangles": 976,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Defender_Head",
+      "variants": 1,
+      "vertices": 3644,
+      "triangles": 1272,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Storm_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 1900,
+      "triangles": 760,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Storm_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1694,
+      "triangles": 696,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Storm_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Defender_Torso",
+      "variants": 3,
+      "vertices": 1532,
+      "triangles": 676,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Gateway",
+      "variants": 1,
+      "vertices": 516,
+      "triangles": 236,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Herald",
+      "variants": 1,
+      "vertices": 1136,
+      "triangles": 444,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Storm_Peasant_Head",
+      "variants": 1,
+      "vertices": 4004,
+      "triangles": 1392,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Storm_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 936,
+      "triangles": 384,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1628,
+      "triangles": 720,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_RoadTile",
+      "variants": 1,
+      "vertices": 1476,
+      "triangles": 680,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_RoofCrest",
+      "variants": 1,
+      "vertices": 168,
+      "triangles": 80,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Runner_Head",
+      "variants": 1,
+      "vertices": 3644,
+      "triangles": 1272,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Storm_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 1032,
+      "triangles": 428,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1694,
+      "triangles": 696,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Storm_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 724,
+      "triangles": 328,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Storm_Runner_Torso",
+      "variants": 3,
+      "vertices": 1532,
+      "triangles": 676,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sun_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Sun_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Archer_Torso",
+      "variants": 3,
+      "vertices": 2444,
+      "triangles": 1080,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Defender_Head",
+      "variants": 3,
+      "vertices": 5696,
+      "triangles": 1956,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sun_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 2928,
+      "triangles": 1168,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Sun_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Sun_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Defender_Torso",
+      "variants": 3,
+      "vertices": 2536,
+      "triangles": 1020,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Herald",
+      "variants": 1,
+      "vertices": 1992,
+      "triangles": 784,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Sun_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sun_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1904,
+      "triangles": 824,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Sun_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Sun_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Sun_Runner_Torso",
+      "variants": 3,
+      "vertices": 2000,
+      "triangles": 868,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Tower_Base",
+      "variants": 1,
+      "vertices": 6096,
+      "triangles": 2772,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Tower_Ruins",
+      "variants": 1,
+      "vertices": 1944,
+      "triangles": 700,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Tower_Upgrade2",
+      "variants": 1,
+      "vertices": 6392,
+      "triangles": 2904,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Tower_Upgrade3",
+      "variants": 1,
+      "vertices": 16304,
+      "triangles": 7436,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Tree",
+      "variants": 1,
+      "vertices": 280,
+      "triangles": 144,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Archer_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Veteran_Archer_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Archer_LeftArm",
+      "variants": 3,
+      "vertices": 1584,
+      "triangles": 664,
+      "degenerateRemoved": 28
+    },
+    {
+      "name": "Veteran_Archer_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Archer_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Archer_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Archer_Torso",
+      "variants": 3,
+      "vertices": 1804,
+      "triangles": 828,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Defender_Head",
+      "variants": 1,
+      "vertices": 4256,
+      "triangles": 1476,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Veteran_Defender_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Defender_LeftArm",
+      "variants": 3,
+      "vertices": 1960,
+      "triangles": 784,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Veteran_Defender_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Defender_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Veteran_Defender_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Defender_Torso",
+      "variants": 3,
+      "vertices": 1896,
+      "triangles": 768,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Herald",
+      "variants": 1,
+      "vertices": 1024,
+      "triangles": 400,
+      "degenerateRemoved": 16
+    },
+    {
+      "name": "Veteran_Peasant_Head",
+      "variants": 3,
+      "vertices": 4040,
+      "triangles": 1388,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Veteran_Peasant_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Peasant_LeftArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Peasant_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Peasant_RightArm",
+      "variants": 3,
+      "vertices": 648,
+      "triangles": 252,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Peasant_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Peasant_Torso",
+      "variants": 3,
+      "vertices": 1264,
+      "triangles": 572,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_RoadTile",
+      "variants": 1,
+      "vertices": 1440,
+      "triangles": 660,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_RoofCrest",
+      "variants": 1,
+      "vertices": 728,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Runner_Head",
+      "variants": 3,
+      "vertices": 4000,
+      "triangles": 1380,
+      "degenerateRemoved": 84
+    },
+    {
+      "name": "Veteran_Runner_Insignia",
+      "variants": 1,
+      "vertices": 96,
+      "triangles": 44,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Runner_LeftArm",
+      "variants": 3,
+      "vertices": 744,
+      "triangles": 296,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Runner_LeftLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Runner_RightArm",
+      "variants": 3,
+      "vertices": 1466,
+      "triangles": 588,
+      "degenerateRemoved": 4
+    },
+    {
+      "name": "Veteran_Runner_RightLeg",
+      "variants": 3,
+      "vertices": 488,
+      "triangles": 220,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Veteran_Runner_Torso",
+      "variants": 3,
+      "vertices": 1360,
+      "triangles": 616,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Village_Base",
+      "variants": 1,
+      "vertices": 10038,
+      "triangles": 4388,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Village_Upgrade2",
+      "variants": 1,
+      "vertices": 11248,
+      "triangles": 4988,
+      "degenerateRemoved": 0
+    },
+    {
+      "name": "Village_Upgrade3",
+      "variants": 1,
+      "vertices": 22922,
+      "triangles": 10004,
+      "degenerateRemoved": 0
+    }
+  ]
+}

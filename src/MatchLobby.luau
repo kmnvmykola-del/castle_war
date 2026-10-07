@@ -39,7 +39,7 @@ function Lobby:Leave(player,disconnect)
         local side=old.Members[player];old.Members[player]=nil
         if old.Mode~='Lobby' and old.State.Phase~='Waiting' and old.State.Phase~='Ended'then
             old.Forfeits[side]=true;old.State.Phase='Ended';old.State.Winner=side==1 and 2 or 1
-            for other in old.Members do self.Notify(other,'Противник вышел из матча. Победа.')end
+            for other in old.Members do self.Notify(other,'Your opponent left the match. You win!')end
         end
         self:Finish(old)
     end
@@ -48,21 +48,21 @@ function Lobby:Leave(player,disconnect)
 end
 function Lobby:StartAI(player,map,difficulty)
     local current=self:Register(player)
-    if current.State.Phase~='Waiting' and current.State.Phase~='Ended'then return false,'Сначала заверши текущий матч.'end
+    if current.State.Phase~='Waiting' and current.State.Phase~='Ended'then return false,'Finish your current match first.'end
     self:Leave(player,true)
     local session=self:NewSession({[player]=1},map,'AI',difficulty);session.State:Start()
-    return true,'Займи сёла и подготовь армию.'
+    return true,'Capture villages and prepare your army.'
 end
 function Lobby:Join(player,mode)
     local current=self:Register(player);mode=mode=='Ranked'and 'Ranked'or 'PvP'
-    if current.State.Phase~='Waiting' and current.State.Phase~='Ended'then return false,'Сначала заверши текущий матч.'end
-    if self:IsQueued(player)then return true,'Ожидаем второго игрока.'end
+    if current.State.Phase~='Waiting' and current.State.Phase~='Ended'then return false,'Finish your current match first.'end
+    if self:IsQueued(player)then return true,'Waiting for a second player.'end
     self:Leave(player,false)
     local profile=self.Profile(player)or {};local ticket={Mode=mode,Rank=profile.Rank or 0,Level=profile.Level or 1,JoinedAt=self.Now()}
     table.insert(self.Queue,player);self.QueueInfo[player]=ticket
     self:PumpQueue()
-    if not self:IsQueued(player)then return true,'Противник найден. Карта: '..self.Players[player].State.Map.Definition.Name end
-    return true,'Ожидаем второго игрока на этом сервере.'
+    if not self:IsQueued(player)then return true,'Opponent found. Map: '..self.Players[player].State.Map.Definition.Name end
+    return true,'Waiting for a second player on this server.'
 end
 function Lobby:PumpQueue()
     for _,player in table.clone(self.Queue)do
@@ -79,7 +79,7 @@ function Lobby:PumpQueue()
                 self:Leave(player,true);self:Leave(other,true)
                 local map,mapId=Catalog.Random(self.Random)
                 local session=self:NewSession({[player]=1,[other]=2},map,ticket.Mode);session.MapId=mapId;session.State:Start()
-                for member in session.Members do self.Notify(member,'Противник найден. Карта: '..map.Definition.Name)end
+                for member in session.Members do self.Notify(member,'Opponent found. Map: '..map.Definition.Name)end
             end
         end
     end

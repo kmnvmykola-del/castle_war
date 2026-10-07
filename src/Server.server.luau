@@ -2,6 +2,7 @@ local Players=game:GetService('Players')
 local RS=game:GetService('ReplicatedStorage')
 local Run=game:GetService('RunService')
 local Http=game:GetService('HttpService')
+game:GetService('SoundService').RespectFilteringEnabled=true
 local root=RS:WaitForChild('Kingdoms')
 local Engine=require(root.Engine)
 local Config=require(root.Config)
@@ -51,7 +52,7 @@ end
 network=ServerNetwork.new(function(p,text)feedback:FireClient(p,text)end,function(p)
     if not p.Parent then return end
     if network and network.Reserved and network.MetadataLoaded then
-        if not network.Metadata or not network.IsHub and not table.find(network.Metadata.Users,p.UserId)then p:Kick('Этот сервер предназначен для участников одного матча.');return end
+        if not network.Metadata or not network.IsHub and not table.find(network.Metadata.Users,p.UserId)then p:Kick('This server is reserved for the players in one match.');return end
         tryPrivate()
     end
     if network and ready[p]then network:EnsureLobby(p,account:Profile(p))end
@@ -71,7 +72,7 @@ Players.PlayerRemoving:Connect(function(p)ready[p]=nil;throttles[p]=nil;profiles
 command.OnServerEvent:Connect(function(player,action,payload)
     if typeof(action)~='string' or typeof(payload)~='table' then return end
     if action=='Ready'then
-        if network.Reserved and network.MetadataLoaded and (not network.Metadata or not network.IsHub and not table.find(network.Metadata.Users,player.UserId))then player:Kick('Этот сервер предназначен для участников одного матча.');return end
+        if network.Reserved and network.MetadataLoaded and (not network.Metadata or not network.IsHub and not table.find(network.Metadata.Users,player.UserId))then player:Kick('This server is reserved for the players in one match.');return end
         ready[player]=true
         local d=account:Profile(player)or account:Load(player);if not d then return end
         account:Publish(player);tryPrivate();snapshot(lobby:Register(player),player);editorData:FireClient(player,{Map=d.Map,Prefs=d.Prefs,Persistent=account.Data.S.Store~=nil})
@@ -79,13 +80,14 @@ command.OnServerEvent:Connect(function(player,action,payload)
         return
     end
     if not ready[player]then return end
-    if not account:Profile(player)then feedback:FireClient(player,'Профиль ещё загружается.');return end
+    if not account:Profile(player)then feedback:FireClient(player,'Your profile is still loading.');return end
     local now=os.clock();throttles[player]=throttles[player]or {}
     if now-(throttles[player][action]or 0)<.12 then return end;throttles[player][action]=now
     if action=='Prefs'then
         local data={}
-        for _,k in {'Music','Camera','Zoom'}do local v=payload[k];if typeof(v)=='number'and v==v then data[k]=math.clamp(v,k=='Music'and 0 or .5,k=='Music'and 1 or 2)end end
+        for _,k in {'Music','Effects','Camera','Zoom'}do local v=payload[k];if typeof(v)=='number'and v==v then local audio=k=='Music'or k=='Effects';data[k]=math.clamp(v,audio and 0 or .5,audio and 1 or 2)end end
         data.Grid=payload.Grid==true;data.Labels=payload.Labels~=false
+        data.BattleTutorialDone=payload.BattleTutorialDone==true
         local ok,message=account.Data:Field(player.UserId,'Prefs',data);if not ok then feedback:FireClient(player,message)end;return
     elseif action=='SaveMap'then
         local map,reason=Network.Create(payload.Definition)
@@ -95,7 +97,7 @@ command.OnServerEvent:Connect(function(player,action,payload)
         editorData:FireClient(player,{Map=map.Definition,Persistent=account.Data.S.Store~=nil,Saved=true})
         return
     end
-    local ok,message=false,'Неизвестная команда.'
+    local ok,message=false,'Unknown command.'
     local session=lobby:Register(player);local state=session.State;local side=session.Members[player]
     if action=='Start'then
         if state.Phase=='Waiting'or state.Phase=='Ended'then
@@ -106,7 +108,7 @@ command.OnServerEvent:Connect(function(player,action,payload)
             elseif payload.MapId=='Random'then map=Catalog.Random()
             elseif payload.MapId then
                 local known=false;for _,item in Catalog.Items do if item.Id==payload.MapId then known=true;break end end
-                if not known then feedback:FireClient(player,'Выбери существующую карту.');return end
+                if not known then feedback:FireClient(player,'Select an existing map.');return end
                 map=assert(Catalog.Create(payload.MapId))
             end
             local difficulty=Config.BotInterval[payload.Difficulty]and payload.Difficulty or 'Hard'
@@ -115,14 +117,14 @@ command.OnServerEvent:Connect(function(player,action,payload)
                 local mapId='TwoBridges';for _,item in Catalog.Items do if item.Name==map.Definition.Name then mapId=item.Id;break end end
                 ok,message=network:Solo(player,payload.Definition and map.Definition or nil,mapId,difficulty)
             end
-        else message='Бой уже идёт.'end
+        else message='A battle is already in progress.'end
     elseif action=='JoinPvP'or action=='JoinRanked'then
         local mode=action=='JoinRanked'and 'Ranked'or 'PvP'
         if network.Studio then ok,message=lobby:Join(player,mode)else ok,message=network:Join(player,account:Profile(player),mode)end
-    elseif action=='CancelPvP'then if network.Studio then lobby:CancelQueue(player);ok=true;message='Поиск отменён.'else ok,message=network:Cancel(player)end
+    elseif action=='CancelPvP'then if network.Studio then lobby:CancelQueue(player);ok=true;message='Search cancelled.'else ok,message=network:Cancel(player)end
     elseif action=='ReturnMenu'then
-        if network.Reserved and not network.IsHub then lobby:Leave(player,false);account:Await(player);local profile=account:Profile(player);if player.Parent then network:Return(player,profile and profile.Level)end;ok=true;message='Возвращаемся в лобби…'
-        elseif network.Studio then lobby:Leave(player,false);ok=true;message='Матч завершён.'
+        if network.Reserved and not network.IsHub then lobby:Leave(player,false);account:Await(player);local profile=account:Profile(player);if player.Parent then network:Return(player,profile and profile.Level)end;ok=true;message='Returning to the lobby…'
+        elseif network.Studio then lobby:Leave(player,false);ok=true;message='Match ended.'
         else ok,message=network:Cancel(player)end
     elseif action=='Send'then ok,message=state:Send(side,payload.Sources,payload.Target,payload.Percent,payload.Filter,payload.Route)
     elseif action=='Upgrade'then ok,message=state:Upgrade(side,payload.Site)
@@ -138,7 +140,7 @@ Run.Heartbeat:Connect(function(dt)
     end end
 end)
 if network.Reserved then task.delay(90,function()
-    if not privateSession and not network.IsHub then for _,p in Players:GetPlayers()do feedback:FireClient(p,'Второй участник не подключился. Возвращаемся в лобби.');network:Return(p,account:Profile(p)and account:Profile(p).Level)end end
+    if not privateSession and not network.IsHub then for _,p in Players:GetPlayers()do feedback:FireClient(p,'The second player did not connect. Returning to the lobby.');network:Return(p,account:Profile(p)and account:Profile(p).Level)end end
 end)end
 if Run:IsStudio()then _G.KingdomsLobby=lobby;_G.KingdomsAccount=account end
 

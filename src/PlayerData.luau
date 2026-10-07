@@ -12,11 +12,11 @@ function Data:Load(userId,force)
     if self.S.Store then ok,value=pcall(function()local options=Instance.new('DataStoreGetOptions');options.UseCache=false;return self.S.Store:GetAsync('Player_'..userId,options)end)
     elseif force then value=self.Profiles[userId]end
     self.Busy[userId]=nil
-    if not ok then self.Errors[userId]='Не удалось загрузить профиль. Попробуй ещё раз.';return nil,self.Errors[userId]end
+    if not ok then self.Errors[userId]='Could not load your profile. Please try again.';return nil,self.Errors[userId]end
     local d=P.Normalize(value);self.Profiles[userId]=d;self.Errors[userId]=nil;return d
 end
 function Data:Update(userId,change)
-    if not self.Profiles[userId]then return false,self.Errors[userId]or 'Профиль ещё загружается.'end
+    if not self.Profiles[userId]then return false,self.Errors[userId]or 'Your profile is still loading.'end
     while self.Busy[userId]do task.wait()end
     self.Busy[userId]=true;local outcome,rejected
     local ok,value=pcall(function()
@@ -30,7 +30,7 @@ function Data:Update(userId,change)
         return transform(self.Profiles[userId])
     end)
     self.Busy[userId]=nil
-    if not ok then return false,'Сохранение временно недоступно. Изменение не применено.'end
+    if not ok then return false,'Saving is temporarily unavailable. No changes were applied.'end
     if rejected then return false,rejected end
     if value then self.Profiles[userId]=value end
     return true,outcome
@@ -41,32 +41,46 @@ function Data:Result(userId,result)
     end)
 end
 function Data:Buy(userId,skinId)
-    local skin=P.Skin(skinId);if not skin or skin.Price==0 then return false,'Выбери доступный набор.'end
+    local skin=P.Skin(skinId);if not skin or skin.Price<=0 or skin.RobuxPrice or skin.ChestOnly then return false,'This set cannot be purchased with coins.'end
     return self:Update(userId,function(d)
-        if d.Skins[skinId]then return false,'Набор уже куплен.'end
-        if d.Coins<skin.Price then return false,'Недостаточно монет.'end
-        d.Coins-=skin.Price;d.Skins[skinId]=true;return true,'Набор куплен. Можно надеть его в магазине.'
+        if d.Skins[skinId]then return false,'You already own this set.'end
+        if d.Coins<skin.Price then return false,'Not enough coins.'end
+        d.Coins-=skin.Price;d.Skins[skinId]=true;return true,'Set purchased. Find it in your inventory.'
     end)
 end
 function Data:Equip(userId,skinId)
-    if not P.Skin(skinId)then return false,'Неизвестный набор.'end
+    if not P.Skin(skinId)then return false,'Unknown set.'end
     return self:Update(userId,function(d)
-        if not d.Skins[skinId]then return false,'Сначала купи этот набор.'end
-        d.Equipped=skinId;return true,'Набор выбран для следующего матча.'
+        if not d.Skins[skinId]then return false,'Unlock this set first.'end
+        d.Equipped=skinId;return true,'Set selected for your next match.'
     end)
 end
 function Data:OpenChest(userId,requestId,signature)
-    if typeof(requestId)~='string'or #requestId>64 or #requestId<8 then return false,'Некорректный запрос.'end
+    if typeof(requestId)~='string'or #requestId>64 or #requestId<8 then return false,'Invalid request.'end
     local roll=self.S.Roll and self.S.Roll()or Random.new():NextNumber()
     return self:Update(userId,function(d)
-        if d.Chests[requestId]then return true,{Skin=d.Chests[requestId],AlreadyApplied=true}end
+        if d.Chests[requestId]then
+            local previous=d.Chests[requestId]
+            local result=typeof(previous)=='table'and copy(previous)or {Skin=previous}
+            result.AlreadyApplied=true;return true,result
+        end
         local pool,current=P.ChestPool(d)
-        if #pool==0 then return false,'Все наборы уже собраны.'end
-        if signature~=current then return false,'Список наград изменился. Проверь новые шансы.'end
-        if d.Coins<P.ChestPrice then return false,'Недостаточно монет.'end
-        local id=pool[math.clamp(math.floor(roll*#pool)+1,1,#pool)]
-        d.Coins-=P.ChestPrice;d.Skins[id]=true;d.Chests[requestId]=id
-        return true,{Skin=id,Coins=P.ChestPrice}
+        if P.CollectionCount(d)==#P.Skins then return false,'You already own every set.'end
+        if signature~=current then return false,'The reward list changed. Review the updated odds.'end
+        if d.Coins<P.ChestPrice then return false,'Not enough coins.'end
+        local id=P.DrawChest(roll);local duplicate=d.Skins[id]==true
+        local refund=duplicate and P.Skin(id).DuplicateCoins or 0
+        local result={Skin=id,Coins=P.ChestPrice,Duplicate=duplicate,Refund=refund}
+        d.Coins=d.Coins-P.ChestPrice+refund;d.Skins[id]=true;d.Chests[requestId]=copy(result)
+        return true,result
+    end)
+end
+-- This method is called only after MarketplaceService verifies pass ownership.
+function Data:GrantPass(userId,skinId)
+    local skin=P.Skin(skinId);if not skin or not skin.RobuxPrice then return false,'Unknown premium set.'end
+    return self:Update(userId,function(d)
+        if d.Skins[skinId]then return true,{AlreadyApplied=true}end
+        d.Skins[skinId]=true;return true,{Skin=skinId}
     end)
 end
 function Data:Receipt(userId,purchaseId,coins)
@@ -76,13 +90,13 @@ function Data:Receipt(userId,purchaseId,coins)
     end)
 end
 function Data:Field(userId,key,value)
-    if key~='Map' and key~='Prefs'then return false,'Неизвестное поле.'end
+    if key~='Map' and key~='Prefs'then return false,'Unknown field.'end
     return self:Update(userId,function(d)d[key]=value;return true,true end)
 end
 function Data:Deliver(userId,result)
     if self.S.Inbox then
         local queued=pcall(function()self.S.Inbox:UpdateAsync(tostring(userId),function(old)local d=old or {};d[result.Id]=result;return d end)end)
-        if not queued then return false,'Награда ожидает сохранения.'end
+        if not queued then return false,'Your reward is waiting to be saved.'end
     end
     local ok,reward=self:Result(userId,result)
     if ok and self.S.Inbox then pcall(function()self.S.Inbox:UpdateAsync(tostring(userId),function(old)if old then old[result.Id]=nil end;return old end)end)end
@@ -118,7 +132,7 @@ function Data:Board(kind,userId)
         local entries={};local store=self.S[kind]
         if store then
             local ok,pages=pcall(function()return store:GetSortedAsync(false,100)end)
-            if not ok then return nil,'Таблица временно недоступна.'end
+            if not ok then return nil,'The leaderboard is temporarily unavailable.'end
             for i,v in pages:GetCurrentPage()do table.insert(entries,{Place=i,UserId=tonumber(v.key),Score=math.floor(v.value/100000000)})end
         else
             for id,d in self.Profiles do table.insert(entries,{UserId=id,Score=d[kind]})end
