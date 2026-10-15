@@ -1,39 +1,39 @@
-# Проверка перехода на MeshPart — 6 октября 2026
+# MeshPart transition validation — October 6, 2026
 
-Переход установлен в настоящей Roblox Studio и опубликован в существующую **Frontier Kingdoms**, версия **v12**. PlaceId: `81963222072062`, GameId: `10769541065`. Output в 09:18:38 UTC подтвердил `Published new changes in "Frontier Kingdoms" to Roblox`.
+The transition was installed in real Roblox Studio and published to the existing **Frontier Kingdoms**, version **v12**. PlaceId: `81963222072062`, GameId: `10769541065`. Output at 09:18:38 UTC confirmed `Published new changes in "Frontier Kingdoms" to Roblox`.
 
-## Модели и локальные проверки
+## Models and local checks
 
-Рабочий каталог содержит **1984 обычных MeshPart**: 803 исходные модели, синие/красные варианты одежды всех 25 комплектов и 23 серые детали стандартной нейтральной армии. Art клонирует шаблоны и сохраняет суставы и анимацию шести частей человека. Геометрия во время игры и редактора больше не создаётся.
+The working catalog contains **1,984 ordinary MeshParts**: 803 source models, blue/red clothing variants for all 25 sets, and 23 gray parts for the standard neutral army. Art clones templates and retains joints and six-part character animation. Geometry is no longer created during gameplay or editor use.
 
-`validate_static_meshes.py` сравнил все 587 404 невырожденных исходных треугольника с Blender JSON: позиции, нормали, порядок вершин, индексы и цвета. Все варианты совпадают; кожа, броня и оружие при окраске ткани сохранены. Удалены 10 868 граней нулевой площади. Полный каталог с вариантами содержит 1 291 748 треугольников — это объём каталога, а не одной сцены. GLB занимает 52 927 828 байт; glTF/bin точно соответствуют ему.
+`validate_static_meshes.py` compared all 587,404 nondegenerate source triangles with Blender JSON: positions, normals, vertex order, indices, and colors. All variants match; recoloring fabric preserves skin, armor, and weapons. 10,868 zero-area faces were removed. The full catalog with variants contains 1,291,748 triangles; this is catalog volume, not a single scene. GLB size is 52,927,828 bytes; glTF/bin match it exactly.
 
-`run_local_qa.py`: **73 сценария, 0 ошибок**, все 828 исходников компилируются. Проверены экономика, покупки, отдельные Inventory/Shop, английский UI, обновления редактора, цвета обеих сторон для всех комплектов, нейтральная армия, локальный звук, полная и дополнительная установка с откатом при ошибке. CLI использует подставные MeshId/CFrame; их нет в сохранённой игре.
+`run_local_qa.py`: **73 scenarios, 0 failures**; all 828 sources compile. Checks covered economy, purchases, separate Inventory/Shop, English UI, editor updates, both team colors for all sets, neutral army, local sound, and full and supplemental installation with rollback on errors. CLI uses mock MeshIds/CFrames; these are absent from the saved game.
 
-## Проверка в Studio
+## Studio validation
 
-- Первоначальный импорт задержался из-за HTTP-тайм-аута трёх MeshPart. Reconfigure → Import в той же сессии сохранил успешные загрузки и завершился зелёной отметкой.
-- Первые 1961 MeshPart установлены с резервной копией прежних игровых папок в ServerStorage.
-- В первом матче обнаружена ошибка: TeamKey поддерживал синий/красный цвет, но отклонял серых нейтральных лучников. Добавлены 23 серые детали и регрессионная проверка всех четырёх стандартных типов нейтральной армии. Уже загруженные модели сохранили ID.
-- Английское меню загружается; Play → Vs AI → Easy запускает матч. Отряд из 35 бойцов дошёл до нейтральной казармы и захватил её. В повторном матче предупреждения Kingdoms snapshot / Unsupported army team colour отсутствовали.
-- Inventory открывает только полученные комплекты; Shop показывает предложения и Coming Soon для неподключённых Robux-покупок. Проверены армия, замок и дорога Dragon Order.
-- UIGradient убран с ViewportFrame: он затемнял сам рендер. После исправления модели отображаются с нормальной яркостью.
-- В редакторе проверены выбор фермы, размещение, Undo и повторное размещение. FPS не измерялся.
+- Initial import was delayed by HTTP timeouts for three MeshParts. Reconfigure → Import in the same session retained successful uploads and finished with a green check mark.
+- The first 1,961 MeshParts were installed, with previous game folders backed up in ServerStorage.
+- The first match exposed an error: TeamKey supported blue/red colors but rejected gray neutral archers. 23 gray parts and a regression check for all four standard neutral army types were added. Previously uploaded models retained their IDs.
+- The English menu loads; Play → Vs AI → Easy starts a match. A 35-fighter group reached and captured the neutral barracks. A repeated match showed no Kingdoms snapshot / Unsupported army team colour warnings.
+- Inventory shows only owned sets; Shop shows offers and Coming Soon for unconnected Robux purchases. Dragon Order army, castle, and road previews were checked.
+- UIGradient was removed from ViewportFrame because it darkened the rendered models. Models have normal brightness after the fix.
+- Editor checks covered selecting a farm, placement, Undo, and placement again. FPS was not measured.
 
-## Сохранение
+## Saving
 
-`FrontierKingdoms-installed.rbxl` сохранён самой Studio через Download a Copy; `inex.rbxl` содержит ту же установленную версию. Размер: 2 848 109 байт. SHA-256: `d1a964eb22e8dd843257263466bed8c2b4be17d5152935cf43f1769609ce80a2`.
+`FrontierKingdoms-installed.rbxl` was saved by Studio through Download a Copy; `inex.rbxl` contains the same installed version. Size: 2,848,109 bytes. SHA-256: `d1a964eb22e8dd843257263466bed8c2b4be17d5152935cf43f1769609ce80a2`.
 
-`verify_installed_place.py` прочитал бинарный файл: все 25 активных Source совпадают с `src/`, все 1984 шаблона имеют реальные положительные MeshId, Geometry отсутствует в активной папке. 860 архивных исходников сохранены, архивные Script/LocalScript отключены. Синхронизация в памяти сохраняет ID моделей, все нескриптовые свойства, родителей и архивные Source; устаревшая Geometry обратно не добавляется. `check_english.py` подтверждает отсутствие непереведённых литералов, кириллицы и расхождений активного кода.
+`verify_installed_place.py` read the binary: all 25 active Sources match `src/`, all 1,984 templates have real positive MeshIds, and Geometry is absent from the active folder. 860 archived sources are preserved; archived Script/LocalScript instances are disabled. In-memory synchronization preserves model IDs, all nonscript properties, parents, and archived Sources; obsolete Geometry is not reintroduced. `check_english.py` confirms there are no untranslated literals, Cyrillic text, or active-code mismatches.
 
-Резервные папки в ServerStorage:
+Backup folders in ServerStorage:
 
-- `KingdomsBeforeMeshImport_98f2443d-b844-40b1-8f03-93e77634d38a` — прежние игровые корни и первоначальный импорт.
-- `KingdomsBeforeNeutralFix_870ea26e-633e-48e5-beb8-27ad7229206d` — Art/MeshCatalog до серых деталей.
-- `KingdomsBeforePreviewFix_dec2cb2a-c966-42fc-9a0a-9a0a4efa398f` — CollectionUI до исправления затемнения.
+- `KingdomsBeforeMeshImport_98f2443d-b844-40b1-8f03-93e77634d38a` — previous game roots and initial import.
+- `KingdomsBeforeNeutralFix_870ea26e-633e-48e5-beb8-27ad7229206d` — Art/MeshCatalog before gray parts.
+- `KingdomsBeforePreviewFix_dec2cb2a-c966-42fc-9a0a-9a0a4efa398f` — CollectionUI before the dimming fix.
 
-Локальные копии: `build/inex-before-static-meshes.rbxl`, `build/inex-before-native-install.rbxl`. Отчёты: `build/static-mesh-qa-report.json`, `build/inventory-qa-report.json`, `build/installed-place-qa-report.json`, `build/native-studio-qa-report.json`, `build/english-audit-report.json`.
+Local copies: `build/inex-before-static-meshes.rbxl`, `build/inex-before-native-install.rbxl`. Reports: `build/static-mesh-qa-report.json`, `build/inventory-qa-report.json`, `build/installed-place-qa-report.json`, `build/native-studio-qa-report.json`, and `build/english-audit-report.json`.
 
-## Границы проверки
+## Validation limits
 
-В Studio проверен один клиент и матч против ИИ. Два настоящих клиента, изоляция звуков на двух устройствах, FPS, опубликованные DataStore и реальные Robux-транзакции отдельно не проверялись. Публикация v12 подтверждена Studio; внешний запуск через приложение Roblox в этой сессии не выполнялся. Оригинальные музыкальные записи и товары Robux ещё требуют подключения своих AssetId/GamePassId.
+Studio validation covered one client and an AI match. Two real clients, sound isolation across two devices, FPS, published DataStores, and actual Robux transactions were not tested separately. Studio confirmed v12 publication; the external Roblox app was not launched in this session. Original music and Robux products still require their own AssetIds/GamePassIds.

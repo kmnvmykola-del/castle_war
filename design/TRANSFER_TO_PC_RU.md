@@ -1,15 +1,15 @@
-# Перенос проекта через GitHub
+# Transferring the project through GitHub
 
-Архив не создаётся по просьбе пользователя. Переноси папку проекта через свой репозиторий GitHub.
+No archive is created at the user's request. Transfer the project folder through your own GitHub repository.
 
-1. Добавь `inex.rbxl`, `README_RU.md`, папки `src/`, `design/`, `tools/`, `assets/` и `.gitignore` в репозиторий. `build/` содержит промежуточные файлы и резервные копии, для запуска игры не нужен.
-2. На другом ПК клонируй репозиторий или скачай его через GitHub. Сначала извлеки скачанные файлы в обычную папку.
-3. Установи Roblox Studio, открой `inex.rbxl` через **File → Open from File** и нажми **Play / F5**. Для запуска исходники Blender не требуются.
-4. Для изменения моделей нужен Blender 5.2. Текущие `.blend` находятся в `assets/blender/v012/base/`, `collection/`, `decor/`.
-5. Для продолжения работы в новом чате выбери эту папку проекта и отправь текст ниже.
+1. Add `inex.rbxl`, `README_RU.md`, `src/`, `design/`, `tools/`, `assets/`, and `.gitignore` to the repository. `build/` contains intermediates/backups and is unnecessary to run the game.
+2. On another PC, clone the repository or download it from GitHub. Extract downloaded files into an ordinary folder first.
+3. Install Roblox Studio, open `inex.rbxl` through **File → Open from File**, and press **Play / F5**. Blender sources are unnecessary to run the game.
+4. Model changes require Blender 5.2. Current `.blend` files are in `assets/blender/v012/base/`, `collection/`, and `decor/`.
+5. To continue in a new chat, select this project folder and send the following text.
 
-> Продолжи разработку этой Roblox-игры. Сначала прочитай design/NEXT_SESSION_RU.md, design/CONCEPT_RU.md и design/ALL_FEATURES_RU.md. Основной файл inex.rbxl. Новые игровые механики и изменения согласованных чисел сначала обсуждай со мной. Модели создавай в Blender. Не проверяй каждое разрешение экрана. Объясни текущее состояние, затем выполняй мой следующий запрос.
+> Continue developing this Roblox game. First read design/NEXT_SESSION_RU.md, design/CONCEPT_RU.md, and design/ALL_FEATURES_RU.md. The main file is inex.rbxl. Discuss new mechanics and changes to agreed values with me first. Create models in Blender. Do not test every screen resolution. Explain the current state, then carry out my next request.
 
-Это перенос файлов и рабочего контекста проекта. `NEXT_SESSION_RU.md` содержит передачу состояния, а не дословную копию переписки. Папку проекта нужно переносить отдельно от ссылки на чат; доступ к беседе сам по себе не доставляет локальный файл Roblox на другой компьютер.
+This transfers project files and working context. `NEXT_SESSION_RU.md` is a state handoff, not a verbatim chat transcript. Transfer the project folder separately from the chat link; access to the conversation alone does not put the local Roblox file on another computer.
 
-В `.gitignore` исключены `build/`, Studio lock-файлы, временные копии Blender и Python-кеш. Основной Roblox-файл и исходники не исключены. Репозиторий за тебя не создавался, файлы туда не отправлялись.
+`.gitignore` excludes `build/`, Studio lock files, temporary Blender copies, and Python caches. The main Roblox file and sources are not excluded. No repository was created or files uploaded on your behalf.

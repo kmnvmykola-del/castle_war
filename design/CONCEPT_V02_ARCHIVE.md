@@ -1,239 +1,239 @@
-# Пограничные королевства — концепция 0.2
+# Frontier Kingdoms — Concept 0.2
 
-Дата: 4 октября 2026 года. Рабочее название можно заменить.
+Date: October 4, 2026. The working title may be changed.
 
-Статус: пользователь утвердил концепцию 0.2 и разрешил создание первого прототипа. Новые механики и изменения правил сначала согласуются с пользователем.
+Status: the user approved concept 0.2 and authorized the first prototype. Agree on new mechanics and rule changes with the user first.
 
-## 1. Уже задано пользователем
+## 1. User requirements already established
 
-- Платформа: Roblox.
-- Отправная точка: LandGrabbers и близкие игры; объединяем подходящие идеи в самостоятельную игру.
-- Мир: средневековье и немного магии.
-- Графика: полноценное 3D, умеренно мультяшное.
-- Порядок работы: проектирование → согласование → создание игры.
-- Основной источник населения — сёла. Военные объекты медленно создают бойцов самостоятельно и обучают прибывающих селян.
-- Каждый участник должен успеть занять 3–4 села в начале партии.
-- Улучшение до второго уровня расходует 50 человек, до третьего — ещё 100. С уровнями растут соответствующие характеристики здания.
-- Смешанные армии: защитники, лучники и быстрые бойцы; пример желаемой битвы — 50 лучников против 100 защитников.
-- Модели создавать в Blender и переносить в Roblox. Основной Roblox-файл проекта — существующий `inex.rbxl`.
+- Platform: Roblox.
+- Starting point: LandGrabbers and similar games; combine compatible ideas into an independent game.
+- World: medieval with a little magic.
+- Graphics: full 3D, moderately stylized.
+- Workflow: design → approval → game implementation.
+- Villages are the main population source. Military structures slowly produce fighters and train arriving peasants.
+- Each participant should have time to capture 3–4 villages at the start.
+- Upgrading to level two consumes 50 people; level three consumes another 100. Relevant building statistics improve with levels.
+- Mixed armies: defenders, archers, and fast fighters; an example desired battle is 50 archers against 100 defenders.
+- Create models in Blender and transfer them to Roblox. The existing `inex.rbxl` is the main project file.
 
-Пользователь утвердил конкретные скорости, характеристики, очередь обучения, минуту подготовки и планировку первого прототипа ниже. Дополнительно утверждены стартовые гарнизоны: каждый замок — 50 защитников и 20 селян; нейтральное село — 8 селян; казарма, стрельбище и лагерь — по 12 бойцов своего типа; башня — 15 лучников. Бот сложный, активно атакует и перехватывает снабжение, играет без бесплатных ресурсов.
+The user approved the concrete speeds, statistics, training queue, preparation minute, and initial layout below. Starting garrisons were also approved: each castle has 50 defenders and 20 peasants; neutral villages have 8 peasants; barracks, archery ranges, and camps have 12 fighters of their type; towers have 15 archers. The bot is challenging, actively attacks/intercepts supply, and receives no free resources.
 
-## 2. Изученные игры и выводы
+## 2. Games researched and conclusions
 
-Исследованы официальные описания разработчиков и издателей. Это анализ материалов, а не отчёт о личном прохождении игр. Предлагаемые адаптации и оценки — наши проектные выводы.
+Research used official developer and publisher descriptions. This analyzes those materials rather than claiming personal playthroughs. Proposed adaptations and assessments are our design conclusions.
 
-| Игра | Подтверждённая идея | Предлагаемая адаптация |
+| Game | Confirmed idea | Proposed adaptation |
 | --- | --- | --- |
-| LandGrabbers | Захват зданий армиями, отправка половины гарнизона, улучшения, оборонительные башни, конюшни, арсеналы, артефакты | Основа: здания создают войска; нападение ослабляет свой гарнизон; специализированные объекты меняют тактику |
-| Mushroom Wars 2 | Короткие RTS-бои, герои с особыми умениями, кампания, матчи до четырёх игроков и 2v2 | Позже добавить командиров, командные бои и кампанию с особыми задачами |
-| Galcon Fusion | Быстрая отправка больших групп между точками, одиночные и командные режимы | Быстрые приказы и совместная атака из нескольких крепостей |
-| Auralux: Constellations | Простая основа RTS, постепенное введение механик, туман войны, перемещающиеся планеты и червоточины | Вводить особенности карт по одной: переправы, горные обходы, затем туман и редкие порталы |
-| Tentacle Wars | Соединение объектов линиями, постоянная передача энергии, управление соединениями и их разрывом | Автоподкрепление между своими зданиями с обязательным запасом гарнизона; отмена линии одним действием |
+| LandGrabbers | Army-based building capture, sending half a garrison, upgrades, defense towers, stables, arsenals, artifacts | Core: buildings produce troops; attacking weakens the home garrison; specialized structures affect tactics |
+| Mushroom Wars 2 | Short RTS battles, heroes with special abilities, campaign, up to four players and 2v2 | Later add commanders, team battles, and a campaign with special objectives |
+| Galcon Fusion | Quickly sending large groups between points; solo and team modes | Fast orders and coordinated attacks from several fortresses |
+| Auralux: Constellations | Simple RTS foundation, gradual mechanics, fog of war, moving planets, wormholes | Introduce one map feature at a time: crossings, mountain detours, then fog and rare portals |
+| Tentacle Wars | Line-based links, continuous energy transfer, link management and disconnection | Automatic reinforcement between owned buildings with a mandatory garrison reserve; cancel a line with one action |
 
-Источники:
+Sources:
 
 1. [Nevosoft: LandGrabbers, press kit](https://iphone.nevosoft.com/games/landgrabbers/presskit).
-2. [Mushroom Wars 2: описание издателя в Steam](https://store.steampowered.com/app/457730/Mushroom_Wars_2/).
-3. [Galcon Fusion: официальный сайт](https://www.galcon.com/fusion/).
-4. [Auralux: Constellations: описание издателя в Steam](https://store.steampowered.com/app/444130/Auralux_Constellations/).
-5. [Tentacle Wars: описание FDG Entertainment в Google Play](https://play.google.com/store/apps/details?id=com.fdgentertainment.tentaclewars.gp.free&hl=en).
+2. [Mushroom Wars 2: publisher description on Steam](https://store.steampowered.com/app/457730/Mushroom_Wars_2/).
+3. [Galcon Fusion: official website](https://www.galcon.com/fusion/).
+4. [Auralux: Constellations: publisher description on Steam](https://store.steampowered.com/app/444130/Auralux_Constellations/).
+5. [Tentacle Wars: FDG Entertainment description on Google Play](https://play.google.com/store/apps/details?id=com.fdgentertainment.tentaclewars.gp.free&hl=en).
 
-Свою игру строим вокруг совместимых механик. Собственные название, модели, карты, интерфейс, персонажи и музыка.
+Build our game around compatible mechanics, with original title, models, maps, interface, characters, and music.
 
-## 3. Идея игры
+## 3. Game idea
 
-Игрок ведёт небольшое королевство в войне за сёла, военные здания и пути между ними. Сёла дают население; игрок направляет селян в нужные военные объекты, где они становятся защитниками, лучниками или быстрыми бойцами. Обученные отряды физически движутся по дорогам, сталкиваются и сражаются. Башни прикрывают подходы; позже появятся редкие способности командиров.
+Players lead a small kingdom fighting for villages, military structures, and routes between them. Villages supply population; players send peasants to military buildings to become defenders, archers, or fast fighters. Trained troops physically follow roads, collide, and fight. Towers cover approaches; rare commander abilities may follow later.
 
-Главный вопрос каждого решения: «Усилить производство, сохранить защитников или сейчас отправить армию?»
+The central decision is: improve production, retain defenders, or send the army now?
 
-Предлагаемая отличительная черта: контроль маршрутов. Между важными объектами есть короткий опасный путь и более длинный обход. Выбранный маршрут виден до подтверждения приказа. Победа зависит от численности, времени и расположения армии.
+Proposed distinction: route control. Important locations have a short dangerous route and a longer alternative. The selected route is visible before confirming orders. Victory depends on numbers, timing, and army position.
 
-## 4. Одна партия
+## 4. One match
 
-1. Каждый участник начинает с замка и одинакового гарнизона. В его стартовой зоне находятся четыре нейтральных села и доступные военные объекты.
-2. Первые 60 секунд центральные переправы закрыты. Участники занимают 3–4 села, выбирают первые военные здания и настраивают снабжение.
-3. Игрок направляет население в казарму, стрельбище или лагерь быстрых бойцов; решает, потратить ли 50 человек на второй уровень здания.
-4. Переправы открываются: начинается борьба за башни, пути снабжения и чужие военные объекты.
-5. Игрок собирает смешанные отряды, использует преимущества разных войск и решает, когда вложить 100 человек в третий уровень.
-6. Получает результат матча и награды за участие и достижения.
+1. Each participant starts with a castle and identical garrison. Their starting area has four neutral villages and accessible military structures.
+2. Central crossings remain closed for 60 seconds. Participants capture 3–4 villages, choose their first military buildings, and arrange supply.
+3. Players send population to barracks, archery ranges, or fast-fighter camps and decide whether to spend 50 people on a level-two building.
+4. Crossings open, starting the struggle for towers, supply routes, and enemy military structures.
+5. Players assemble mixed groups, exploit troop strengths, and decide when to invest 100 people in level three.
+6. Players receive match results and rewards for participation and achievements.
 
-Целевая длительность обычной партии с населением и обучением: 10–15 минут, обучение — короче. Это ориентир для будущих испытаний, а не обещание готового баланса. Период подготовки входит в длительность партии. Минуту подготовки сначала предлагаем как правило основной карты; отдельный быстрый режим сможет обходиться без неё.
+Target duration for an ordinary population-and-training match: 10–15 minutes; tutorials are shorter. This guides future testing rather than promising finished balance. Preparation counts toward match duration. Initially propose the preparation minute as the main-map rule; a separate fast mode could omit it.
 
-Предлагаемое правило первого прототипа: участник проигрывает, когда у него не осталось зданий и живых отрядов на карте, включая селян. Один потерянный стартовый замок сам по себе не завершает игру. Побеждает последний участник с силами на карте.
+Proposed first-prototype defeat rule: no remaining buildings or living groups on the map, including peasants. Losing the starting castle alone does not end the match. The last participant with forces on the map wins.
 
-Для затянувшихся матчей позже обсудим предел времени и прозрачный подсчёт результата. Для режима удержания контрольных точек будет отдельное правило победы.
+For prolonged matches, later discuss time limits and transparent scoring. Control-point modes will have separate victory rules.
 
-## 5. Управление и камера
+## 5. Controls and camera
 
-Рекомендация, пока пользователь не выбрал: камера сверху под углом, масштабирование и перемещение по карте. Мир полностью трёхмерный. Камера держит здания и армии хорошо видимыми.
+Recommendation pending user choice: angled overhead camera with zoom and map panning. The world is fully 3D, and the camera keeps buildings and armies clearly visible.
 
-- Выбрать своё здание → выбрать цель → отправить отряд.
-- По умолчанию уходит 50% выбранного состава гарнизона. Дополнительные варианты: 25%, 75%, 100%.
-- Состав отправки можно выбрать: все, только селяне, защитники, лучники или быстрые бойцы. Приказ показывает точное количество каждого типа.
-- На компьютере можно выделить несколько зданий. На телефоне — последовательный выбор источников.
-- Перед приказом видны число отправляемых солдат и дорога, по которой они пойдут.
-- Автоснабжение: своё село регулярно отправляет селян в выбранное военное здание, сохраняя заданный резерв. Свои военные здания могут отправлять обученные подкрепления друг другу. При смене владельца любой конечной точки автоматическая линия отключается.
-- Во время выбора можно отменить приказ. После отправки первая версия ведёт отряд до цели; перенаправление обсудим отдельно.
+- Select an owned building → choose a target → send a group.
+- Default send amount is 50% of the selected garrison composition. Additional options: 25%, 75%, and 100%.
+- Choose the sent composition: all, peasants only, defenders, archers, or fast fighters. Orders show exact counts by type.
+- PC supports multiple-building selection; phones select sources sequentially.
+- Troop counts and their route are visible before issuing orders.
+- Automatic supply: an owned village periodically sends peasants to a selected military building while retaining a specified reserve. Owned military buildings can send trained reinforcements to one another. Ownership changes at either endpoint disable the automatic line.
+- Orders can be canceled while selecting. After dispatch, the first version takes troops to their destination; discuss redirection separately.
 
-Управляемый персонаж на поле не включён в текущую рекомендацию. Если пользователь выберет героя или смешанное управление, потребуется пересмотреть камеру, темп боя и интерфейс.
+A directly controlled field character is outside the current recommendation. Choosing a hero or mixed control requires reconsidering camera, combat pace, and interface.
 
-## 6. Армия, захват и развитие
+## 6. Army, capture, and progression
 
-### Население и обучение
+### Population and training
 
-Сёла создают только селян. Замок, казарма, стрельбище, лагерь и башня медленно создают бойцов своего типа самостоятельно. Селянин, дошедший до собственного военного здания, занимает место в очереди обучения. Один селянин превращается в одного бойца; обучение не добавляет ещё одного человека поверх исходного.
+Villages produce only peasants. Castles, barracks, archery ranges, camps, and towers slowly recruit their own fighters. A peasant arriving at an owned military building enters its training queue. One peasant becomes one fighter; training does not add another person.
 
-Казарма и замок обучают защитников, стрельбище и башня — лучников, лагерь — быстрых бойцов. Обученные бойцы, пришедшие в другое здание, сохраняют свой тип. Обратное превращение и бесплатное переобучение не предлагаются для первой версии.
+Barracks/castles train defenders, archery ranges/towers train archers, and camps train fast fighters. Trained fighters retain their type when entering other buildings. Reversion and free retraining are not proposed for the first version.
 
-| Показатель | Уровень 1 | Уровень 2 | Уровень 3 |
+| Parameter | Level 1 | Level 2 | Level 3 |
 | --- | --- | --- | --- |
-| Цена перехода на этот уровень | Начальный | 50 человек из гарнизона | Ещё 100 человек из гарнизона |
-| Производство села | 1 селянин / 5 с | 1 / 3 с | 1 / 2 с |
-| Самостоятельный набор военного здания | 1 боец / 20 с | 1 / 15 с | 1 / 12 с |
-| Обучение привезённых селян | 1 боец / 3 с | 1 / 2 с | 1 / 1,5 с |
-| Дополнительная защита гарнизона внутри здания | 0% | Снижение получаемого урона на 10% | Снижение на 20% |
-| Вместимость села / обычного военного здания | 80 | 160 | 260 |
-| Вместимость замка | 120 | 240 | 400 |
-| Вместимость башни | 60 | 140 | 220 |
+| Cost to reach this level | Starting level | 50 people from the garrison | Another 100 people from the garrison |
+| Village production | 1 peasant / 5 s | 1 / 3 s | 1 / 2 s |
+| Independent military recruitment | 1 fighter / 20 s | 1 / 15 s | 1 / 12 s |
+| Training arriving peasants | 1 fighter / 3 s | 1 / 2 s | 1 / 1.5 s |
+| Additional garrison defense inside buildings | 0% | 10% incoming damage reduction | 20% reduction |
+| Village / ordinary military building capacity | 80 | 160 | 260 |
+| Castle capacity | 120 | 240 | 400 |
+| Tower capacity | 60 | 140 | 220 |
 
-Вместимость включает обученных бойцов, селян и очередь обучения вместе. При заполнении самостоятельный набор останавливается. Прибывающих сверх вместимости нельзя спрятать внутри: они остаются своим видимым отрядом у входа и уязвимы для атаки; игрок может отправить их дальше. Обучение уже размещённых селян не увеличивает общую численность.
+Capacity includes trained fighters, peasants, and the training queue combined. Independent recruitment stops when full. Excess arrivals cannot hide inside: they remain a visible friendly group at the entrance, vulnerable to attacks, and can be sent onward. Training peasants already inside does not increase population.
 
-### Расход на улучшение
+### Upgrade expenditure
 
-Чтобы открыть уровень 2, надо иметь в этом здании хотя бы 50 человек и потратить ровно 50. Для уровня 3 надо иметь хотя бы 100 и потратить ещё 100. Это отдельные платежи: суммарно от уровня 1 до уровня 3 расходуется 150 человек.
+Level 2 requires at least 50 people in that building and consumes exactly 50. Level 3 requires at least 100 and consumes another 100. These are separate payments: level 1 to level 3 consumes 150 people total.
 
-Селяне или бойцы переходят в строительную команду и больше не участвуют в боях. По умолчанию сначала используются селяне; перед подтверждением виден точный состав расхода. Если селян мало, интерфейс явно показывает, какие бойцы будут потрачены. Отдельные золото, дерево и камень в первой версии не нужны.
+Peasants or fighters become a construction team and no longer fight. Peasants are used first by default; exact expenditure composition is visible before confirmation. If peasants are insufficient, the interface clearly shows which fighters will be spent. Separate gold, timber, and stone are unnecessary in the first version.
 
-Улучшение длится 6 секунд до уровня 2 и 10 секунд до уровня 3. Набор и обучение на это время приостанавливаются, гарнизон продолжает защищаться. Башня продолжает стрелять с прежними характеристиками до завершения улучшения. При захвате незавершённая стройка отменяется без возврата вложенных людей; последний завершённый уровень здания сохраняется.
+Upgrades take 6 seconds to level 2 and 10 seconds to level 3. Recruitment/training pause, while the garrison continues defending. Towers retain their old firing statistics until completion. Capture cancels unfinished construction without refunding spent people; the last completed building level remains.
 
-### Состав войск — стартовые значения для проверки
+### Troop composition — initial test values
 
-Характеристики ниже предложены для будущего прототипа. Их ещё не проверяли в игровом движке.
+The following statistics are proposals for the future prototype and have not yet been tested in the engine.
 
-| Тип | Здоровье | Урон за удар | Интервал атаки | Скорость, studs/с | Дальность, studs | Роль |
+| Type | Health | Damage per hit | Attack interval | Speed, studs/s | Range, studs | Role |
 | --- | --- | --- | --- | --- | --- | --- |
-| Селянин | 30 | 3 | 1,5 с | 8 | 2 | Население, обучение и стройка; слабая самооборона |
-| Защитник | 100 | 12 | 1,2 с | 6 | 2 | Передний ряд и захват; щит снижает урон стрел на 35% |
-| Лучник | 45 | 10 | 1,5 с | 7 | 22 | Атакует издали; уязвим после сближения |
-| Быстрый боец | 60 | 8 | 1 с | 12 | 2 | Обходы, перехват селян и атака лучников |
+| Peasant | 30 | 3 | 1.5 s | 8 | 2 | Population, training, construction; weak self-defense |
+| Defender | 100 | 12 | 1.2 s | 6 | 2 | Front line and capture; shield reduces arrow damage by 35% |
+| Archer | 45 | 10 | 1.5 s | 7 | 22 | Ranged attacks; vulnerable once enemies close in |
+| Fast fighter | 60 | 8 | 1 s | 12 | 2 | Flanking, peasant interception, archer attacks |
 
-В ближнем бою сильнее защитники; быстрые бойцы лучше добираются до лучников; лучники полезны за своими защитниками. Селяне могут отбиться от небольшой группы, но военное обучение заметно повышает их боевую пользу. Типы войск не получают постоянный бонус от уровня аккаунта.
+Defenders are stronger in melee; fast fighters reach archers more effectively; archers are useful behind friendly defenders. Peasants can resist a small group, but military training greatly improves combat usefulness. Account level grants no permanent troop bonuses.
 
-### Бой и захват
+### Combat and capture
 
-Правило «30 минус 20 равно 10» заменяется боем с индивидуальным здоровьем, скоростью и дальностью. Вражеские отряды сражаются при встрече на дороге. Защитники смешанного отряда идут впереди, лучники — позади. Атаки автоматические; бесконечное автоматическое отступление лучников не предлагается.
+The simple "30 minus 20 equals 10" rule is replaced by individual health, speed, and range. Hostile groups fight when they meet on roads. Defenders lead mixed groups; archers stay behind. Attacks are automatic; endless automatic archer retreat is not proposed.
 
-Гарнизон встречает атакующих у своего здания; действует бонус защиты этого здания. Он прекращается, когда защитники уходят на дорогу. Щит защитника и бонус здания применяются последовательно, а не складываются в один процент: например, на уровне 3 урон стрел умножается на 0,65 × 0,8.
+Garrisons meet attackers near their building with its defense bonus, which ends when defenders enter the road. Defender shields and building bonuses apply sequentially rather than adding percentages: at level 3, for example, arrow damage is multiplied by 0.65 × 0.8.
 
-Здание захватывается, когда его прежний гарнизон уничтожен и к нему дошёл хотя бы один живой атакующий. Селяне в очереди считаются частью гарнизона и при нападении защищаются со своими слабыми характеристиками. Если обе стороны одновременно теряют всех бойцов, исходный владелец сохраняет пустое здание. Очередь погибшего гарнизона очищается; воины победителя сохраняют свои типы.
+Buildings are captured when the previous garrison is destroyed and at least one living attacker arrives. Queued peasants count as garrison and defend using their weak statistics. If both sides lose every fighter simultaneously, the original owner retains the empty building. The defeated garrison's queue is cleared; victorious warriors retain their types.
 
-50 лучников против 100 защитников — возможный состав битвы. На открытой дороге ожидаем преимущество 100 защитников: они выдерживают стрелы и выигрывают после сближения. Поддержка своей башни, прикрытие другой пехотой и расстояние меняют исход. Точный результат проверим в прототипе, заранее его не обещаем.
+50 archers versus 100 defenders is a possible battle composition. On an open road, expect the 100 defenders to have an advantage: they withstand arrows and win after closing in. Friendly tower support, other infantry, and distance alter the outcome. The exact result will be tested in the prototype, not promised beforehand.
 
-Захват меняет владельца готового объекта. Свободное строительство города и осадные машины оставляем для будущих дополнений.
+Capture changes ownership of an existing structure. Free-form city construction and siege engines are left for future additions.
 
-## 7. Здания для полной концепции
+## 7. Buildings in the full concept
 
-| Объект | Предлагаемая роль | Когда вводить |
+| Structure | Proposed role | Introduction stage |
 | --- | --- | --- |
-| Замок | Большой гарнизон, медленный набор защитников и обучение селян | Первый прототип |
-| Село | Быстрое производство селян для снабжения и улучшений | Первый прототип |
-| Казарма | Защитники со щитами; медленный набор и обучение селян | Первый прототип |
-| Стрельбище | Лучники; медленный набор и обучение селян | Первый прототип |
-| Лагерь | Быстрые бойцы; медленный набор и обучение селян | Первый прототип |
-| Сторожевая башня | Обстрел проходящих врагов, медленный набор лучников и обучение селян | Первый прототип |
-| Конюшня | Позже открывает конных разведчиков или рыцарей | Дополнение |
-| Кузница | Позже даёт локальное улучшение войск; механика требует отдельного баланса | Дополнение |
-| Руническое святилище | Позже ускоряет восстановление способности командира | Вместе с командирами |
+| Castle | Large garrison, slow defender recruitment, peasant training | First prototype |
+| Village | Fast peasant production for supply and upgrades | First prototype |
+| Barracks | Shielded defenders; slow recruitment and peasant training | First prototype |
+| Archery range | Archers; slow recruitment and peasant training | First prototype |
+| Camp | Fast fighters; slow recruitment and peasant training | First prototype |
+| Watchtower | Shoots passing enemies, slowly recruits archers and trains peasants | First prototype |
+| Stable | Later unlocks mounted scouts or knights | Expansion |
+| Smithy | Later provides local troop upgrades; needs separate balancing | Expansion |
+| Rune sanctuary | Later accelerates commander ability recovery | Alongside commanders |
 
-Все боевые здания первой версии самостоятельно набирают войска медленно. Кузницу и святилище пока не включаем в это правило: их роль и персонал будут согласованы при добавлении.
+All first-version combat buildings slowly recruit troops independently. The smithy and sanctuary are excluded for now; agree on their roles and staffing when adding them.
 
-Стреляет самостоятельно только сторожевая башня; остальные здания защищаются своими отрядами. Башня делает залп максимум по трём разным ближайшим противникам, пока в её гарнизоне есть хотя бы один обученный боец. Число бойцов в башне не умножает число стрел её собственного залпа.
+Only watchtowers fire independently; other buildings defend with troops. Towers volley at up to three different nearest enemies while at least one trained fighter remains inside. Garrison size does not multiply the building's own volley arrows.
 
-| Характеристика башни | Уровень 1 | Уровень 2 | Уровень 3 |
+| Tower statistic | Level 1 | Level 2 | Level 3 |
 | --- | --- | --- | --- |
-| Урон каждой стрелы залпа | 12 | 16 | 20 |
-| Дальность, studs | 26 | 32 | 38 |
-| Интервал залпа | 2 с | 1,8 с | 1,6 с |
-| Защита гарнизона | Базовая | −10% получаемого урона | −20% |
+| Damage per volley arrow | 12 | 16 | 20 |
+| Range, studs | 26 | 32 | 38 |
+| Volley interval | 2 s | 1.8 s | 1.6 s |
+| Garrison defense | Base | −10% incoming damage | −20% |
 
-Лучники гарнизона используют свои обычные атаки; залп здания — отдельная ограниченная поддержка. Стрелы башни учитывают щиты защитников. Дальность соседних башен и время прохождения под огнём проверим на первой карте.
+Garrison archers use ordinary attacks; the building volley is separate limited support. Tower arrows respect defender shields. Neighboring tower ranges and time under fire will be tested on the first map.
 
-Чтобы накопленное преимущество не делало исход очевидным слишком рано, сначала используем вместимость гарнизонов и ограниченное число уровней. Бесплатную армию проигрывающему автоматически не добавляем. Проверяем, позволяют ли расстояния и обходы сделать контратаку.
+Initially use garrison capacity and limited upgrade levels to prevent an accumulated advantage deciding matches too early. Do not automatically grant free armies to losing players. Test whether distances and alternate routes allow counterattacks.
 
-## 8. Немного магии
+## 8. A little magic
 
-В полной концепции перед матчем выбирается командир с одной активной способностью:
+In the full concept, choose a commander with one active ability before a match:
 
-- Полководец: краткое ускорение выбранного отряда.
-- Инженер: временная дополнительная защита своего здания.
-- Маг: короткое замедление врагов в ограниченной области.
+- Warlord: briefly accelerates a selected group.
+- Engineer: temporarily increases defense of an owned building.
+- Mage: briefly slows enemies in a limited area.
 
-Все трое — предложения для дополнения. В первом прототипе сначала проверяем население, обучение, смешанные бои и улучшения. Затем добавим одно ускорение. Способность имеет видимый срок восстановления и не уничтожает всю армию одним нажатием. Заклинания сопровождаются коротким читаемым эффектом.
+All three are expansion proposals. First test population, training, mixed combat, and upgrades in the prototype, then add one speed boost. Abilities have visible cooldowns and cannot destroy an entire army in one click. Spells use short, readable effects.
 
-## 9. Визуальный стиль
+## 9. Visual style
 
-Полноценные объёмные крепости, холмы, деревья, река и маленькие отряды с анимацией движения. Формы слегка упрощены; пропорции солдат близки к обычным, с немного более заметными шлемами, щитами и знаменами.
+Fully dimensional fortresses, hills, trees, a river, and small groups with movement animations. Forms are slightly simplified; soldiers have near-normal proportions with somewhat more visible helmets, shields, and banners.
 
-- Камень и дерево узнаваемые, с крупными деталями и спокойными текстурами.
-- Цвета природные: зелень, песчаник, дерево, холодный камень.
-- Цвет армии читается по флагам, щитам, крышам и маркерам; разные эмблемы помогают отличать команды.
-- Освещение мягкое; эффекты ударов и магии короткие.
-- Кроны и высокие стены не закрывают важные гарнизоны с основной камеры.
-- Улучшение видно по внешности: дополнительная башенка, стена, крыша или знамя.
+- Recognizable stone and timber, large details, and restrained textures.
+- Natural colors: greenery, sandstone, wood, and cool stone.
+- Army colors read through flags, shields, roofs, and markers; distinct emblems help identify teams.
+- Soft lighting; short hit and magic effects.
+- Tree canopies and high walls do not obscure important garrisons from the main camera.
+- Upgrades visibly add a turret, wall, roof, or banner.
 
-Схема карты в чате показывает расположение и тактическую роль объектов. Она не является утверждённым образцом финальной графики.
+The map diagram in chat illustrates object placement and tactical roles. It is not an approved final-graphics reference.
 
-## 10. Первая основная карта: «Две переправы»
+## 10. First main map: Two Crossings
 
-Новая планировка заменяет схему из восьми зданий в версии 0.1. Всего 18 объектов:
+This layout replaces the eight-building version 0.1 diagram. Total: 18 structures:
 
-- По одному замку у каждой стороны — 2.
-- По четыре нейтральных села в каждой стартовой зоне — 8.
-- По казарме, стрельбищу и лагерю быстрых бойцов с каждой стороны — 6.
-- Две нейтральные сторожевые башни у центральных переправ — 2.
+- One castle per side — 2.
+- Four neutral villages in each starting area — 8.
+- Barracks, archery range, and fast-fighter camp on each side — 6.
+- Two neutral watchtowers beside central crossings — 2.
 
-Два берега соединены северной и южной переправами; башни прикрывают подходы. Начальные стороны зеркальны по возможностям. Нейтральные военные объекты захватываются так же, как сёла, но их гарнизоны сильнее. Стартовый отряд рассчитан на открытие своей экономики; точные численности нейтральных гарнизонов подберём при проверке карты.
+Northern and southern crossings connect the banks, with towers covering approaches. Starting sides have mirrored opportunities. Neutral military structures are captured like villages but have stronger garrisons. Starting troops are designed to establish the economy; exact neutral counts will be chosen during map testing.
 
-Первые 60 секунд проход к сопернику закрыт видимыми воротами с обратным отсчётом. В собственной зоне перемещение и захват доступны сразу. После открытия ворот они остаются открытыми. Это даёт время занять 3–4 села без ранней атаки соперника; автоматической выдачи сел игроку нет.
+Visible gates with a countdown block access to the opponent for 60 seconds. Movement/capture within each starting area are immediately available. Once opened, gates stay open. This gives time to capture 3–4 villages without early enemy attacks; villages are not automatically awarded.
 
-Игрок решает, удерживать один переход, расширяться на второй или провести встречные атаки. Медленного набора башни недостаточно для большого гарнизона: её выгодно снабжать из своих сел и военных зданий. Быстрые бойцы могут перехватывать отряды селян на дорогах.
+Players choose whether to hold one crossing, expand to the second, or launch opposing attacks. Slow tower recruitment cannot fill a large garrison; supplying towers from villages and military buildings is worthwhile. Fast fighters can intercept peasant groups on roads.
 
-Переправа — часть дороги, а не отдельное захватываемое здание. Для прохода не требуется владеть соседней башней, но противник может атаковать проходящий отряд. В первой карте мосты не разрушаются.
+Crossings are road sections, not separately capturable buildings. Passage does not require owning the neighboring tower, but enemies can attack passing groups. Bridges cannot be destroyed on the first map.
 
-Последующие карты: горный перевал с длинным обходом; острова с несколькими мостами; зимняя карта. Порталы и туман войны — отдельные дополнения после основной системы маршрутов.
+Later maps: a mountain pass with a long detour, islands with several bridges, and a winter map. Portals and fog of war are separate expansions after the core routing system.
 
-## 11. Режимы и развитие между матчами
+## 11. Modes and between-match progression
 
-Рекомендация по этапам:
+Recommended stages:
 
-1. Обучение и бой с одним ботом.
-2. Дуэль 1v1, когда правила и управление проверены.
-3. Кооператив вдвоём против ботов и 2v2.
-4. Небольшая кампания с новыми условиями карт; затем испытания и контрольные точки.
+1. Tutorial and one-bot battles.
+2. 1v1 duels after rules and controls are validated.
+3. Two-player co-op against bots and 2v2.
+4. A small campaign with new map conditions, then challenges and control points.
 
-Между матчами: открытие новых карт, альтернативных командиров, внешности армии, флагов и украшений замка. В соревновательном режиме открываемые варианты не должны давать постоянный прирост силы за уровень аккаунта.
+Between matches, unlock new maps, alternative commanders, army appearances, flags, and castle ornaments. Competitive unlocks must not grant permanent strength increases based on account level.
 
-Если позже потребуется монетизация, предлагаем облики, знамёна и эмоции победы. Выбор монетизации не требуется для текущего проектирования.
+If monetization is needed later, propose skins, banners, and victory emotes. Monetization decisions are unnecessary for the current design.
 
-## 12. Что согласовать до разработки
+## 12. Decisions before development
 
-- Подходят ли очереди обучения: один селянин → один боец определённого типа.
-- Утвердить расход 50 человек до уровня 2 и ещё 100 до уровня 3, с приоритетом селян.
-- Утвердить предложенные начальные скорости производства, обучения, характеристики войск и башен как исходный баланс для испытаний.
-- Подходит ли 60 секунд подготовки и по четыре доступных села с каждой стороны.
-- Утвердить смешанные бои с дальностью и здоровьем; один только перевес по численности не определяет результат.
-- Рекомендация по камере сохраняется: командование сверху под углом, масштабирование, удобные приказы для компьютера и телефона.
+- Are training queues acceptable: one peasant → one specific fighter?
+- Approve spending 50 people for level 2 and another 100 for level 3, prioritizing peasants.
+- Approve initial production/training rates and troop/tower statistics as starting test balance.
+- Are 60 seconds of preparation and four available villages per side acceptable?
+- Approve mixed battles with range and health; numerical advantage alone does not determine results.
+- Camera recommendation remains angled overhead command, zoom, and convenient PC/phone orders.
 
-После одобрения этой версии начинаем создавать первый прототип без дополнительного согласования того же объёма: одна карта из 18 объектов, один бот, селяне и три боевых типа, шесть типов зданий, обучение, смешанный бой, захват, три уровня развития и понятный интерфейс. Командиры, конница, кузницы и дополнительные режимы остаются дальнейшими этапами.
+After this version is approved, start the first prototype without requesting approval for the same scope again: one 18-structure map, one bot, peasants and three combat types, six building types, training, mixed combat, capture, three upgrade levels, and a clear interface. Commanders, cavalry, smithies, and additional modes remain later stages.
 
-## 13. Roblox-файл и Blender
+## 13. Roblox file and Blender
 
-Разрабатываем игру в существующем `C:/Users/kolia/Desktop/roblox-real-good_project/inex.rbxl`. Это основной файл Roblox-проекта. Документы проектирования и рабочие исходники моделей могут лежать в отдельных папках; они не являются дополнительными Roblox-местами.
+Develop in the existing `C:/Users/kolia/Desktop/roblox-real-good_project/inex.rbxl`, the main Roblox project file. Design documents and working model sources may occupy separate folders; they are not additional Roblox places.
 
-Модели зданий, окружения и четырёх типов людей создаём в Blender. Выдерживаем один масштаб, умеренно мультяшные пропорции и читаемые силуэты. Для зданий предусматриваем детали, которые добавляются на уровнях 2 и 3. Для людей — движение, ближнюю атаку или выстрел, попадание и исчезновение после поражения.
+Create buildings, environment assets, and all four unit types in Blender. Maintain consistent scale, moderately stylized proportions, and readable silhouettes. Buildings need details added at levels 2 and 3. Units need movement, melee or firing, hit, and defeat/disappearance animations.
 
-Экспортируем модели из Blender в FBX или glTF, импортируем в Roblox Studio, проверяем масштаб, материалы, точки опоры, коллизии и анимации. В Studio собираем сцену и подключаем игровую логику. Такой путь поддерживается официальной [документацией Roblox о Blender](https://create.roblox.com/docs/art/blender).
+Export Blender models as FBX or glTF; import into Roblox Studio and check scale, materials, pivots, collisions, and animations. Assemble the scene and connect gameplay in Studio. This workflow is supported by the official [Roblox Blender documentation](https://create.roblox.com/docs/art/blender).
 
-Создание первого прототипа разрешено. Новые механики, дополнительные режимы и изменения утверждённых правил сначала согласуются с пользователем.
+Creating the first prototype is authorized. Agree on new mechanics, additional modes, and approved-rule changes with the user first.
 

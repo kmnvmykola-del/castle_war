@@ -1,35 +1,35 @@
-# Инвентарь и комплекты 0.13 — результаты проверки
+# Inventory and sets 0.13 — validation results
 
-Дата: 5 октября 2026. Пользователь согласовал оба способа получения мифических комплектов, кейс 300 монет, цены 199/399/699 Robux и общий шанс мифических 1%.
+Date: October 5, 2026. The user approved both mythical acquisition methods, 300-coin cases, 199/399/699 Robux prices, and a combined mythical probability of 1%.
 
-## Реализовано
+## Implemented
 
-- Отдельные Inventory/Shop. В инвентаре только полученные комплекты и экипировка; в магазине 24 предложения, цены и покупка, фильтры монет/Robux/неполученных и мифический блок. Полученные предложения ведут в инвентарь. Выбор комплектов между страницами независимый.
-- Просмотр армии, зданий и дорог. Каждый полученный комплект оформляет четыре типа людей, все типы и уровни зданий, гербы, крыши и свои дороги.
-- 21 покупка за монеты; мифические Storm/Dragon/Oracle подготовлены как три отдельные покупки Game Pass и доступны из кейса с шансом 0,5%/0,3%/0,2%.
-- Постоянные шансы редкостей 60%/30%/9%/1%; 24 исхода раскрываются до покупки с численной вероятностью и точной долей.
-- Компенсация повтора 100/150/200/250 монет. Повтор запроса и сохранения не удваивает списание или возврат. Старые записи сундуков мигрируют без повторного списания.
-- Ограничение случайных покупок на сервере через PolicyService, подтверждение пропусков через UserOwnsGamePassAsync. Владение восстанавливается при входе и обновлении профиля.
-- `inex.rbxl` обновлён напрямую из исходников; все 826 Source совпадают с диском, в том числе 803 модуля геометрии. Существующие ссылки, сервисы, музыка и свойства сохранены. Резервная копия прежнего файла: `build/inex-before-inventory.rbxl`.
+- Separate Inventory/Shop. Inventory has owned sets and equipment only; shop has 24 offers, prices/purchases, coin/Robux/unowned filters, and a mythical section. Owned offers lead to inventory. Set selections are independent between pages.
+- Army, building, and road previews. Each owned set styles four unit types, all building types/levels, crests, roofs, and owned roads.
+- 21 coin purchases; mythical Storm/Dragon/Oracle are prepared as three separate Game Pass purchases and case rewards with 0.5%/0.3%/0.2% probabilities.
+- Fixed rarity probabilities 60%/30%/9%/1%; all 24 outcomes are disclosed before purchase with numeric probability and exact fraction.
+- Duplicate refunds of 100/150/200/250 coins. Request/save retries do not double charges or refunds. Old chest records migrate without another charge.
+- Server-side random-purchase restriction through PolicyService, pass verification through UserOwnsGamePassAsync, and ownership restoration on login/profile refresh.
+- `inex.rbxl` was updated directly from sources; all 826 Sources match disk, including 803 geometry modules. Existing references, services, music, and properties were retained. Previous-file backup: `build/inex-before-inventory.rbxl`.
 
-## Пройдено
+## Passed
 
-`tools/run_local_qa.py` использует официальный Luau CLI и тестовые замены Roblox:
+`tools/run_local_qa.py` uses the official Luau CLI and Roblox test substitutes:
 
-- Компиляция всех 826 исходников.
-- 17 прежних сценариев опыта, ранга, монет, таблиц, очередей, результатов и чеков.
-- 13 сценариев новой экономики: все покупки, полный перебор 84 000 билетов вероятности, граничные значения, постоянство шансов, компенсации, повторные запросы/UpdateAsync, старые данные, недостаток монет, устаревшие шансы, ошибка сохранения, полная коллекция, владение пропуском, PolicyService.
-- 13 сценариев реальных построителей MetaUI/CollectionUI с тестовыми GUI-объектами: разделение инвентаря и магазина, отказ невыданного комплекта в инвентаре, валютные/редкостные фильтры, 75 просмотров с проверкой ассетов, выдача/экипировка, независимый выбор страниц, покупка/переход полученного предложения, цены и ограничения, кейсы/повторы, освобождение просмотра и ошибки.
-- 3 сценария английского UI, включая настоящий UI.Build, редактор/обучение и все заголовки, динамический профиль/награды/кейсы и блокировку автолокализации. Вся игра переведена на английский; подробности — `design/QA_ENGLISH_RU.md`.
-- `tools/validate_art_v012.py`: 25 наборов, 803 модели, 598 272 треугольника, корректные границы, цвета, индексы и точки анимации.
-- Проверка сохранённого бинарного файла: полный каталог встроен, Source совпадают с диском и исходные родители сохранены.
+- Compilation of all 826 sources.
+- 17 previous XP/rank/coin/leaderboard/queue/result/receipt scenarios.
+- 13 new economy scenarios: every purchase, exhaustive enumeration of 84,000 probability tickets, boundaries, fixed odds, refunds, request/UpdateAsync retries, old data, insufficient coins, stale odds, save failures, full collection, pass ownership, and PolicyService.
+- 13 scenarios using real MetaUI/CollectionUI builders with mock GUI objects: inventory/shop separation, unowned inventory rejection, currency/rarity filters, 75 asset-checked previews, grants/equipment, independent page selection, purchasing/owned-offer navigation, prices/restrictions, cases/duplicates, preview release, and errors.
+- 3 English UI scenarios covering real UI.Build, editor/tutorial and all headings, dynamic profiles/rewards/cases, and automatic-localization blocking. The whole game is English; details: `design/QA_ENGLISH_RU.md`.
+- `tools/validate_art_v012.py`: 25 sets, 803 models, 598,272 triangles, valid bounds, colors, indices, and animation pivots.
+- Saved-binary validation: the full catalog is embedded, Sources match disk, and original parents are preserved.
 
-Местные отчёты: `build/inventory-qa-report.json`, `build/inventory-save-report.json`.
+Local reports: `build/inventory-qa-report.json`, `build/inventory-save-report.json`.
 
-## Что требует живой проверки
+## Live validation still required
 
-После перевода в английский наблюдалось главное меню в настоящем Studio Play. Полная визуальная проверка остальных страниц не завершена; подробности — `design/QA_ENGLISH_RU.md`. CLI GUI-проверки моделируют объекты и состояния, а не рендерят экран; создание EditableMesh заменено в этих тестах. Старые отчёты 0.12 относятся к прежней версии и не подтверждают рендер 0.13.
+The main menu was observed in real Studio Play after English translation. Full visual validation of other pages did not finish; details: `design/QA_ENGLISH_RU.md`. CLI GUI checks model objects/states rather than render screens; EditableMesh creation is mocked. Previous 0.12 reports concern an earlier version and do not confirm 0.13 rendering.
 
-Игра не опубликована, GamePassId трёх комплектов и ProductId пакетов монет равны 0. Реального списания Robux не было. Для продаж нужно создать три пропуска после публикации, указать отдельные ID в таблице `premium` в `src/SkinStyles.luau`, выставить цены на Roblox и запустить `tools/sync_place.py`. Региональные цены читаются клиентом из Roblox. Реальные DataStore, телепорты, ответы PolicyService и покупки требуют опубликованной проверки.
+The game is unpublished; GamePassIds for the three sets and coin-pack ProductIds equal 0. No actual Robux was charged. Sales require creating three passes after publication, setting separate IDs in `src/SkinStyles.luau`'s `premium` table, setting Roblox prices, and running `tools/sync_place.py`. Clients retrieve regional prices from Roblox. Real DataStores, teleports, PolicyService responses, and purchases require published validation.
 
-Документация: [пропуска](https://create.roblox.com/docs/production/monetization/passes), [региональные цены](https://create.roblox.com/docs/production/monetization/regional-pricing), [случайные покупки](https://create.roblox.com/docs/production/monetization/paid-random-items).
+Documentation: [passes](https://create.roblox.com/docs/production/monetization/passes), [regional pricing](https://create.roblox.com/docs/production/monetization/regional-pricing), [random purchases](https://create.roblox.com/docs/production/monetization/paid-random-items).

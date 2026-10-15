@@ -1,77 +1,77 @@
-# Frontier Kingdoms — состояние релиза 0.16, 6 октября 2026
+# Frontier Kingdoms — Release 0.16 status, October 6, 2026
 
-## Игра и файлы
+## Game and files
 
-PlaceId `81963222072062`, UniverseId `10769541065`. Владелец kolian / Robloxian547270901, UserId `1148782214`.
+PlaceId `81963222072062`, UniverseId `10769541065`. Owner: kolian / Robloxian547270901, UserId `1148782214`.
 
-Версия 0.16 опубликована в существующую игру из Studio 2026-10-06 16:13:37 UTC. Creator Hub: Public сохранён, Strategy без поджанра; аудитория ограничена Roblox пользователями 16+ и доверенными друзьями. Режим Mesh / Image APIs не нужен и выключен. Не требовать документы для текущей реализации. Игра: https://www.roblox.com/games/81963222072062/Frontier-Kingdoms .
+Version 0.16 was published to the existing game from Studio on 2026-10-06 at 16:13:37 UTC. Creator Hub retains Public access and Strategy without a subgenre; Roblox restricts the audience to users aged 16+ and trusted friends. Mesh / Image APIs is unnecessary and disabled. Do not require documents for this implementation. Game: https://www.roblox.com/games/81963222072062/Frontier-Kingdoms .
 
-Канонические `inex.rbxl`, `FrontierKingdoms-installed.rbxl` и `build/release/FrontierKingdoms-launch.rbxl`: 3 216 913 байт, SHA-256 `2aa3bc738fa324ebfb97afabe5931bf3ea7b59d49e6397e72110f3892510055e`. Скачано из Studio через Download a Copy и проверено `tools/verify_installed_place.py`: 26 активных Source точно совпадают с src, 1969 MeshPart с настоящими ID, 978 архивных Source сохранены, архивные исполняемые скрипты отключены, Geometry отсутствует в активном корне. Старый v12 сохранён в `build/release/inex-before-launch.rbxl`.
+Canonical files `inex.rbxl`, `FrontierKingdoms-installed.rbxl`, and `build/release/FrontierKingdoms-launch.rbxl`: 3,216,913 bytes, SHA-256 `2aa3bc738fa324ebfb97afabe5931bf3ea7b59d49e6397e72110f3892510055e`. Downloaded from Studio through Download a Copy and validated with `tools/verify_installed_place.py`: 26 active Sources exactly match src, 1,969 MeshParts have real IDs, 978 archived Sources remain, archived executable scripts are disabled, and Geometry is absent from the active root. Old v12 is retained in `build/release/inex-before-launch.rbxl`.
 
-## Последние правки
+## Latest changes
 
-- Здания всех уровней и руины обращены дверями к камере (`Config.BuildingYaw=math.pi`). Исправлены смещения дверей и отражение Z при импорте pivots/границ. Проверено отправкой 36 бойцов из замка и захватом деревни в настоящем Play.
-- Полностью переделаны премиальные Storm / Dragon / Oracle в Blender: новые силуэты доспехов, шлемы, плащи, оружие и щиты; отдельные дороги и ворота. Это косметика, боевые характеристики не изменены. Командные синие/красные элементы отделены от цветного металла/камней.
-- Storm: серебряная броня с молниями, крылатый шлем, золотые желоба и приподнятые плиты дорог.
-- Dragon: перекрывающиеся зелёные чешуйки, рогатый шлем, крылья плаща, клыки и когти на дороге.
-- Oracle: разрезная фиолетовая мантия, звёздный ореол, небесные медальоны дорог и звёздный портал.
-- У ScrollingFrame магазина/инвентаря/профиля/редактора явно включён Active. Настоящий эмулятор телефона: Shop.CanvasPosition дошёл с 0 до 328 после прокрутки; кнопки покупки и пакеты монет видны. Физический телефон не проверен.
-- Инвентарь показывает только полученные комплекты; магазин содержит предложения и покупки. Английский UI, локальная музыка/FX, независимая громкость, обучение и сохранённые механики работают как раньше.
+- All building levels and ruins face their doors toward the camera (`Config.BuildingYaw=math.pi`). Door offsets and Z reflection during pivot/bounds import were fixed. Verified in real Play by sending 36 fighters from the castle and capturing a village.
+- Premium Storm / Dragon / Oracle were completely rebuilt in Blender: new armor silhouettes, helmets, cloaks, weapons, shields, roads, and gates. These are cosmetic changes; combat statistics remain unchanged. Blue/red team elements are separated from colored metal/gems.
+- Storm: silver lightning armor, winged helmet, golden channels, and raised road slabs.
+- Dragon: overlapping green scales, horned helmet, cloak wings, and road fangs/claws.
+- Oracle: split purple robe, star halo, celestial road medallions, and star portal.
+- Active is explicitly enabled on shop/inventory/profile/editor ScrollingFrames. Real phone emulator: scrolling moved Shop.CanvasPosition from 0 to 328; purchase buttons and coin packs are visible. No physical phone was tested.
+- Inventory shows only owned sets; shop contains offers and purchases. English UI, client-local music/FX, independent volume, tutorials, and retained mechanics behave as before.
 
-## Модели и пересборка
+## Models and rebuilding
 
-`assets/blender/v016/premium/premium_v016.blend`, geometry.json, FBX и PNG рядом. Blender 4.5.0: `build/blender-runtime/blender-4.5.0-windows-x64/blender.exe`. Авторский экспорт 90 моделей, 54 576 треугольников. Полный каталог 806 моделей / 1969 MeshPart, CatalogSignature `bd3872582d1ecc17ef2dc3f9462869bd729e5dc61cacb224b93bb909b98925a9`.
+`assets/blender/v016/premium/premium_v016.blend`, with geometry.json, FBX, and PNG alongside. Blender 4.5.0: `build/blender-runtime/blender-4.5.0-windows-x64/blender.exe`. Authored export: 90 models, 54,576 triangles. Full catalog: 806 models / 1,969 MeshParts, CatalogSignature `bd3872582d1ecc17ef2dc3f9462869bd729e5dc61cacb224b93bb909b98925a9`.
 
-`tools/build_premium_v016.py` → export_premium_v016.py → export_static_meshes.py → pack_premium_v016.py / pack_static_mesh_setup.py. Малые glTF Storm/Dragon/Oracle уже импортированы и загружены в Roblox. Повторять импорт и установщики НЕ нужно. Пакеты пересобраны после последней UI-правки. `tools/stage_visual_sources.py` готовит обновление шести модулей с резервной копией; оно уже применено.
+`tools/build_premium_v016.py` → export_premium_v016.py → export_static_meshes.py → pack_premium_v016.py / pack_static_mesh_setup.py. Small Storm/Dragon/Oracle glTFs are already imported and uploaded to Roblox. Do NOT repeat imports or installers. Packages were rebuilt after the last UI change. `tools/stage_visual_sources.py` prepares a six-module update with backup; it has already been applied.
 
-Архив премиальной установки в ServerStorage: `KingdomsBeforePremium16_06382e81-f724-49b2-ae14-b14263e9196b`. В нём предыдущие корни, импорты, установщик и отключённая native QA. Папки KingdomsBeforeFacingFix сохраняют прежние версии Source. Временных активных QA-скриптов нет.
+Premium installation archive in ServerStorage: `KingdomsBeforePremium16_06382e81-f724-49b2-ae14-b14263e9196b`, containing previous roots, imports, installer, and disabled native QA. KingdomsBeforeFacingFix folders retain previous Sources. No temporary active QA scripts remain.
 
-Для исходников пользоваться `tools/sync_place.py`: обновляет активные корни, сохраняет архивы, MeshId и свойства. Не запускать старую копию Studio поверх нового inex.rbxl.
+Use `tools/sync_place.py` for source synchronization: it updates active roots while preserving archives, MeshIds, and properties. Do not overwrite the new inex.rbxl with an old Studio copy.
 
-## Донат
+## Monetization
 
-Созданы и включены продажи, изображения и цены:
+Sales, images, and prices are created and enabled:
 
-| Товар | Roblox ID | Цена |
+| Product | Roblox ID | Price |
 | --- | --- | --- |
 | Storm | GamePass 2006883740 | 199 Robux |
 | Dragon | GamePass 2005989756 | 399 Robux |
 | Oracle | GamePass 2005239786 | 699 Robux |
-| 500 монет | Product 3716851182 | 49 Robux |
-| 1500 монет | Product 3716851330 | 129 Robux |
-| 3500 монет | Product 3716851499 | 249 Robux |
+| 500 coins | Product 3716851182 | 49 Robux |
+| 1,500 coins | Product 3716851330 | 129 Robux |
+| 3,500 coins | Product 3716851499 | 249 Robux |
 
-Сервер проверяет владение пропуском; ProcessReceipt сохраняет начисление атомарно и защищает от повторных чеков. UI запрашивает действительную цену Roblox. В Studio Robux-покупки намеренно отключены. Владелец естественно владеет своими пропусками; проверка не выдавала бесплатных комплектов другим пользователям и не тратила Robux. Реальное списание денег и восстановление чека на опубликованном сервере ещё не проверены.
+The server verifies pass ownership; ProcessReceipt atomically saves coin grants and rejects duplicate receipts. UI requests actual Roblox prices. Robux purchases are intentionally disabled in Studio. Owners naturally own their passes; validation neither granted free sets to others nor spent Robux. Real charges and receipt restoration on a published server remain untested.
 
-Кейс 300 монет: Common/Rare/Epic/Mythic 60/30/9/1%. Storm/Dragon/Oracle 0.5/0.3/0.2%; все 24 исхода показаны. PolicyService закрывает случайные покупки при ограничении или ошибке ответа. Согласованные числа не менять без пользователя.
+300-coin cases: Common/Rare/Epic/Mythic 60/30/9/1%. Storm/Dragon/Oracle 0.5/0.3/0.2%; all 24 outcomes are shown. PolicyService blocks random purchases on restriction or response failure. Do not change agreed values without the user.
 
-## Звук и сайт
+## Audio and website
 
-Все 10 оригинальных записей загружены в Roblox и проверены IsLoaded на обоих настоящих клиентах: Menu 119718967994975, Battle 124112194729458, Click 120162779880223, Select 124159972087187, Order 123835389545068, Place 112056872756115, Error 82716831723745, Chest 123191148517154, Victory 83900946007025, Defeat 115137529677758. Клиентский PlayLocalSound и группы Music/FX; клики другого игрока не передаются.
+All 10 original recordings are uploaded to Roblox and confirmed IsLoaded on both real clients: Menu 119718967994975, Battle 124112194729458, Click 120162779880223, Select 124159972087187, Order 123835389545068, Place 112056872756115, Error 82716831723745, Chest 123191148517154, Victory 83900946007025, Defeat 115137529677758. Client PlayLocalSound and Music/FX groups isolate other players' clicks.
 
-Галерея опубликована: https://frontier-kingdoms-sound-library.kmnv-mykola.chatgpt.site . Доступ Site сейчас владельцу, не всем посетителям. Исходники `audio-site`, commit `6cf6464ec2180008b542d11d011a11393a7f89db`, deployment `appgdep_6ac51279cce481919d5e352f1247b0e4`. Повторно не публиковать без изменений.
+Published gallery: https://frontier-kingdoms-sound-library.kmnv-mykola.chatgpt.site . Site access currently allows the owner, not all visitors. Sources: `audio-site`, commit `6cf6464ec2180008b542d11d011a11393a7f89db`, deployment `appgdep_6ac51279cce481919d5e352f1247b0e4`. Do not republish without changes.
 
-## Оформление и видео
+## Presentation and videos
 
-Английские название и описание сохранены в Creator Hub. Иконка и 3 прежние обложки сохранены. Новые gameplay/editor PNG в `assets/promo` сняты с v0.16. Roblox-трейлер успешно загружен: Creator Hub показал «Video under review», осталось 2 из 3 загрузок. Не отправлять повторно. Новый gameplay PNG отправлен в загрузчик Thumbnails, но Save Changes ещё НЕ нажат. Editor PNG ещё не отправлен. Пользователь остановил управление физическим Esc; никаких дальнейших UI-действий в этом ходе не выполнять. Продолжить только после нового разрешения. Старые обложки не удалялись.
+English title and description are saved in Creator Hub. The icon and 3 previous covers remain. New gameplay/editor PNGs in `assets/promo` were captured from v0.16. The Roblox trailer uploaded successfully: Creator Hub showed "Video under review", with 2 of 3 uploads remaining. Do not resubmit. A new gameplay PNG was submitted to the Thumbnails uploader, but Save Changes has NOT been clicked. Editor PNG has not been submitted. The user stopped control with physical Esc; perform no further UI actions in that turn. Continue only with new authorization. Previous covers were not deleted.
 
-Готовы ролики с настоящими кадрами v0.16 и оригинальной музыкой:
-- `build/release/Frontier-Kingdoms-Shorts.mp4`: 29 секунд, 1080x1920, 30 FPS. В начале и конце иллюстративный key art.
-- `build/release/Frontier-Kingdoms-Roblox-Trailer.mp4`: 30 секунд, 1920x1080, настоящие игровые кадры.
-- `build/release/PROMO_POST_EN.txt`: подпись и ссылка для соцсетей.
+Videos using real v0.16 footage and original music are ready:
+- `build/release/Frontier-Kingdoms-Shorts.mp4`: 29 seconds, 1080x1920, 30 FPS. Illustrative key art appears at the beginning and end.
+- `build/release/Frontier-Kingdoms-Roblox-Trailer.mp4`: 30 seconds, 1920x1080, real gameplay footage.
+- `build/release/PROMO_POST_EN.txt`: social caption and link.
 
-Оба MP4 полностью декодированы FFmpeg без ошибок. TikTok/YouTube не опубликованы: пользователь ещё не указал канал. Не выбирать чужой/случайный аккаунт и не начинать платную рекламу.
+Both MP4s were fully decoded by FFmpeg without errors. TikTok/YouTube uploads have not happened because the user has not selected a channel. Do not choose another/random account or start paid advertising.
 
-## Проверки и честные ограничения
+## Validation and explicit limits
 
-90 CLI-сценариев PASS, 832 встроенных исходника компилируются. Полная геометрическая проверка PASS. `build/inventory-qa-report.json`, `build/installed-place-qa-report.json`, `build/release/native-release-qa.json`, `build/release/native-premium-qa.json`.
+90 CLI scenarios PASS; 832 embedded sources compile. Full geometry validation PASS. `build/inventory-qa-report.json`, `build/installed-place-qa-report.json`, `build/release/native-release-qa.json`, `build/release/native-premium-qa.json`.
 
-Настоящие два клиента: свои Blue63, враги Red63, ошибок Scene0; 10 аудио загрузились, разная громкость локальна. Это проверка предыдущего кода 0.15, сетевую логику 0.16 не менял. Новая native-проверка 0.16: 24 бойца трёх скинов и обеих команд, 142 уникальных премиальных asset загружены без ошибок; направление и части всех моделей проверены. Play: три предпросмотра, дороги/ворота, бой с выходом из двери и захватом; Editor PlaceVillage/Undo без заметной паузы; мобильный Shop прокручивается.
+Two real clients: friendly Blue63, enemies Red63, Scene errors 0; all 10 audio assets loaded, and different volumes stayed local. This tested previous code 0.15; version 0.16 network logic was unchanged. New native 0.16 validation covered 24 fighters across three skins and both teams; 142 unique premium assets loaded without errors, and all model orientations/parts were checked. Play covered three previews, roads/gates, combat with door exits and capture. Editor PlaceVillage/Undo had no noticeable pause; mobile Shop scrolling works.
 
-Не утверждать проверенными: настоящая оплата, опубликованный DataStore при повторном входе, глобальный подбор/межсерверный переход и физический телефон. Публичная страница открылась, показывает Mild / Ages16+, Strategy и кнопку Play. Нажатие Play в IAB показало «Roblox is now loading», но запуска Roblox Player не подтверждено; живого публичного клиента не было. Дальнейшую проверку остановил Esc пользователя. Скриншот публичной страницы: `build/release/public-game-page.png`. Ранее результаты имитаций специально отделены от настоящей Studio.
+Do not claim validation of real payment, published DataStore on rejoining, global matchmaking/cross-server transfers, or a physical phone. The public page opened and showed Mild / Ages16+, Strategy, and Play. Clicking Play in IAB showed "Roblox is now loading", but Roblox Player launch was not confirmed; no live public client was tested. User Esc stopped further validation. Public page screenshot: `build/release/public-game-page.png`. Earlier simulation results were deliberately distinguished from real Studio.
 
-## Предпочтения и инструменты
+## Preferences and tools
 
-Пользователь явно разрешил текущую работу в Studio и публикацию игры. По возможности использовать файлы/API, чтобы не мешать ПК; сейчас ПК разрешён. После Esc прекращать управление до нового разрешения. Новые механики/цены сначала обсуждать. Использовать Blender для моделей. Не проверять каждое разрешение экрана. **Не делегировать субагентам без просьбы.**
+The user explicitly authorized the current Studio work and game publication. Prefer files/APIs where possible to avoid interfering with the PC; PC control is currently authorized. After Esc, stop control until new authorization. Discuss new mechanics/prices first. Use Blender for models. Do not test every resolution. **Do not delegate to subagents without a request.**
 
-Python: `C:/Users/Kolia/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`, запускать `-B -Xutf8`. Windows UI: только computer-use skill и @oai/sky. Creator Hub: браузер IAB, учётка владельца авторизована; пароли/документы не вводить. Никаких root GitHub/PR/коммитов пользователь не просил. Сайт — отдельный авторизованный Sites workflow.
+Python: `C:/Users/Kolia/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`, run with `-B -Xutf8`. Windows UI: computer-use skill and @oai/sky only. Creator Hub: IAB browser, owner account authorized; do not enter passwords/documents. The user requested no root GitHub/PR/commit operations. The website uses a separate authorized Sites workflow.

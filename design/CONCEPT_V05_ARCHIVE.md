@@ -1,122 +1,122 @@
-# Пограничные королевства — прототип 0.5
+# Frontier Kingdoms — Prototype 0.5
 
-Дата: 4 октября 2026 года. Основной файл игры — `inex.rbxl`. Рабочее название сохранено из прошлого прототипа.
+Date: October 4, 2026. Main game file: `inex.rbxl`. The working title is retained from the previous prototype.
 
-Этот документ заменяет правила 0.4 там, где пользователь попросил изменения. Предыдущая концепция сохранена в `CONCEPT_V04_ARCHIVE.md`. Пользователь отдельно разрешил выбрать способ ослабления лучников: используется урон здоровью вместо мгновенного убийства. Остальные новые механики и изменения чисел сначала согласуются с пользователем.
+This document supersedes version 0.4 where the user requested changes. The previous concept is retained in `CONCEPT_V04_ARCHIVE.md`. The user separately authorized choosing how to weaken archers: health damage replaces instant kills. Agree on other new mechanics and value changes first.
 
-## Мир и цель
+## World and objective
 
-Roblox RTS в средневековом мире с умеренно мультяшной трёхмерной графикой. Модели создаются в Blender и переносятся в Roblox. Тематика допускает немного магии; заклинания пока не добавлены.
+A Roblox RTS in a medieval world with moderately stylized 3D graphics. Models are created in Blender and transferred to Roblox. The setting allows some magic; spells have not been added yet.
 
-Игрок захватывает сёла, направляет население в военные здания, улучшает здания и сражается за дороги. Бот играет по той же экономике, без бесплатных подкреплений. Победа наступает, когда у противника нет зданий и живых людей, включая селян.
+Players capture villages, send population to military buildings, upgrade structures, and fight for roads. The bot uses the same economy without free reinforcements. Victory occurs when the opponent has no buildings or living people left, including peasants.
 
-## Карта и редактор
+## Map and editor
 
-Первая карта — «Две переправы». На каждой стороне есть замок, своя ферма, четыре нейтральных села, казарма, стрельбище и лагерь. У переправ стоят две нейтральные башни. Всего 20 зданий, 2 точки соединения дорог и 36 связей между объектами. Из них рассчитываются 190 физических отрезков дорожной сети.
+The first map is Two Crossings. Each side has a castle, owned farm, four neutral villages, barracks, archery range, and camp. Two neutral towers stand near the crossings. Total: 20 buildings, 2 road junctions, and 36 links between objects. These generate 190 physical road-network segments.
 
-Первые 60 секунд мосты закрыты воротами: стороны развиваются на своих берегах и могут занять 3–4 села. Затем переправы открываются. Мосты не разрушаются.
+Bridges are gated for 60 seconds while sides develop their banks and capture 3–4 villages. Crossings then open. Bridges cannot be destroyed.
 
-Основа карты — сетка с клеткой 32 studs. Любое здание, включая замок, занимает одну клетку. Здания и точки дорог имеют координаты клетки и уникальное имя. Дорога соединяет два существующих имени. Видимая дорога, маршрут отряда и положение моста рассчитываются по одним конечным точкам: подходы доходят до переправы.
+The map uses a 32-stud grid. Every building, including a castle, occupies one cell. Buildings and road junctions have cell coordinates and unique names. A road links two existing names. Visible roads, troop routes, and bridge positions use the same endpoints, with approaches reaching the crossings.
 
-Дороги идут по свободным клеткам и вокруг границ клеток зданий. Вход здания — отдельная конечная ветка; проходящий отряд обходит промежуточные здания, не попадая в гарнизон и не обучаясь. Подходы и мост используют одну сеть. Модели опираются на площадку клетки.
+Roads follow free cells and route around building-cell edges. Building entrances are separate terminal branches; passing groups avoid intermediate buildings without entering garrisons or training. Approaches and bridges share one network. Models stand on cell platforms.
 
-Переходы доступны только между явно соединёнными объектами. Визуальное пересечение дорог не создаёт соединение и не даёт сократить маршрут. Для развилки ставится именованная точка дороги и соединяется с нужными объектами. Пересечения без соединения отмечаются деревянным переходом. Полное кольцо дорог вокруг каждого здания больше не рисуется автоматически: видны только необходимые подходы. При первом открытии редактора появляется инструкция; кнопка «?» открывает её снова.
+Traversal is allowed only between explicitly connected objects. Visual intersections do not connect roads or shorten routes. Named junctions connect required objects at forks. Disconnected crossings are marked with wooden overpasses. Full road rings are no longer drawn automatically around buildings; only required approaches appear. Instructions show on first editor opening; **?** reopens them.
 
-Редактор внутри игры размещает здания и точки дорог по клеткам, соединяет пары точек, переносит и удаляет объекты, отменяет изменения, экспортирует и импортирует код карты. Незаконченная карта редактируется свободно. Перед игрой и сохранением проверяются границы, занятые клетки, конечные точки дорог, один замок каждой стороны и связность всех зданий. На своей карте можно играть против ИИ. В непубликованном Studio карта сохраняется на текущий запуск; код карты переносится между запусками вручную. DataStore предусмотрен для опубликованной игры и ещё требует проверки там.
+The in-game editor places buildings and road junctions on cells, connects point pairs, moves/deletes objects, undoes changes, and exports/imports map codes. Incomplete maps can be edited freely. Play/save validation covers bounds, occupied cells, road endpoints, one castle per side, and connectivity of all buildings. Custom maps can be played against AI. Unpublished Studio saves maps only for the current session; map codes transfer manually between runs. DataStore is prepared for the published game and still requires validation there.
 
-## Начальные силы
+## Starting forces
 
-| Здание | Начальное население |
+| Building | Starting population |
 | --- | --- |
-| Замок каждой стороны | 50 защитников и 20 селян |
-| Нейтральное село | 8 селян |
-| Нейтральная казарма | 12 защитников |
-| Нейтральное стрельбище | 12 лучников |
-| Нейтральный лагерь | 12 быстрых бойцов |
-| Нейтральная башня | 15 лучников |
-| Своя ферма возле каждого замка | 0 человек |
+| Each side's castle | 50 defenders and 20 peasants |
+| Neutral village | 8 peasants |
+| Neutral barracks | 12 defenders |
+| Neutral archery range | 12 archers |
+| Neutral camp | 12 fast fighters |
+| Neutral tower | 15 archers |
+| Owned farm near each castle | 0 people |
 
-Нейтральные здания не производят пополнение, пока их не захватят.
+Neutral buildings produce no reinforcements until captured.
 
-## Население и улучшения
+## Population and upgrades
 
-Село создаёт только селян. Казарма и замок создают защитников, стрельбище и башня — лучников, лагерь — быстрых бойцов. Военные здания сами создают людей медленно; основной источник пополнения — сёла.
+Villages produce only peasants. Barracks and castles produce defenders; archery ranges and towers produce archers; camps produce fast fighters. Military buildings produce slowly; villages are the main source of reinforcements.
 
-Селянин автоматически становится воином, когда доходит до **конечного** собственного военного здания. Очереди обучения нет. При нехватке еды он ждёт селянином, пока еда снова появится. Прохождение промежуточного здания не меняет его тип. Уже обученные защитники, лучники и быстрые бойцы не переучиваются. В селе и на ферме прибывшие селяне остаются селянами.
+Peasants automatically become warriors when they reach the **final** owned military building. There is no training queue. During food shortages, they wait as peasants until food becomes available. Passing intermediate buildings does not change type. Trained defenders, archers, and fast fighters never retrain. Peasants arriving at villages or farms remain peasants.
 
-| Характеристика | I | II | III |
+| Property | I | II | III |
 | --- | --- | --- | --- |
-| Цена перехода на этот уровень | Стартовый | 50 человек | Ещё 100 человек |
-| Время улучшения | — | 6 с | 10 с |
-| Село: 1 новый селянин | Каждые 5 с | Каждые 3 с | Каждые 2 с |
-| Военное здание: 1 новый воин | Каждые 20 с | Каждые 15 с | Каждые 12 с |
-| Вместимость обычного здания | 80 | 160 | 260 |
-| Вместимость замка | 120 | 240 | 400 |
-| Вместимость башни | 60 | 140 | 220 |
-| Снижение обычного урона при защите здания | 0% | 10% | 20% |
+| Cost to reach this level | Starting level | 50 people | Another 100 people |
+| Upgrade time | — | 6 s | 10 s |
+| Village: 1 new peasant | Every 5 s | Every 3 s | Every 2 s |
+| Military building: 1 new warrior | Every 20 s | Every 15 s | Every 12 s |
+| Ordinary building capacity | 80 | 160 | 260 |
+| Castle capacity | 120 | 240 | 400 |
+| Tower capacity | 60 | 140 | 220 |
+| Ordinary damage reduction while defending a building | 0% | 10% | 20% |
 
-Цена улучшения списывается с местного гарнизона. Сначала расходуются селяне, затем быстрые бойцы, защитники и лучники. Во время улучшения производство приостанавливается. При захвате незавершённое улучшение отменяется; завершённый уровень сохраняется. Вместимость строгая по выбору пользователя: при её достижении производство прекращается, а пришедшие подкрепления ждут снаружи. По мере освобождения мест ожидающие заходят и исчезают с карты. Селянин обучается только после входа в конечное военное здание. Воины снаружи продолжают расходовать еду и могут отправляться дальше. Панель показывает гарнизон и число ожидающих отдельно.
+Upgrade costs come from the local garrison: peasants first, then fast fighters, defenders, and archers. Production pauses during upgrades. Capture cancels unfinished upgrades while preserving completed levels. Capacity is strict at the user's choice: production stops at the limit and reinforcements wait outside. Waiting units enter and disappear from the map as places open. Peasants train only after entering the final military building. Warriors outside continue consuming food and can be sent onward. The panel shows garrison and waiting counts separately.
 
-## Еда и фермы
+## Food and farms
 
-У каждой стороны в начале 100 еды и одна своя ферма за замком.
+Each side begins with 100 food and one owned farm behind its castle.
 
-| Уровень фермы | Еда каждые 5 секунд |
+| Farm level | Food every 5 seconds |
 | --- | --- |
 | I | 10 |
 | II | 15 |
 | III | 20 |
 
-Ферма производит только еду. Людей сама не создаёт. Прибывшие селяне остаются селянами и могут расходоваться на улучшение фермы по обычной цене 50/100.
+Farms produce only food, not people. Arriving peasants remain peasants and can pay for farm upgrades at the ordinary 50/100 cost.
 
-Каждый живой воин расходует 1 еду каждые 30 секунд, в гарнизоне и в походе. Селяне еду не расходуют. При нехватке еды прекращаются создание и обучение новых воинов. Существующие остаются живы; производство селян и еды продолжается. Остаток еды не опускается ниже нуля.
+Every living warrior consumes 1 food every 30 seconds in garrisons and while marching. Peasants consume none. Shortages stop creation and training of new warriors; existing units survive, and peasant/food production continues. Food never drops below zero.
 
-## Бои и башни
+## Combat and towers
 
-Защитники и быстрые бойцы идут по дороге ровным строем по четыре. Расстояние между колонками — 1,15 studs, между рядами — 1,4 studs. В смешанном строю ближние бойцы держат скорость самого медленного оставшегося участника. Повороты поворачивают весь ряд согласованно; бойцы разных колонок больше не блокируют друг друга. Отряд только быстрых бойцов сохраняет скорость 12 studs/с.
+Defenders and fast fighters follow roads in orderly rows of four, with column spacing 1.15 studs and row spacing 1.4 studs. Mixed melee formations move at the slowest surviving member's speed. Turns rotate the whole row together; different columns no longer block each other. Fast-fighter-only groups retain 12 studs/s speed.
 
-При столкновении двух групп мечников каждые 2 секунды погибает по одному бойцу с каждой стороны. Передний ряд делает видимый взмах; потери происходят после взмаха. Темп даёт лучникам время участвовать в бою.
+When sword groups collide, each side loses one fighter every 2 seconds. The front row visibly swings; casualties occur afterward. This pace gives archers time to participate.
 
-Каждый лучник стреляет раз в 2 секунды и наносит 25 урона здоровью. Здоровье селян — 30, лучников — 45, быстрых бойцов — 60, защитников — 100; щит защитника уменьшает урон стрел на 35%. Здоровый человек переживает первое попадание. Уже летящий урон учитывается при выборе целей, чтобы не тратить дополнительные стрелы на гарантированно погибающего врага. Дальность полевого лучника — 22 studs. Лучники идут по своей дороге до дистанции стрельбы, останавливаются и стреляют. Назад не отходят. Их движение свободное: они могут проходить через строй ближних бойцов. В ближнем бою мечник убивает лучника первым взмахом. Урон стрел по сооружению башни остаётся 2.
+Each archer fires every 2 seconds for 25 health damage. Health: peasants 30, archers 45, fast fighters 60, defenders 100; defender shields reduce arrow damage by 35%. Healthy units survive the first hit. In-flight damage is considered when selecting targets to avoid wasting arrows on doomed enemies. Field archer range is 22 studs. Archers follow their road until within range, stop, and fire. They do not retreat. Their movement is free through melee formations. A swordsman kills a field archer with the first melee swing. Arrows still deal 2 structural damage to towers.
 
-Селяне сохраняют слабую ближнюю атаку из прошлого прототипа. Их основная роль — население для производства и улучшений.
+Peasants retain their weak melee attack from the previous prototype. Their main role is population for production and upgrades.
 
-У башни отдельная прочность 100. Удар мечника снимает 5, стрела — 2; защита улучшенной башни уменьшает получаемый урон. Пока сооружение цело, его гарнизон защищён стенами. Лучники стреляют из башни, не выходя на дорогу.
+Towers have separate durability of 100. Sword hits deal 5 and arrows 2; upgraded tower defenses reduce incoming damage. Intact structures protect the garrison with walls. Archers fire from the tower without entering the road.
 
-| Башня | I | II | III |
+| Tower | I | II | III |
 | --- | --- | --- | --- |
-| Дальность стрелков | 26 | 32 | 38 studs |
-| Интервал выстрела стрелка | 2 с | 1,8 с | 1,6 с |
-| Защита сооружения | 0% | 10% | 20% |
+| Archer range | 26 | 32 | 38 studs |
+| Archer firing interval | 2 s | 1.8 s | 1.6 s |
+| Structure defense | 0% | 10% | 20% |
 
-Сначала нужно разрушить башню. При нулевой прочности остаются руины и уничтожается её гарнизон. Затем подошедший отряд занимает её: владелец меняется, прочность восстанавливается до 100. Отдельный залп здания из старой версии заменён стрельбой находящихся внутри лучников.
+Destroy the tower first. At zero durability, it becomes ruins and its garrison is destroyed. An approaching group then occupies it: ownership changes and durability returns to 100. The old separate building volley is replaced by fire from archers inside.
 
-## Меню и управление
+## Menus and controls
 
-В начальном меню — «Играть с ИИ», редактор, настройки и неактивный «Поиск врага · СКОРО». После выбора игры с ИИ предлагаются лёгкая, средняя и сложная сложности; выбор начинает партию. Сложный бот активнее атакует и перехватывает снабжение. Онлайн-поиск пока не реализован. Настройки меняют громкость, скорость камеры и масштаба, показ сетки и численности. Звучит спокойная средневековая инструментальная тема из Creator Store; источник указан в README и настройках.
+The start menu has Play vs AI, editor, settings, and disabled Find Opponent · COMING SOON. AI offers easy, medium, and hard difficulties; selection starts a match. Hard AI attacks/intercepts supply more actively. Online matchmaking is not implemented. Settings change volume, camera/zoom speed, grid, and population visibility. A calm medieval Creator Store instrumental plays; its source is listed in README and settings.
 
-Цвета задаются относительно игрока: свои здания и войска синие, чужие красные, нейтральные серые. При захвате площадка, окантовка, флаг и численность меняют цвет.
+Colors are relative to the player: friendly buildings/troops blue, enemies red, neutrals gray. Capture changes platform, outline, flag, and population colors.
 
-Верхняя полоса убрана. Меню открывается кнопкой из трёх полосок слева сверху. Ресурсы, селяне, время и состояние мостов находятся слева снизу, без общего счётчика армии. На телефоне эта информация открывается и закрывается кнопкой «i». На ПК ползунок увеличен и находится по центру снизу; на телефоне сохраняется компактная панель здания.
+The top bar was removed. A three-line button at the top left opens the menu. Resources, peasants, time, and bridge status are at the bottom left without a total army counter. On phones, **i** toggles this information. PC uses an enlarged bottom-center slider; phones retain a compact building panel.
 
-При выборе здания появляется компактная панель: название и уровень, численность каждого типа людей в гарнизоне, заполнение и ожидание снаружи, ползунок отправки от 0 до 100% и улучшение с ценой. Начальное значение — 50%. На телефоне есть кнопка режима приказа. Отправляется выбранный процент каждого имеющегося типа людей.
+Selecting a building opens a compact panel: name and level, garrison counts by unit type, capacity and outside waiting count, a 0–100% send slider, and upgrade cost. Default is 50%. Phones include an order-mode button. The chosen percentage of each available unit type is sent.
 
-Компьютер:
+PC:
 
-- ЛКМ выбирает здание для просмотра и приказов; ПКМ по цели отправляет отряд.
-- Shift + ЛКМ добавляет или убирает своё здание из группы. Рамка выбирает несколько своих зданий.
-- WASD перемещает камеру, колесо меняет масштаб, средняя кнопка позволяет перетаскивать карту.
-- Esc снимает выбор, затем открывает меню матча.
+- Left-click selects a building for inspection and orders; right-clicking a target sends troops.
+- Shift + left-click adds/removes an owned building from the group. Box selection selects several owned buildings.
+- WASD pans, the wheel zooms, and the middle mouse button drags the map.
+- Esc clears selection, then opens the match menu.
 
-Телефон:
+Phone:
 
-- Тап выбирает здание. Кнопка «Приказ →», затем тап по цели отправляют людей.
-- Удержание выбирает здание без отправки отряда.
-- Перетаскивание одним пальцем двигает камеру; щипок меняет масштаб.
-- Ползунок и кнопка улучшения имеют увеличенную область касания. Движение пальца по карте не отправляет случайный приказ.
+- Tap selects a building. Tap **Order →**, then a target to send people.
+- Holding selects a building without sending troops.
+- One-finger dragging pans; pinching zooms.
+- The slider and upgrade button have enlarged touch areas. Moving a finger across the map does not issue accidental orders.
 
-## Проверки
+## Validation
 
-В Roblox Studio проверяются маршруты и ошибки схемы карты; мгновенное обучение и сохранение типа обученных воинов; остановка обучения при голоде; расход еды; уровни фермы; цены улучшений; взаимные потери мечников; период стрельбы и отсутствие отхода лучников; разрушение и захват башни; стрельба защищённого гарнизона; развитие бота и правило победы. Дополнительно проверяется бой 50 лучников против 100 защитников.
+Roblox Studio checks cover routes and map-schema errors; instant training and trained-unit type preservation; training suspension during starvation; food consumption; farm levels; upgrade prices; mutual sword casualties; archer firing interval and no retreat; tower destruction/capture; protected garrison fire; AI development; and victory rules. An additional battle tests 50 archers against 100 defenders.
 
-Настольное меню и действия проверяются через реальный интерфейс Studio Play. Мобильная компоновка и основные касания проверяются в эмуляторе телефона. Проверка на физическом телефоне и проверка опубликованной игры ещё предстоят.
+Desktop menus and actions are tested through the real Studio Play UI. Phone layout and basic touch actions are tested in the phone emulator. Physical-phone and published-game validation remain pending.

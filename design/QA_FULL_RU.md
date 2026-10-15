@@ -1,17 +1,17 @@
-# Общая проверка версии 0.8 — 5 октября 2026
+# General version 0.8 validation — October 5, 2026
 
-Пройдены пять игровых наборов: `qa_gameplay`, `qa_v06`, `qa_v07`, `qa_v08`, `qa_full`. Последний добавляет шесть проверок поведения, включая девять партий: три базовые карты × три сложности ИИ, каждая по три игровых минуты.
+Five gameplay suites passed: `qa_gameplay`, `qa_v06`, `qa_v07`, `qa_v08`, and `qa_full`. The last adds six behavioral checks, including nine matches: three base maps × three AI difficulties, each lasting three game minutes.
 
-Проверены бой четырёх пар, две пары на мосту, неполные и неравные ряды, смешанные ближние бойцы, дальняя стрельба, осада и захват башни, выход 300 человек через дверь, отсутствие застрявших на проверенных маршрутах. Проверены явные дорожные связи, запрет прохода через незахваченные промежуточные здания, обходы, прохождение селян мимо военного здания с обучением только в конечном пункте.
+Validated four combat pairs, two bridge pairs, incomplete/unequal rows, mixed melee units, ranged fire, tower siege/capture, 300-person door exits, and no stuck units on tested routes. Checked explicit road links, intermediate-building ownership gates, alternative routes, and peasants passing military buildings but training only at the final destination.
 
-Проверены еда, голод, возобновление обучения, строгая вместимость, улучшения, скрытые гарнизоны, состав армии, владение зданиями, снимки состояния, отклонение некорректных карт и приказов. Во всех девяти партиях ИИ захватил четыре села; отрицательной еды, ошибочных владельцев и потерянных людей не обнаружено.
+Validated food, starvation, training resumption, strict capacity, upgrades, hidden garrisons, army composition, building ownership, snapshots, and rejection of invalid maps/orders. In all nine matches, AI captured four villages; no negative food, invalid owners, or missing people were found.
 
-Через интерфейс проверены настройки, громкость, сетка и численность, выбор карты и сложности, случайная карта, начало и завершение матча, ЛКМ/ПКМ, WASD, масштаб колесом, поиск и отмена поиска. Карта создана с нуля через редактор: здания размещены, дороги соединены, код сохранён, созданная карта запущена с ИИ. На телефоне проверены сенсорный выбор, кнопка приказа и тап по цели, перетаскивание камеры, открытие информации и прокрутка настроек. Проверка экранов завершена по просьбе пользователя.
+UI checks covered settings, volume, grid/population display, map/difficulty selection, random maps, match start/end, left/right click, WASD, wheel zoom, matchmaking, and cancellation. A map was built from scratch in the editor: buildings placed, roads connected, code saved, and the custom map played against AI. Phone checks covered touch selection, order button/target tap, camera dragging, information opening, and settings scrolling. Screen testing ended at the user's request.
 
-Все 51 меш и 44 504 треугольника загружены. Проверено 60 сочетаний здания и уровня на полной карте: видна одна модель нужного уровня, здания стоят на земле. Проверены цвета для второй стороны, руины башни и четыре типа моделей людей. Музыка загружается и воспроизводится.
+All 51 meshes and 44,504 triangles loaded. Checked 60 building/level combinations on the full map: only the correct level model is visible, and buildings stand on the ground. Checked second-side colors, tower ruins, and four unit types. Music loads and plays.
 
-Исправлены найденные наложения интерфейса: панель здания больше не задевает кнопку информации на узком телефоне; уведомление меняет положение после выхода из меню в матч; в маленьком окне ПК информация располагается выше приказов, освобождая нижний ползунок. Эмулятор возвращён к обычному виду, временные проверки не включены в игровой файл.
+UI overlap fixes: the building panel no longer touches the information button on narrow phones; notifications reposition after leaving the menu for a match; small PC windows place information above orders, freeing the bottom slider. The emulator was restored to normal view; temporary checks were not embedded in the game file.
 
-Подбор соперника, очереди разных лобби, отмена, ошибки резервирования, тайм-ауты, разрыв соединения и назначение двух сторон проверены с имитацией Roblox-сервисов. Реальные межсерверные телепорты, облачное сохранение и разрешения моделей требуют проверки опубликованной игры в приложении Roblox. Физический телефон и жест масштабирования двумя пальцами отдельно не проверялись.
+Opponent matching, cross-lobby queues, cancellation, reservation failures, timeouts, disconnects, and side assignment were tested with simulated Roblox services. Real cross-server teleports, cloud persistence, and model permissions require published-game testing in the Roblox app. Physical phones and two-finger pinch zoom were not separately tested.
 
-Подробные результаты: `build/full-qa-report.json`. Итоговая сверка встроенных исходников: `build/save-report.json`. Основной файл: `inex.rbxl`; резервная копия перед проверкой: `build/pre-full-qa.bin`.
+Detailed results: `build/full-qa-report.json`. Final embedded-source comparison: `build/save-report.json`. Main file: `inex.rbxl`; prevalidation backup: `build/pre-full-qa.bin`.

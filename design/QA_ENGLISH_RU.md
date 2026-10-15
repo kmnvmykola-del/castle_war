@@ -1,30 +1,30 @@
-# Английская версия — результаты проверки
+# English version — validation results
 
-Дата: 5 октября 2026. Пользователь попросил перевести ВСЮ игру на английский и предложить описание для Roblox.
+Date: October 5, 2026. The user requested translating the ENTIRE game into English and preparing a Roblox description.
 
-## Выполнено
+## Completed
 
-- Переведены 404 уникальных фрагмента в 17 игровых модулях: меню и настройки, бой и результаты, профиль/лидеры, Inventory/Shop/Chests, редактор/обучение/импорт, названия карт, всех 25 комплектов, типов войск и зданий, сообщения сервера, сохранения, подбора/подключения и покупки, ошибки загрузки моделей.
-- Название в меню — Frontier Kingdoms. Мифические комплекты — Storm Knights, Dragon Order, Star Keepers.
-- AutoLocalize=false у KingdomsUI и KingdomsOverlay сохраняет английский игровой интерфейс при автоматических переводах Roblox.
-- Игроки сохраняют введённые ими названия карт и свои имена; это пользовательские данные. Системные меню, окно покупки и страница игры принадлежат Roblox и не переводятся игровым кодом.
-- Английские описания игры, трёх пропусков и пакетов монет подготовлены в `design/ROBLOX_LISTING_EN.md`. На Roblox ничего не публиковалось.
-- `inex.rbxl` пересобран из исходников. Резервная копия до перевода — `build/inex-before-english.rbxl`.
+- Translated 404 unique fragments across 17 game modules: menus/settings, combat/results, profile/leaderboards, Inventory/Shop/Chests, editor/tutorial/import, map names, all 25 sets, troop/building types, server/persistence/matchmaking/connection/purchase messages, and model-loading errors.
+- Menu title: Frontier Kingdoms. Mythical sets: Storm Knights, Dragon Order, Star Keepers.
+- AutoLocalize=false on KingdomsUI and KingdomsOverlay preserves the English game interface under automatic Roblox translation.
+- Player-entered map names and player names remain user data. System menus, purchase dialogs, and game pages belong to Roblox and are not translated by game code.
+- English descriptions for the game, three passes, and coin packs are prepared in `design/ROBLOX_LISTING_EN.md`. Nothing was published to Roblox.
+- `inex.rbxl` was rebuilt from sources. Pretranslation backup: `build/inex-before-english.rbxl`.
 
-## Проверено
+## Validated
 
-- Все 826 исходников компилируются официальным Luau CLI.
-- Все 46 сценариев прошли: 17 развития/онлайна, 13 экономики, 13 разделения инвентаря и магазина, 3 английского UI.
-- `tools/check_english.py`: ноль кириллических фрагментов в исходниках и встроенных Source, ноль кириллических значений статических Text/PlaceholderText/ToolTip/Name, все 826 Source совпадают с исходниками.
-- Отчёты: `build/english-audit-report.json`, `build/inventory-qa-report.json`, `build/inventory-save-report.json`.
+- All 826 sources compile using the official Luau CLI.
+- All 46 scenarios passed: 17 progression/online, 13 economy, 13 inventory/shop separation, and 3 English UI checks.
+- `tools/check_english.py`: zero Cyrillic fragments in source files or embedded Sources; zero Cyrillic static Text/PlaceholderText/ToolTip/Name values; all 826 Sources match their source files.
+- Reports: `build/english-audit-report.json`, `build/inventory-qa-report.json`, `build/inventory-save-report.json`.
 
-## Границы проверки
+## Validation limits
 
-CLI строит реальные UI.Build/MetaUI/CollectionUI на тестовых Roblox-объектах и имитирует загрузку мешей. Он проверяет содержимое и поведение, но не качество живого рендера.
+CLI builds real UI.Build/MetaUI/CollectionUI on mock Roblox objects and simulates mesh loading. It validates content/behavior, not live rendering quality.
 
-В живом Studio Play наблюдалось главное меню обновлённого файла: Frontier Kingdoms, Play, Map Editor, Profile, Inventory, Shop, Leaderboards, Settings и подсказка управления на английском; стандартная таблица показывала Level/Wins/Rank. Полная визуальная проверка остальных страниц не завершена: инструмент отказал во вводе из-за обнаруженного ручного ввода пользователя. Общий studioRenderVerified остаётся false; наблюдение главного меню не считается проверкой всех страниц или мешей.
+Live Studio Play showed the updated main menu: Frontier Kingdoms, Play, Map Editor, Profile, Inventory, Shop, Leaderboards, Settings, and English control hints; the standard player list showed Level/Wins/Rank. Full visual validation of other pages did not finish because the tool refused input after detecting manual user input. Overall studioRenderVerified remains false; observing the main menu does not validate all pages or meshes.
 
-Продажи Robux требуют опубликованной версии и настоящих GamePassId/ProductId; сейчас они равны 0. Агент не публиковал эту версию на Roblox. Реальные покупки, DataStore и межсерверные переходы в этой сессии не проверялись. Физический телефон не проверялся.
+Robux sales require a published version and real GamePassIds/ProductIds; these currently equal 0. The agent did not publish this version. Real purchases, DataStores, and cross-server transfers were not tested in this session. No physical phone was tested.
 
-Документация Roblox: [AutoLocalize](https://create.roblox.com/docs/reference/engine/classes/GuiBase2d), [язык источника](https://create.roblox.com/docs/production/localization).
+Roblox documentation: [AutoLocalize](https://create.roblox.com/docs/reference/engine/classes/GuiBase2d), [source language](https://create.roblox.com/docs/production/localization).
 

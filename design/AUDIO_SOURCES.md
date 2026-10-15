@@ -1,37 +1,37 @@
-# Аудио Frontier Kingdoms — 6 октября 2026
+# Frontier Kingdoms audio — October 6, 2026
 
-Две оригинальные композиции и восемь эффектов созданы процедурным синтезом в `tools/compose_audio.py`. Записи не используют чужие семплы или готовые мелодии. WAV находятся в `assets/audio/original`, копии для прослушивания — в `audio-site/dist/audio`. Формат: stereo PCM, 32 kHz, 16 bit.
+Two original compositions and eight effects were created through procedural synthesis in `tools/compose_audio.py`. Recordings use no third-party samples or existing melodies. WAV files are in `assets/audio/original`, with listening copies in `audio-site/dist/audio`. Format: stereo PCM, 32 kHz, 16 bit.
 
-| Ключ для подключения | Файл | Назначение |
+| Connection key | File | Purpose |
 | --- | --- | --- |
-| Menu | menu.wav | Frontier Dawn: меню, редактор, подготовка |
-| Battle | battle.wav | March of the Banners: бой |
-| Click | click.wav | Кнопки интерфейса |
-| Select | select.wav | Выбор здания или войск |
-| Order | order.wav | Отправка войск |
-| Place | place.wav | Изменение карты |
-| Error | error.wav | Ошибка действия |
-| Chest | chest.wav | Получение результата кейса |
-| Victory | victory.wav | Победа |
-| Defeat | defeat.wav | Поражение |
+| Menu | menu.wav | Frontier Dawn: menu, editor, preparation |
+| Battle | battle.wav | March of the Banners: combat |
+| Click | click.wav | Interface buttons |
+| Select | select.wav | Building or troop selection |
+| Order | order.wav | Sending troops |
+| Place | place.wav | Map changes |
+| Error | error.wav | Invalid action |
+| Chest | chest.wav | Case result |
+| Victory | victory.wav | Victory |
+| Defeat | defeat.wav | Defeat |
 
-Сейчас все оригинальные `Id` в `src/AudioCatalog.luau` равны **0**. Игра выбирает временные Roblox-ассеты; оригиналы пока доступны только как WAV и на сайте. Вход в Creator Hub нужен для загрузки WAV в аккаунт владельца игры и получения ID, поскольку локальный файл не является Roblox audio asset. Для каждой записи требуется предоставить игре доступ к загруженному ассету. Инструкции Roblox: [Audio assets](https://create.roblox.com/docs/audio/assets).
+All original `Id` fields in `src/AudioCatalog.luau` currently equal **0**. The game selects temporary Roblox assets; originals are available only as WAV files and on the website. Creator Hub login is needed to upload WAV files to the game owner's account and obtain IDs, because a local file is not a Roblox audio asset. Grant the game access to every uploaded recording. Roblox instructions: [Audio assets](https://create.roblox.com/docs/audio/assets).
 
-Временные источники:
+Temporary sources:
 
-- Меню: [Medieval Market d OL — APM Music](https://create.roblox.com/store/asset/1847223666/Medieval-Market-d-OL), ID `1847223666`.
-- Бой: [Flame a — APM Music](https://create.roblox.com/store/asset/9045862008/Flame-a), ID `9045862008`.
-- Интерфейс: [UI Click 1 — 0FFZ3TI](https://create.roblox.com/store/asset/113397864512278/UI-Click-1), ID `113397864512278`. Для разных действий временно изменяется скорость и громкость одной записи.
-- Дополнительный прежний запасной трек: `Medieval_Ambient_Lute`, ID `93176902923482`, автор DistrokidOfficial. Его доступность в опубликованной игре отдельно не подтверждена.
+- Menu: [Medieval Market d OL — APM Music](https://create.roblox.com/store/asset/1847223666/Medieval-Market-d-OL), ID `1847223666`.
+- Combat: [Flame a — APM Music](https://create.roblox.com/store/asset/9045862008/Flame-a), ID `9045862008`.
+- Interface: [UI Click 1 — 0FFZ3TI](https://create.roblox.com/store/asset/113397864512278/UI-Click-1), ID `113397864512278`. Different actions temporarily vary one recording's speed and volume.
+- Additional earlier fallback track: `Medieval_Ambient_Lute`, ID `93176902923482`, by DistrokidOfficial. Availability in the published game has not been separately confirmed.
 
-## Что сейчас блокирует запуск опубликованной игры
+## Current published-game launch blocker
 
-В настоящем Studio обнаружена ошибка `EditableMesh is not accessible. Go to Security Tab...`. В Security переключатель доступа был недоступен; интерфейс показывал `You must be 13+ ID verified to access this API`. Из-за этой ошибки модели не загружались, а кнопка Play оставалась недоступной. Это отдельная проблема от подключения аудио. Позже пользователь сообщил, что проверка аккаунта завершена; доступ API после этого ещё не подтверждён. Нужно повторно открыть Studio, проверить переключатель Mesh / Image APIs и запуск. Проверку аккаунта выполняет сам владелец. Эти сведения описывают наблюдённое состояние конкретного аккаунта.
+Real Studio showed `EditableMesh is not accessible. Go to Security Tab...`. The Security access toggle was unavailable; the UI showed `You must be 13+ ID verified to access this API`. This prevented models from loading and kept Play unavailable. It is separate from audio setup. The user later reported account verification was complete, but API access had not been confirmed afterward. Reopen Studio, check Mesh / Image APIs, and test launch. Account verification is performed by the owner. This records the observed state of this particular account.
 
-## Как подключить загруженные оригиналы
+## Connecting uploaded originals
 
-1. Загрузить десять WAV в Creator Hub от владельца игры, дождаться готовности ассетов и предоставить игре права использования. Скопировать именно числовой Asset ID каждой записи.
-2. Запустить `tools/connect_audio.py` с десятью явными ID. Команда ниже — пример формы; значения `123` нужно заменить настоящими ID. Сначала добавить `--dry-run`, чтобы проверить значения без записи.
+1. Upload all ten WAV files to Creator Hub as the game owner, wait for assets to become ready, and grant the game usage rights. Copy the numeric Asset ID for each recording.
+2. Run `tools/connect_audio.py` with ten explicit IDs. The command below illustrates the format; replace `123` with real IDs. Add `--dry-run` first to validate without writing.
 
 ```powershell
 python tools/connect_audio.py --dry-run `
@@ -40,8 +40,8 @@ python tools/connect_audio.py --dry-run `
   --id Victory=123 --id Defeat=123
 ```
 
-3. Убрать `--dry-run` и повторить команду. Скрипт изменит только ID в `src/AudioCatalog.luau`, `assets/audio/original/manifest.json` и, если она существует, `audio-site/dist/manifest.json`. Он не загружает файлы, не публикует игру или сайт и не проверяет права Roblox по сети.
-4. Выполнить `python tools/sync_place.py`, затем `python tools/check_english.py` и `python tools/run_local_qa.py`. Закрыть старую вкладку Studio и открыть обновлённый `inex.rbxl`, убедиться, что открыт нужный облачный place, затем опубликовать обновление через Studio.
-5. Проверить музыку меню/боя и эффекты в Roblox; отдельно убедиться, что доступ к аудио предоставлен этой игре. Проверку локального звука выполнить с двумя игроками. Подмена ID в файле без синхронизации и публикации не изменит уже опубликованную версию.
+3. Remove `--dry-run` and repeat. The script updates only IDs in `src/AudioCatalog.luau`, `assets/audio/original/manifest.json`, and `audio-site/dist/manifest.json` if present. It does not upload files, publish the game or website, or check Roblox permissions over the network.
+4. Run `python tools/sync_place.py`, then `python tools/check_english.py` and `python tools/run_local_qa.py`. Close the old Studio tab and open updated `inex.rbxl`; confirm the correct cloud place is open, then publish the update through Studio.
+5. Test menu/combat music and effects in Roblox; separately confirm this game has audio access. Use two players to verify client-local sound. Replacing IDs in a file without synchronization and publication does not update the published version.
 
-Не запускать `tools/compose_audio.py` после подключения ID без сохранения этих значений: генератор заново записывает manifest с `robloxAssetId=0`.
+Do not run `tools/compose_audio.py` after connecting IDs without preserving those values: the generator rewrites the manifest with `robloxAssetId=0`.

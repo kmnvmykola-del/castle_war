@@ -1,15 +1,15 @@
-# Принятые и реализованные правила обновления 0.12
+# Approved and implemented update 0.12 rules
 
-Пользователь попросил 25 красивых скинов, обновление старых моделей армии и зданий, сундуки и оформление собственных дорог. После ответа «продолжай» принят озвученный вариант ниже. Это реализованная версия, а не ожидающее согласования предложение.
+The user requested 25 attractive skins, updates to old army/building models, chests, and owned-road styling. After the user said "continue", the proposal below was accepted. This describes the implemented version, not a proposal awaiting approval.
 
-- Всего 25 полных наборов, включая обычный бесплатный и три прежних. Один набор оформляет армию, базы и собственные дороги. Боевых преимуществ нет.
-- Три прежних набора покупаются напрямую за 400 / 800 / 1200 монет. 21 новый набор получается из сундуков.
-- Сундук стоит 300 монет. Награда — один случайный ещё не полученный платный набор. Все оставшиеся имеют равный шанс 1/N. Список наград и численные шансы показываются до покупки. Повторов нет; при полной коллекции покупка закрывается.
-- Оформление дороги появляется только на соединении собственных баз без чужой или нейтральной промежуточной контролируемой базы. Развилки наследуют стиль только при едином владении; спорные общие участки остаются обычными. Захват и потеря обновляют внешний вид, граф маршрутов сохранён.
-- Армия имеет разные формы шлемов, щитов, плащей и оружия, а не только перекраску. Сохраняются знаки своей и чужой стороны.
-- Старые модели обновлены в Blender, включая все 21 вариант зданий. Добавлены гербы, украшения крыш и дорожная плитка. Подробные оригиналы замков сохранены в Blender/FBX, для игры экспортированы облегчённые варианты II/III уровней по 8000 треугольников.
-- Геометрия загружается по необходимости. Старые предпросмотры освобождаются при смене страницы и старте матча. Сетевые снимки применяются последовательно при загрузке новых моделей.
+- 25 complete sets total, including free Standard and the three previous sets. Each styles armies, bases, and owned roads without combat advantages.
+- The three previous sets sell directly for 400 / 800 / 1,200 coins. The 21 new sets come from chests.
+- A chest costs 300 coins and awards one random paid set not yet owned. Every remaining set has equal probability 1/N. Rewards and numeric probabilities are visible before purchase. No duplicates; purchasing closes when the collection is complete.
+- Road styling appears only on owned-base connections without enemy/neutral intermediate controlled bases. Junctions inherit style only under unified ownership; contested shared segments remain standard. Capture/loss updates appearance while preserving the route graph.
+- Armies vary helmet, shield, cloak, and weapon shapes, not just colors. Friendly/enemy markings remain.
+- Previous models were updated in Blender, including all 21 building variants. Crests, roof ornaments, and paving were added. Detailed castle originals remain in Blender/FBX; reduced 8,000-triangle variants were exported for game levels II/III.
+- Geometry loads on demand. Old previews are released on page changes and match start. Network snapshots apply sequentially while new models load.
 
-Поскольку монеты запланированы к покупке за Robux, сервер учитывает `PolicyService.ArePaidRandomItemsRestricted`, согласно [Roblox Paid random items](https://create.roblox.com/docs/production/monetization/paid-random-items). До получения разрешения и при отказе случайная покупка недоступна. Реальные продажи Robux не подключены: ProductId остаются 0.
+Because coins are planned for Robux purchase, the server respects `PolicyService.ArePaidRandomItemsRestricted` under [Roblox Paid random items](https://create.roblox.com/docs/production/monetization/paid-random-items). Random purchases remain unavailable before permission or upon restriction. Real Robux sales are not connected: ProductIds remain 0.
 
-Основной файл: `inex.rbxl`. Полный список — `ALL_FEATURES_RU.md`, проверка — `QA_V012_RU.md`, передача состояния — `NEXT_SESSION_RU.md`. Копия до обновления — `build/pre-v012.bin`, правила 0.11 — `CONCEPT_V011_ARCHIVE.md`.
+Main file: `inex.rbxl`. Full list: `ALL_FEATURES_RU.md`; validation: `QA_V012_RU.md`; handoff: `NEXT_SESSION_RU.md`. Preupdate copy: `build/pre-v012.bin`; version 0.11 rules: `CONCEPT_V011_ARCHIVE.md`.

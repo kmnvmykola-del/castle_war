@@ -1,37 +1,37 @@
-# Проверка версии 0.11 — 5 октября 2026
+# Version 0.11 validation — October 5, 2026
 
-Основной файл `inex.rbxl` сохранён: **2 054 358 байт**, 155 встроенных исходников, 135 модулей геометрии. Все исходники сверены с `src`, ссылки и родители сервисов проверены. Копия до изменений — `build/pre-v011.bin`; правила — `design/CONCEPT_V010_ARCHIVE.md`.
+Main `inex.rbxl` saved: **2,054,358 bytes**, 155 embedded sources, 135 geometry modules. All sources match `src`; service references/parents were checked. Previous copy: `build/pre-v011.bin`; rules: `design/CONCEPT_V010_ARCHIVE.md`.
 
-## Новая проверка
+## New validation
 
-`tools/qa_v011.luau`: **17 из 17**, без отказов.
+`tools/qa_v011.luau`: **17 of 17**, no failures.
 
-- Опыт ИИ/PvP, отдельный ранг, монеты за пересечение уровня, повторное начисление одного результата.
-- Первые десять ранговых игр, стабильные очки и ускорение серии, отрицательный ранг, выход из матча.
-- Повтор callback UpdateAsync, ошибка записи/загрузки, сохранение старых карты и настроек.
-- Покупка за точную цену, повтор покупки, экипировка только принадлежащего набора, отсутствие бонусов к бою.
-- Повтор одного платного чека на разных серверах; настоящий обработчик Account.ProcessReceipt подтверждает только известный товар и сохранённую выдачу загруженному игроку.
-- Восстановление ожидающей награды после входа; обновление старого кеша лобби после игры на другом сервере.
-- Защита проекций рейтинга от запоздавших записей; своё место №251 при отображении первых 100.
-- Ранговый диапазон 100/200/300, независимость от уровня опыта, раздельные режимы поиска.
-- Выбор ближайшего ранга между разными лобби, одна резервация на пару, лобби 50+, вместимость и истечение старой записи.
-- Результат партии обрабатывается один раз, включая отключение игрока; участники сохраняются для наград. Набор армии закрепляется на время матча.
-- Локальные ожидающие игроки начинают ранговый матч после расширения диапазона через 60 секунд без третьего входа в очередь.
+- AI/PvP XP, separate rank, coins for crossing levels, and duplicate result rewards.
+- First ten ranked games, stable points/streak acceleration, negative rank, and leaving matches.
+- Repeated UpdateAsync callbacks, save/load failures, and preservation of old maps/settings.
+- Exact-price purchases, repeated purchases, equipping only owned sets, and no combat bonuses.
+- Repeated paid receipts across servers; real Account.ProcessReceipt confirms only known products and saved fulfillment for a loaded player.
+- Pending reward restoration on login; stale lobby cache refresh after playing on another server.
+- Leaderboard projections protected from late writes; own position #251 while showing the first 100.
+- Ranked 100/200/300 range, independence from XP level, and separate search modes.
+- Closest-rank selection across lobbies, one reservation per pair, 50+ lobbies, capacity, and stale-entry expiry.
+- Each match result processes once, including disconnects; participant records remain for rewards. Army sets are fixed for the match.
+- Local waiting players start ranked matches after range expansion at 60 seconds without a third queue entry.
 
-## Игровые проверки
+## Gameplay checks
 
-Повторно прошёл `qa_v06`: локальные партии, общая очередь, гонка назначения, отказ резервации, отмена, тайм-аут, одна неподвижная симуляция на 100 ожидающих игроков, мост и строй. `qa_full`: **6 из 6**, включая девять партий на всех трёх картах и сложностях ИИ по три игровых минуты. Проверены экономика, вместимость, обучение в конце пути, жизненный цикл людей и отсутствие некорректных позиций. Ранее в этом обновлении прошли все восемь проверок дорог `qa_v010`.
+`qa_v06` passed again: local matches, global queue, assignment races, reservation failure, cancellation, timeout, one stationary simulation for 100 waiting players, bridges, and formations. `qa_full`: **6 of 6**, including nine three-minute AI matches on all three maps/difficulties. Checks covered economy, capacity, final-destination training, unit lifecycle, and invalid positions. All eight `qa_v010` road checks passed earlier in this update.
 
-На одном обычном экране ПК через настоящий интерфейс Studio Play проверены главное меню, профиль, магазин с трёхмерным просмотром, ранговый поиск и отмена, переключение таблиц и своё место. Последний просмотр гвардии показывает модели спереди в увеличенном масштабе.
+Real Studio Play UI on one ordinary PC screen validated main menu, profile, shop 3D previews, ranked search/cancellation, leaderboard switching, and own position. The latest guard preview shows models from the front at increased scale.
 
-Полный цикл наград проверен через игровую сессию: временный сценарий завершил 16 партий со сложным ИИ через обычное правило победы Engine и обработчик завершения MatchLobby. Получено 800 опыта, уровень 5 и 400 монет; ранг и победы PvP остались нулевыми. Через кнопки куплены и надеты «Ветераны», баланс стал 0. В следующей партии через ЛКМ/ПКМ отправлен отряд; на видимых людях появились новые модели и синие знаки своей стороны. Ускорение побед было только временным сценарием проверки и удалено остановкой Play.
+The full reward loop was tested in a game session: a temporary scenario completed 16 hard-AI matches using ordinary Engine victory rules and MatchLobby completion handling. This yielded 800 XP, level 5, and 400 coins; rank/PvP wins stayed zero. Buttons purchased/equipped Veterans, leaving balance 0. In the next match, left/right clicks sent a group showing new models and blue friendly markings. Accelerated wins were temporary validation only, removed when Play stopped.
 
-В Blender созданы три набора для четырёх типов людей: 84 дополнительных mesh, 19 880 треугольников. Исходник `assets/blender/skins/army_skins.blend`, FBX и `skins.png` сохранены. В Play загружены все 135 модулей геометрии; суммарно 64 384 треугольника в каталоге.
+Three sets for four unit types were created in Blender: 84 additional meshes, 19,880 triangles. `assets/blender/skins/army_skins.blend`, FBX, and `skins.png` are saved. All 135 geometry modules loaded in Play; catalog total is 64,384 triangles.
 
-## Границы проверки
+## Validation limits
 
-В финальном Play ошибок игровых скриптов в консоли не обнаружено. Дополнительные разрешения и физический телефон не проверялись по просьбе пользователя. Studio оставлен в Edit; временные сценарии и экспортный атрибут очищены.
+Final Play showed no game-script console errors. Additional resolutions and a physical phone were not tested at the user's request. Studio was left in Edit; temporary scenarios and the export attribute were cleared.
 
-DataStore, MemoryStore, ordered stores, сбои и повторные чеки проверены через внедряемые имитации сервисов. Реальные переносы в закрытые серверы и постоянное хранение между опубликованными серверами в Studio проверить нельзя. Продукты Robux имеют ID 0, кнопки отключены; реальных платных покупок не было. Для них нужны публикация, собственные Developer Products и проверка опубликованной игры.
+DataStore, MemoryStore, ordered stores, failures, and repeated receipts were tested through injectable service simulations. Real reserved-server transfers and persistence across published servers cannot be tested in Studio. Robux product IDs are 0 and buttons disabled; no real paid purchases occurred. Publication, owned Developer Products, and published-game validation are required.
 
-Подробные результаты — `build/qa-v011-report.json`, проверка сохранения — `build/save-report.json`.
+Detailed results: `build/qa-v011-report.json`; save validation: `build/save-report.json`.

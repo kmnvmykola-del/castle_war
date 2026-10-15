@@ -1,72 +1,72 @@
-# Установка обычных моделей — 6 октября 2026
+# Installing ordinary models — October 6, 2026
 
-Переход завершён: все модели загружены, установлены и опубликованы в Frontier Kingdoms, Roblox v12. Основной `inex.rbxl` и отдельная `FrontierKingdoms-installed.rbxl` уже содержат настоящие MeshId. Повторный импорт для текущей игры не нужен.
+The transition is complete: all models are uploaded, installed, and published in Frontier Kingdoms, Roblox v12. The main `inex.rbxl` and separate `FrontierKingdoms-installed.rbxl` already contain real MeshIds. No reimport is needed for the current game.
 
-Ниже инструкция для новой установки. В пакете 803 исходные модели, синие/красные варианты всех 25 комплектов и 23 серые детали нейтральной армии — всего 1984 MeshPart. Для разработки достаточно открыть установленный файл. Allow Mesh / Image APIs и подтверждение по документу для этой реализации не используются.
+The instructions below cover a new installation. The package contains 803 source models, blue/red variants of all 25 sets, and 23 gray neutral army parts: 1,984 MeshParts in total. Open the installed file to continue development. This implementation does not use Allow Mesh / Image APIs or document verification.
 
-## 1. Открыть свою игру
+## 1. Open your game
 
-В Studio открой **существующую опубликованную Frontier Kingdoms**, которую нужно обновить. Если запущен Play, нажми Stop. Не создавай другую игру.
+In Studio, open the **existing published Frontier Kingdoms** to update. Stop Play if running. Do not create another game.
 
-Установщик обновит код сам, поэтому сохранять старый открытый Studio-файл поверх обновлённого локального `inex.rbxl` не нужно.
+The installer updates code itself; do not save an old open Studio file over the updated local `inex.rbxl`.
 
-## 2. Импортировать модели
+## 2. Import models
 
-Нажми **File → Import** и выбери:
+Select **File → Import** and choose:
 
 ```text
 C:\Users\Kolia\castle_war\assets\roblox_meshes\KingdomsMeshCatalogue.gltf
 ```
 
-Рядом уже лежит `KingdomsMeshCatalogue.bin` с геометрией. Оба файла должны оставаться в одной папке. Выбирай для импорта только `.gltf`.
+`KingdomsMeshCatalogue.bin` containing geometry is alongside it. Keep both files together. Select only `.gltf` for import.
 
-Параметры импорта:
+Import settings:
 
-| Параметр | Значение |
+| Setting | Value |
 | --- | --- |
-| Creator | Владелец игры или группа, которой принадлежит игра |
+| Creator | Game owner or the group owning the game |
 | Name | `KingdomsMeshCatalogue` |
-| Upload to Roblox | Включено |
-| Add to Workspace | Включено |
-| Import Only As Model | Включено |
-| Merge Meshes | Выключено |
-| Ignore Vertex Colors | Выключено |
+| Upload to Roblox | Enabled |
+| Add to Workspace | Enabled |
+| Import Only As Model | Enabled |
+| Merge Meshes | Disabled |
+| Ignore Vertex Colors | Disabled |
 | World Up | Top |
 | World Forward | Front |
 | Scale Unit | Studs |
 
-Нажми **Import** и дождись завершения загрузки. Модели в каталоге расположены в одной точке, поэтому в Workspace они временно выглядят наложенными друг на друга. Их игровые позиции и размеры выставит установщик. Не переименовывай отдельные MeshPart и не импортируй каталог дважды.
+Click **Import** and wait for upload completion. Catalog models share one location, so temporarily overlap in Workspace. The installer sets game positions and sizes. Do not rename individual MeshParts or import the catalog twice.
 
-Формат glTF, цвета вершин и указанные параметры описаны в [документации импортера Roblox](https://create.roblox.com/docs/studio/importer). `Add to Workspace` при импорте в опубликованную игру также выдаёт игре разрешение на использование загруженных моделей.
+glTF, vertex colors, and these settings are described in the [Roblox importer documentation](https://create.roblox.com/docs/studio/importer). `Add to Workspace` when importing into a published game also grants the game access to uploaded models.
 
-## 3. Добавить установщик
+## 3. Add the installer
 
-В твоей текущей версии Studio выбери **File → Import Roblox Model** и затем файл:
+In the current Studio version, select **File → Import Roblox Model**, then:
 
 ```text
 C:\Users\Kolia\castle_war\assets\roblox_meshes\KingdomsMeshSetup.rbxmx
 ```
 
-В Workspace появится `KingdomsMeshSetup`. Его игровые Script/LocalScript отключены; добавление файла не запускает замену автоматически. В некоторых версиях Studio эта же операция доступна через Workspace → Insert From File, но в проверенной версии 0.741 используется меню File.
+`KingdomsMeshSetup` appears in Workspace. Its game Script/LocalScript instances are disabled; inserting the file does not automatically replace anything. Some Studio versions offer Workspace → Insert From File; the tested version 0.741 uses the File menu.
 
-## 4. Установить одной командой
+## 4. Install with one command
 
-Открой **Command Bar** в Studio и выполни:
+Open Studio **Command Bar** and run:
 
 ```lua
 require(workspace.KingdomsMeshSetup.Installer).Install()
 ```
 
-Установщик проверит все имена и загруженные MeshId, подготовит новые папки и только после этого заменит игровые скрипты. Если импорт неполный, содержит дубли или незагруженные модели, он остановится до замены. При ошибке во время замены старые игровые папки возвращаются на место.
+The installer validates all names and uploaded MeshIds, prepares new folders, then replaces game scripts. Incomplete imports, duplicate names, or unuploaded models stop installation before replacement. Errors during replacement restore previous game folders.
 
-Успешная установка создаёт `ReplicatedStorage.Kingdoms.MeshTemplates` и печатает в Output `Installed 1984 ordinary MeshParts`. Прежние игровые папки и импортный каталог сохраняются в `ServerStorage.KingdomsBeforeMeshImport_…`. Скрипты резервной копии отключены; их прежнее значение Disabled сохранено в атрибуте `DisabledBeforeMeshImport`. Данные игроков и покупки установщик не меняет.
+Successful installation creates `ReplicatedStorage.Kingdoms.MeshTemplates` and prints `Installed 1984 ordinary MeshParts` in Output. Previous game folders and the imported catalog are retained in `ServerStorage.KingdomsBeforeMeshImport_…`. Backup scripts are disabled, with their previous Disabled value stored in `DisabledBeforeMeshImport`. Player data and purchases are unchanged.
 
-## 5. Проверить и опубликовать
+## 5. Validate and publish
 
-Нажми **F5**. Проверь загрузку главного меню, запуск матча, модели в Inventory/Shop и редактор карт. Для цветов войск проверь матч с двумя игроками: каждый видит собственную армию синей, чужую красной. При двух клиентах клики по интерфейсу должны быть слышны только тому, кто кликнул.
+Press **F5**. Check main-menu loading, match launch, Inventory/Shop models, and map editor. Check troop colors with two players: each sees friendly armies blue and enemies red. UI clicks should be audible only to the clicking client.
 
-После успешной проверки нажми **Stop → File → Publish to Roblox** в эту же игру. Затем сохрани локальную копию установленной игры через **File → Download a Copy** в текущей версии Studio: она будет содержать настоящие импортированные MeshPart и MeshId. Выбери отдельное имя, например `FrontierKingdoms-installed.rbxl`, чтобы сохранить подготовленный файл и прежние резервные копии.
+After validation, select **Stop → File → Publish to Roblox** for this same game. Then save a local installed copy through **File → Download a Copy** in the current Studio version; it contains real imported MeshParts and MeshIds. Choose a separate name such as `FrontierKingdoms-installed.rbxl` to preserve the prepared file and previous backups.
 
-Если какой-то шаг выдаст ошибку, передай её текст из Output. Не запускай установщик повторно после успешной установки: он уже перемещён в резервную копию.
+If a step fails, provide its Output error text. Do not rerun the installer after successful installation: it has already moved into backup.
 
-6 октября импорт выполнен через управление Studio по просьбе пользователя. При тайм-ауте трёх деталей Reconfigure → Import в той же сессии завершил загрузку. Серые детали добавлены отдельным небольшим файлом без повторной загрузки 1961 готовой модели. Матч, коллекция и редактор проверены; обновление опубликовано в PlaceId 81963222072062, v12. Сохранение в Roblox и публикация — отдельные действия; Output должен подтвердить именно Published new changes.
+On October 6, import was completed through Studio control at the user's request. After three parts timed out, Reconfigure → Import in the same session completed uploading. Gray parts were added through a separate small file without reuploading the 1,961 completed models. The match, collection, and editor were checked; the update was published to PlaceId 81963222072062, v12. Saving to Roblox and publishing are separate actions; Output must specifically confirm Published new changes.

@@ -1,157 +1,157 @@
-# Frontier Kingdoms — ранний доступ 0.16
+# Frontier Kingdoms — Early Access 0.16
 
-## Обычные модели вместо EditableMesh
+## Standard models instead of EditableMesh
 
-6 октября 2026 версия **0.16 опубликована в существующую Frontier Kingdoms**. Установлены 806 исходных моделей, варианты 25 комплектов и серая нейтральная армия — всего 1969 шаблонов с настоящими MeshId. Для Storm, Dragon и Oracle созданы новые модели брони, оружия, дорог и ворот в Blender. Здания обращены дверями к камере. [Состояние релиза и проверки](design/NEXT_SESSION_RU.md).
+On October 6, 2026, version **0.16 was published to the existing Frontier Kingdoms experience**. It includes 806 source models, variants of 25 sets, and a gray neutral army: 1,969 templates with real MeshIds in total. New armor, weapon, road, and gate models for Storm, Dragon, and Oracle were created in Blender. Building entrances face the camera. [Release status and validation](design/NEXT_SESSION_RU.md).
 
-**Повторный импорт не нужен.** Основной `inex.rbxl` и `FrontierKingdoms-installed.rbxl` уже содержат установленную игру. В Studio проверены Play, матч против ИИ, захват здания, предпросмотры и редактор с размещением/Undo. Для моделей не используются Allow Mesh / Image APIs и подтверждение по документу. PlaceId: `81963222072062`, GameId: `10769541065`.
+**No reimport is required.** Both the main `inex.rbxl` and `FrontierKingdoms-installed.rbxl` already contain the installed game. Studio checks covered Play, an AI match, building capture, previews, and editor placement/Undo. These models do not use Allow Mesh / Image APIs or document verification. PlaceId: `81963222072062`, GameId: `10769541065`.
 
-Полный перечень возможностей: [design/ALL_FEATURES_RU.md](design/ALL_FEATURES_RU.md). Перенос через GitHub и продолжение на другом ПК: [design/TRANSFER_TO_PC_RU.md](design/TRANSFER_TO_PC_RU.md).
+Full feature list: [design/ALL_FEATURES_RU.md](design/ALL_FEATURES_RU.md). Transfer through GitHub and continuation on another PC: [design/TRANSFER_TO_PC_RU.md](design/TRANSFER_TO_PC_RU.md).
 
-## Английская версия игры
+## English game version
 
-Весь авторский текст игры теперь на английском: **Frontier Kingdoms**. Переведены меню, интерфейс боя, профиль, таблицы лидеров, магазин, инвентарь, кейсы, редактор и обучение, карты, 25 комплектов, сообщения сервера и ошибки. AutoLocalize отключён у обоих корневых ScreenGui, чтобы игровой интерфейс оставался английским. Имена игроков и введённые ими названия собственных карт сохраняются как пользовательские данные.
+All authored game text is now in English: **Frontier Kingdoms**. This includes menus, combat UI, profiles, leaderboards, shop, inventory, cases, editor and tutorials, maps, 25 sets, server messages, and errors. AutoLocalize is disabled on both root ScreenGuis so the game UI remains English. Player names and player-entered custom map names remain user data.
 
-Готовые английские название и описание игры, трёх пропусков и пакетов монет: [design/ROBLOX_LISTING_EN.md](design/ROBLOX_LISTING_EN.md). Проверка перевода: [design/QA_ENGLISH_RU.md](design/QA_ENGLISH_RU.md). При публикации установить Source Language = English в настройках Localization в Creator Hub. Тексты страницы Roblox и системные окна платформы управляются Roblox отдельно от игрового UI.
+Ready-to-use English titles and descriptions for the game, three passes, and coin packs: [design/ROBLOX_LISTING_EN.md](design/ROBLOX_LISTING_EN.md). Translation validation: [design/QA_ENGLISH_RU.md](design/QA_ENGLISH_RU.md). Set Source Language = English in Creator Hub Localization when publishing. Roblox page text and platform dialogs are managed separately from the game UI.
 
-## Инвентарь и кейсы 0.13
+## Inventory and cases 0.13
 
-Главное меню → **Inventory · Sets**. Инвентарь показывает только полученные комплекты; цены и покупка находятся в **Shop · Skins**. В магазине 24 предложения, фильтры по монетам/Robux и владению, отдельный блок мифических комплектов; в инвентаре фильтры редкости и одна кнопка Equip Set. Каждый комплект включает четыре типа бойцов, все здания и уровни, гербы, украшения крыш и свои дороги. Переключатели **Army / Buildings / Roads** открывают 3D-просмотр. Надевается весь комплект сразу, со следующего матча. Косметика не меняет характеристики.
+Main menu → **Inventory · Sets**. Inventory shows only owned sets; prices and purchases are in **Shop · Skins**. The shop contains 24 offers, coin/Robux and ownership filters, and a separate mythical section. Inventory has rarity filters and one Equip Set button. Each set includes four troop types, every building and level, crests, roof decorations, and its own roads. **Army / Buildings / Roads** switches open 3D previews. The entire set is equipped at once, starting with the next match. Cosmetics do not change statistics.
 
-В магазине 21 комплект покупается за монеты: обычные за 400, редкие за 800, эпические за 1200. Мифические комплекты доступны напрямую за Robux или из кейса:
+The shop sells 21 sets for coins: common sets cost 400, rare sets 800, and epic sets 1,200. Mythical sets are available directly for Robux or from a case:
 
-| Комплект | Плановая цена | Шанс в кейсе |
+| Set | Planned price | Case probability |
 | --- | --- | --- |
-| Рыцари бури | 199 Robux | 0,5% |
-| Драконий орден | 399 Robux | 0,3% |
-| Звёздные хранители | 699 Robux | 0,2% |
+| Storm Knights | 199 Robux | 0.5% |
+| Dragon Order | 399 Robux | 0.3% |
+| Star Keepers | 699 Robux | 0.2% |
 
-Кейс стоит 300 монет. Редкости: обычные 60%, редкие 30%, эпические 9%, мифические 1%. Шансы постоянные и не растут при сборе коллекции. Повтор возвращает 100/150/200/250 монет по редкости. Все 24 исхода, точные доли и компенсация видны до покупки. Полная коллекция закрывает покупку кейса. Повторная доставка запроса и повтор UpdateAsync не списывают монеты повторно.
+A case costs 300 coins. Rarity probabilities are common 60%, rare 30%, epic 9%, and mythical 1%. Probabilities are fixed and do not increase as the collection grows. Duplicates refund 100/150/200/250 coins by rarity. All 24 outcomes, exact probabilities, and compensation are visible before purchase. Owning the full collection disables case purchases. Repeated requests and UpdateAsync retries do not charge coins twice.
 
-Продажи Robux подключены к созданным пропускам: Storm `2006883740`, Dragon `2005989756`, Oracle `2005239786`; цены 199/399/699 Robux. Интерфейс получает фактическую цену Roblox; сервер проверяет владение пропуском перед выдачей и восстанавливает покупки при входе или обновлении профиля. Неизвестный пропуск и неподтверждённая покупка комплект не выдают. В Studio кнопки покупки отключены. Реальное списание Robux не выполнялось. [Пропуска Roblox](https://create.roblox.com/docs/production/monetization/passes), [требования к случайным покупкам](https://create.roblox.com/docs/production/monetization/paid-random-items).
+Robux sales are connected to the created passes: Storm `2006883740`, Dragon `2005989756`, and Oracle `2005239786`, priced at 199/399/699 Robux. The UI retrieves the actual Roblox price. The server verifies pass ownership before granting a set and restores purchases on login or profile refresh. Unknown passes and unconfirmed purchases grant no set. Purchase buttons are disabled in Studio. No actual Robux charge was performed. [Roblox passes](https://create.roblox.com/docs/production/monetization/passes), [paid random item requirements](https://create.roblox.com/docs/production/monetization/paid-random-items).
 
-`inex.rbxl` сохранён из установленной Studio-игры: все 26 активных исходников совпадают с `src/`. Прежние Geometry-модули и код сохранены в отключённых резервных папках ServerStorage. `tools/sync_place.py` обновляет только активные игровые корни и сохраняет архивы, MeshId, свойства и связи. Текущая проверка: `tools/run_local_qa.py`, 90 сценариев; `tools/verify_installed_place.py inex.rbxl` проверяет сохранённую игру. Результаты проверки экономики и UI прежней версии — [design/QA_INVENTORY_RU.md](design/QA_INVENTORY_RU.md).
+`inex.rbxl` was saved from the installed Studio game: all 26 active sources match `src/`. Previous Geometry modules and code are retained in disabled backup folders in ServerStorage. `tools/sync_place.py` updates only active game roots and preserves archives, MeshIds, properties, and references. Current validation: `tools/run_local_qa.py`, 90 scenarios; `tools/verify_installed_place.py inex.rbxl` validates the saved game. Previous-version economy and UI results: [design/QA_INVENTORY_RU.md](design/QA_INVENTORY_RU.md).
 
-## Модели 0.12
+## Models 0.12
 
-25 полных косметических наборов армии, баз и собственных дорог. Обновлены все старые модели, 21 вариант зданий, окружение и сундук. В магазине есть 3D-просмотр армии, базы и дороги. Галерея: `assets/blender/v012/gallery.html`.
+25 complete cosmetic sets for armies, bases, and owned roads. All previous models, 21 building variants, environment assets, and the chest were updated. The shop has 3D previews of armies, bases, and roads. Gallery: `assets/blender/v012/gallery.html`.
 
-Правила получения комплектов обновлены в версии 0.13 выше. Сервер учитывает ограничения случайных покупок Roblox через PolicyService.
+Set acquisition rules were updated in version 0.13 above. The server observes Roblox random purchase restrictions through PolicyService.
 
-Модели Blender: `assets/blender/v012/base/kingdoms_v012.blend`, `collection/collection_v012.blend`, `decor/kingdom_decor_v012.blend`. При пересборке основы запустите `tools/limit_meshes_v012.py` после `build_art_v012.py`, затем `optimize_castles_v012.py`, `geometry_to_luau.py` и `validate_art_v012.py`.
+Blender models: `assets/blender/v012/base/kingdoms_v012.blend`, `collection/collection_v012.blend`, and `decor/kingdom_decor_v012.blend`. When rebuilding the base assets, run `tools/limit_meshes_v012.py` after `build_art_v012.py`, then `optimize_castles_v012.py`, `geometry_to_luau.py`, and `validate_art_v012.py`.
 
-## Как запустить
+## How to run
 
-1. Откройте `inex.rbxl` в Roblox Studio через **File → Open from File**.
-2. Нажмите **Play / F5**. Карта и модели загружаются при запуске игры.
-3. Нажмите **Play → Vs AI**, выберите карту или случайную карту, затем сложность.
+1. Open `inex.rbxl` in Roblox Studio through **File → Open from File**.
+2. Press **Play / F5**. The map and models load when the game starts.
+3. Select **Play → Vs AI**, choose a map or a random map, then select difficulty.
 
-Если этот проект уже открыт в Studio, остановите текущую проверку и заново откройте сохранённый файл, чтобы загрузить именно версию с диска.
+If this project is already open in Studio, stop the current test and reopen the saved file to load the version from disk.
 
-## Профиль, ранговый режим и магазин
+## Profile, ranked mode, and shop
 
-В главном меню доступны **Профиль**, **Инвентарь · комплекты**, **Магазин · скины** и **Таблица лидеров**. В **Играть** доступны **С ИИ**, **Обычный · 1 на 1** и **Ранговый**. Обычный уровень и ранговые очки считаются отдельно.
+The main menu provides **Profile**, **Inventory · Sets**, **Shop · Skins**, and **Leaderboards**. **Play** provides **Vs AI**, **Casual · 1v1**, and **Ranked**. Regular level and ranked points are tracked separately.
 
-За победу над ИИ начисляется 20/35/50 опыта в зависимости от сложности; за поражение — 0. PvP даёт 100 опыта за победу и 40 за завершённое поражение. Выход из матча считается поражением и не даёт опыта. Каждые 200 опыта повышают уровень и дают 100 монет. Начальный уровень — 1.
+An AI win grants 20/35/50 XP depending on difficulty; a loss grants 0. PvP grants 100 XP for a win and 40 for a completed loss. Leaving a match counts as a loss and grants no XP. Every 200 XP advances a level and grants 100 coins. The starting level is 1.
 
-Начальный ранг — 0. В первых десяти ранговых матчах победа даёт +100, поражение −25. Затем победа даёт +25; третья подряд +35, четвёртая +45, пятая и последующие +50. Поражение снимает 25 и сбрасывает серию; ранг не опускается ниже нуля. Матчи с ИИ ранг и таблицу побед PvP не меняют.
+The starting rank is 0. During the first ten ranked matches, a win grants +100 and a loss −25. Afterward, a win grants +25; the third consecutive win grants +35, the fourth +45, and the fifth and later wins +50. A loss subtracts 25 and resets the streak; rank cannot fall below zero. AI matches do not affect rank or the PvP wins leaderboard.
 
-Ранговый поиск работает между всеми лобби и ищет ближайшего по очкам соперника: разница до 100 сначала, до 200 после 30 секунд, до 300 после 60 секунд. Лобби распределяются по обычному уровню: 1–9, 10–24, 25–49, 50+. Обычный PvP подбирает игрока из того же диапазона уровней. Таблицы показывают общий топ-100 по рангу и победам PvP, а также своё место.
+Ranked matchmaking spans all lobbies and finds the opponent closest in points: a difference of up to 100 initially, up to 200 after 30 seconds, and up to 300 after 60 seconds. Lobbies are divided by regular level: 1–9, 10–24, 25–49, and 50+. Casual PvP selects a player in the same level bracket. Leaderboards show the global top 100 by rank and PvP wins, along with the player's own position.
 
-В игре 25 комплектов из Blender: базовый и 24 получаемых. Инвентарь содержит только полученные, магазин — 24 предложения. Цены прежних наборов сохранены: **Ветераны — 400**, **Королевская гвардия — 800**, **Тёмные рыцари — 1200 монет**. Комплект меняет армию, здания и свои дороги. Обозначения своей стороны остаются синими, противника — красными.
+The game has 25 Blender sets: the base set and 24 obtainable sets. Inventory contains only owned sets; the shop has 24 offers. Previous set prices are retained: **Veterans — 400**, **Royal Guard — 800**, and **Dark Knights — 1,200 coins**. A set changes the army, buildings, and owned roads. Friendly markings remain blue and enemy markings red.
 
-Пакеты 500/1500/3500 монет подключены к Developer Products `3716851182` / `3716851330` / `3716851499` по 49/129/249 Robux. Интерфейс запрашивает фактическую цену у Roblox; сервер выдаёт монеты только после успешного сохранения подтверждённой покупки и не начисляет их повторно за тот же чек. Реальное списание Robux не выполнялось.
+The 500/1,500/3,500 coin packs are connected to Developer Products `3716851182` / `3716851330` / `3716851499` at 49/129/249 Robux. The UI requests the actual price from Roblox. The server grants coins only after successfully saving the confirmed purchase and never grants them twice for the same receipt. No actual Robux charge was performed.
 
-В Studio профиль, монеты и покупки за игровые монеты действуют до остановки Play. Межсерверный профиль, реальные рейтинги и переходы подготовлены; их нужно проверять в опубликованной игре. Локальная проверка не включает списание Robux.
+In Studio, profiles, coins, and coin purchases last until Play stops. Cross-server profiles, live rankings, and transfers are prepared but must be tested in the published game. Local validation does not charge Robux.
 
-## Управление армией
+## Army controls
 
-**Компьютер:** ЛКМ выбирает здание, ПКМ по цели отправляет выбранный процент войск. Shift + ЛКМ добавляет или убирает своё здание из группы; рамка мышью выбирает несколько зданий. WASD двигает камеру, колесо меняет масштаб, средняя кнопка перетаскивает карту. Esc снимает выбор, затем открывает меню матча.
+**PC:** Left-click selects a building; right-clicking a target sends the selected percentage of troops. Shift + left-click adds or removes an owned building from the group; drag a selection box to select several buildings. WASD moves the camera, the wheel zooms, and the middle button pans the map. Esc clears selection, then opens the match menu.
 
-**Телефон:** тап выбирает здание; кнопка **Приказ →**, затем тап по цели отправляют отряд. Удержание выбирает здание без приказа. Перетаскивание двигает камеру, щипок меняет масштаб. Панель и меню адаптируются к вертикальному и горизонтальному экрану.
+**Phone:** Tap selects a building; tap **Order →**, then tap a target to send troops. Holding selects a building without issuing an order. Dragging pans and pinching zooms. The panel and menus adapt to portrait and landscape screens.
 
-Своя сторона всегда синяя, противник красный, нейтральные серые — независимо от того, за какую сторону играет человек. Цвет показан флагом, площадкой и её окантовкой, а также цветом войск и численности.
+The local player's side is always blue, the opponent red, and neutrals gray, regardless of the player's assigned side. Color appears on flags, platforms and their outlines, troops, and population labels.
 
-Кнопка с тремя полосками находится слева сверху. Ресурсы, селяне, время и состояние мостов показаны слева снизу; общий счётчик армии убран. На телефоне кнопка **i** открывает и закрывает информацию. На ПК большой ползунок отправки появляется по центру снизу; на телефоне он остаётся в панели выбранного здания.
+The three-line button is at the top left. Resources, peasants, time, and bridge status appear at the bottom left; the total army counter was removed. On phones, **i** toggles information. On PC, the large send slider appears at the bottom center; on phones, it remains in the selected building panel.
 
-Мечники и быстрые бойцы идут ровными рядами по четыре. Селяне в смешанном отряде занимают ряды позади всех ближних бойцов, включая неполный последний ряд. Лучники двигаются свободно через задние ряды, но держатся на один ряд позади передних ближних бойцов своего отряда. Без ближних бойцов или после их гибели лучники идут самостоятельно. Перед мостом отряд перестраивается по два, после прохода всего отряда снова по четыре. Перестроение идёт с обычной скоростью без скачков. Мечники подходят к врагу почти вплотную; полевой лучник проигрывает первым взмахом меча. Стрела наносит 25 урона раз в 2 секунды и не убивает здорового бойца одним попаданием.
+Swordsmen and fast fighters march in rows of four. Peasants in mixed groups form rows behind all melee fighters, including an incomplete last row. Archers move freely through rear rows but stay one row behind their group's front melee fighters. Without melee fighters, or after they die, archers march independently. Before a bridge, the group reforms into two columns; after the entire group passes, it reforms into four. Reforming uses normal movement speed without jumps. Swordsmen approach enemies at near-contact range; a field archer dies to the first sword strike. An arrow deals 25 damage every 2 seconds and does not kill a healthy fighter in one hit.
 
-В бою задние ряды подтягиваются за фактическим передним рядом и заполняют места погибших. Мечники делают взмах раз в **1 секунду**, потери применяются через **0,25 секунды**; темп лучников сохранён. Большие отряды и защитники гарнизона выходят из дверей постепенно. Ожидающие выхода остаются внутри здания, занимают места и расходуют еду по прежним правилам; повторный приказ не отправляет их второй раз.
+During combat, rear rows follow the actual front row and fill casualties' positions. Swordsmen swing every **1 second**, with casualties applied after **0.25 seconds**; archer timing is unchanged. Large armies and garrison defenders leave through doors gradually. Units waiting to leave remain inside, occupy capacity, and consume food under the previous rules; repeated orders do not send them twice.
 
-Во время боя отряд продолжает идти рядами по самой дороге и сохраняет её повороты: четыре колонки, на мосту — две. При начале атаки армия не выпрямляется поперёк карты. На углу передние ряды подравниваются друг напротив друга; ближайшие два ряда плавно соединяют фронт с остальным строем на дороге. Все четыре пары мечников сражаются одновременно, а на мосту — две пары. Взмах происходит раз в секунду, потери — через 0,25 секунды; следующие бойцы занимают освободившиеся места. При атаке башни весь отряд подтягивается к месту осады. Выжившие продолжают маршрут после боя.
+During combat, the group continues in rows along the road and follows its turns: four columns, or two on a bridge. The army does not straighten across the map when attacking. At a corner, front rows align opposite each other; the nearest two rows smoothly connect the front to the rest of the formation on the road. All four sword pairs fight simultaneously, or two pairs on a bridge. Swings occur every second, casualties after 0.25 seconds, and the following fighters fill empty positions. When attacking a tower, the entire group closes on the siege location. Survivors continue their route after combat.
 
-При защите здания мечники, быстрые бойцы и селяне остаются внутри. У входа нападающие и ближние защитники обмениваются потерями по тем же правилам четырёх пар. Видимый взмах со стороны гарнизона показывает ответный удар здания. Лучники обычных зданий появляются за моделью, лучники башни — на крыше; они защищены до падения здания. После гибели остальных защитников подошедший враг занимает обычное здание, и оставшиеся лучники погибают при захвате. Башню сначала нужно разрушить: её прочность и прежние правила восстановления сохранены. Полевые лучники могут поражать скрытых защитников обычного здания стрелами; у башни стрелы повреждают сооружение. Защищённые лучники по приказу выходят из передней двери обычным отрядом.
+When defending a building, swordsmen, fast fighters, and peasants remain inside. At the entrance, attackers and melee defenders exchange casualties using the same four-pair rules. A visible garrison-side swing represents the building's counterattack. Archers in ordinary buildings appear behind the model, and tower archers on the roof; they are protected until the building falls. After other defenders die, an approaching enemy occupies an ordinary building, and its remaining archers die on capture. Towers must first be destroyed: their durability and previous rebuilding rules are retained. Field archers can hit hidden defenders in ordinary buildings; arrows damage the structure of a tower. Protected archers given an order leave through the front door as an ordinary group.
 
-Путь через подходы промежуточного здания доступен только после его захвата своей стороной. Игра сначала ищет обход по всей видимой сети дорог, включая перекрёстки и общие участки. Если обхода нет, приказ отклоняется с объяснением, что нужно захватить промежуточное здание. Улица, проходящая мимо здания, остаётся доступной. Саму конечную цель можно атаковать; дорожные точки не требуют захвата. ИИ и подсветка пути используют то же правило.
+Routes through an intermediate building's approaches are available only after that building is captured by the same side. The game first searches the entire visible road network, including intersections and shared segments, for an alternative. If none exists, the order is rejected with an explanation that the intermediate building must be captured. A street passing alongside a building remains accessible. The final target itself can be attacked; road junctions do not require capture. AI and route highlighting use the same rule.
 
-На картах с рекой первые 60 секунд центральные мосты закрыты: занимайте сёла своего берега. Селяне превращаются в воинов при прибытии в конечное военное здание. Улучшения расходуют 50 и затем 100 человек из местного гарнизона и меняют полную модель здания. Фермы дают еду; при её отсутствии новые воины не создаются, а существующие остаются живы.
+On river maps, central bridges are closed for the first 60 seconds: capture villages on your own bank. Peasants become warriors when they arrive at their final military building. Upgrades consume 50, then 100, people from the local garrison and replace the whole building model. Farms provide food; without it, new warriors are not produced, while existing ones remain alive.
 
-Прибывшие люди исчезают в гарнизоне, если там есть место. Вместимость строгая: остальные ждут снаружи и заходят при освобождении мест. Ожидающие селяне ещё не обучаются. Панель отдельно показывает состав внутри и число ожидающих.
+Arriving people disappear into the garrison if capacity is available. Capacity is strict: others wait outside and enter as places become available. Waiting peasants are not trained yet. The panel separately shows the composition inside and the number waiting.
 
-## Редактор карт
+## Map editor
 
-Откройте **Редактор карт** в главном меню. Выберите тип здания и сторону, затем пустую клетку. Одно здание занимает одну клетку; русло реки остаётся свободным. Инструмент **Дороги** соединяет две выбранные точки, автоматически обходя остальные здания и строя подходы к мосту. **Точка дороги** позволяет задавать промежуточные соединения. Есть перенос, удаление, отмена последнего изменения и новая пустая карта.
+Open **Map Editor** in the main menu. Choose a building type and side, then an empty cell. Each building occupies one cell; the river channel stays clear. **Roads** connects two selected points, automatically routing around other buildings and creating bridge approaches. **Road Junction** adds intermediate connections. Move, delete, undo, and a new blank map are available.
 
-При первом открытии появляется инструкция; кнопка **?** открывает её повторно. Видимые перекрёстки, Т-образные развилки и общие участки дорог соединяются автоматически: где непрерывная дорога, там можно пройти. Например, казарма и стрельбище могут использовать общую улицу двух дорог от замка без захода в сам замок. **Точка дороги** помогает задать форму развилки; другие дороги больше не обходят такую точку как препятствие. Здания без соединённой видимой дороги остаются недоступными. Старые деревянные переходы без соединения убраны.
+Instructions appear on first opening; **?** reopens them. Visible intersections, T-junctions, and shared road segments connect automatically: a continuous road is traversable. For example, barracks and an archery range can share a street formed by two roads from a castle without entering the castle itself. **Road Junction** helps shape a fork; other roads no longer route around this point as an obstacle. Buildings without a connected visible road remain inaccessible. Old disconnected wooden crossings were removed.
 
-Переключатель **Река: да / нет** позволяет менять тип поля. Без реки центральный столбец становится обычными клетками. Чтобы включить реку обратно, сначала перенесите стоящие в этом столбце объекты. Новая пустая карта сохраняет выбранный тип поля; тип реки также входит в код карты и историю отмены.
+**River: yes / no** changes the field type. Without a river, the central column becomes ordinary cells. Move objects out of that column before enabling the river again. A new blank map retains the selected field type; river type is also included in the map code and undo history.
 
-Перед сохранением и запуском проверяется, что у каждой стороны ровно один замок и все здания соединены дорогами. **Играть** запускает созданную карту против ИИ. В выборе карт доступны «Две переправы», «Сухопутные рубежи» без реки, «Речной проход» с одним мостом, случайная базовая карта и сохранённая карта. На всех трёх базовых картах одинаковые здания и стартовые гарнизоны.
+Before saving and playing, validation requires exactly one castle per side and road connections to all buildings. **Play** starts the created map against AI. Map selection includes Two Crossings, the riverless Land Frontiers, River Passage with one bridge, a random base map, and a saved map. All three base maps use the same buildings and starting garrisons.
 
-В локальном непубликованном Studio-файле сохранение карты действует до остановки Play. Кнопка **Код карты** позволяет скопировать карту в текстовый файл; **Загрузить** восстанавливает её из этого кода. После сохранения в локальном Studio код открывается автоматически. Для опубликованной игры предусмотрено сохранение карты и настроек через DataStore, но оно ещё не проверено на опубликованном сервере.
+In a local unpublished Studio file, map saves last until Play stops. **Map Code** lets the user copy a map into a text file; **Load** restores it from this code. The code opens automatically after saving in local Studio. Published-game map and settings persistence is prepared through DataStore but has not yet been tested on a published server.
 
-## Настройки и музыка
+## Settings and music
 
-В настройках доступны громкость музыки, скорость камеры и масштаба, показ сетки и численности. Спокойная инструментальная тема **Medieval_Ambient_Lute**, автор DistrokidOfficial, взята из [Roblox Creator Store](https://create.roblox.com/store/asset/93176902923482) и встроена как Sound-ассет. Музыка запускается и повторяется автоматически.
+Settings provide music volume, camera and zoom speeds, grid visibility, and troop counts. The calm instrumental **Medieval_Ambient_Lute** by DistrokidOfficial comes from the [Roblox Creator Store](https://create.roblox.com/store/asset/93176902923482) and is embedded as a Sound asset. Music starts and loops automatically.
 
-## Что включено
+## Included features
 
-Карта с соединёнными дорогами и двумя мостами, замки, сёла, казармы, стрельбища, лагеря, башни и фермы; смешанные армии, строй по четыре, ближние бои, дальняя стрельба, разрушение и захват башен; экономика еды, три уровня зданий, три сложности бота, стартовое меню и управление камерой.
+A map with connected roads and two bridges; castles, villages, barracks, archery ranges, camps, towers, and farms; mixed armies, four-wide formations, melee combat, ranged attacks, tower destruction and capture; food economy, three building levels, three AI difficulties, a start menu, and camera controls.
 
-**Играть → С игроком** включает общий поиск среди игроков всех лобби. После подбора пара переносится в отдельный закрытый сервер; карта всегда случайная из трёх базовых. Матч с ИИ тоже получает отдельный закрытый сервер на одного игрока. Один и тот же опубликованный place работает как лобби и как сервер матча; второй файл игры не нужен. Заклинания пока не добавлены.
+**Play → With Player** enables global matchmaking across all lobbies. A matched pair transfers to a separate reserved server; the map is always randomly selected from the three base maps. An AI match also gets a separate reserved server for one player. The same published place serves as both lobby and match server; a second game file is unnecessary. Spells have not been added yet.
 
-Общая очередь использует MemoryStore и атомарное назначение пары, серверы матчей — ReserveServerAsync и TeleportAsync. Начало PvP ждёт загрузки обоих участников. Чужие посетители закрытого матча не допускаются. Выход участника завершает матч победой соперника; возврат ведёт в лобби текущего диапазона уровней. Публичный вход распределяет игроков по этим лобби. Есть отмена поиска, повтор подключения и восстановление очереди после ошибки создания сервера.
+The global queue uses MemoryStore and atomic pair assignment; match servers use ReserveServerAsync and TeleportAsync. PvP waits for both participants to load. Other visitors are not admitted to reserved matches. A participant leaving ends the match with the opponent winning; returning leads to the lobby for the current level bracket. Public entry distributes players across these lobbies. Search cancellation, reconnection, and queue recovery after server creation failures are implemented.
 
-В Studio переходы между серверами недоступны: для локальной проверки ИИ запускается здесь же, а PvP использует двух тестовых игроков. Реальные лобби и переходы нужно проверять после публикации в приложении Roblox — это [ограничение TeleportService](https://create.roblox.com/docs/projects/teleport). Размер публичного лобби задаётся лимитом игроков place при публикации. В лобби используется одна общая неподвижная симуляция; отдельная армия для каждого ожидающего игрока не создаётся.
+Cross-server transfers are unavailable in Studio: AI runs locally for testing, and PvP uses two test players. Real lobbies and transfers must be tested after publication in the Roblox app; this is a [TeleportService limitation](https://create.roblox.com/docs/projects/teleport). The public lobby size is set by the place's player limit when publishing. The lobby uses one shared stationary simulation; it does not create an army for each waiting player.
 
-## Файлы разработки
+## Development files
 
-- `inex.rbxl` — единственный основной файл игры. Игровые скрипты и данные геометрии встроены в него.
-- `design/CONCEPT_RU.md` — текущие согласованные правила.
-- `design/CONCEPT_V02_ARCHIVE.md` — предыдущая концепция для истории проекта.
-- `src/` — исходники встроенных Luau-скриптов.
-- `src/Progression.luau`, `PlayerData.luau`, `AccountServer.luau` — правила развития, атомарное сохранение, награды, магазин и обработка чеков; `MetaUI.luau` — страницы профиля, магазина и лидеров; `LobbyDirectory.luau` — лобби по уровням.
-- `assets/blender/skins/army_skins.blend` — три новых набора армии; рядом FBX, геометрия и `skins.png`. Сборка — `tools/build_skins.py`.
-- `tools/qa_v011.luau` — 17 проверок развития, покупки, сохранения, рангового подбора и лобби. Результаты — `design/QA_V011_RU.md` и `build/qa-v011-report.json`.
-- `design/CONCEPT_V010_ARCHIVE.md` и `build/pre-v011.bin` — правила и файл до версии 0.11.
-- `src/MapNetwork.luau` — сетка, проверка схемы, дороги и маршруты; `MapEditor.luau` — редактор.
-- `design/CONCEPT_V03_ARCHIVE.md` — концепция предыдущего прототипа.
-- `assets/blender/kingdoms_models.blend` — исходные модели Blender; рядом находятся экспорты FBX и изображения.
-- `tools/build_models.py` и `tools/geometry_to_luau.py` — сборка моделей и перенос геометрии в Luau.
-- `tools/qa_gameplay.luau` — проверка согласованных правил в Studio.
-- `tools/qa_v06.luau` — строй на мосту, новые карты, ближний контакт и общая очередь с имитацией разных лобби и ошибок Roblox-сервисов.
-- `tools/qa_v07.luau` — перекрытие пути владельцем здания, обход, выход 300 человек из дверей, сближение рядов и выход защитников гарнизона.
-- `tools/qa_v08.luau` — четыре одновременные пары на прямой и углу, две пары на мосту, ширина и расстояния рядов, одиночный лучник, защитники села и осада отрядом из 300 человек.
-- `tools/qa_full.luau` — девять партий на всех картах и сложностях ИИ, обучение только в конечном здании, голод, неполные и смешанные ряды, некорректные карты и приказы.
-- `tools/qa_v09.luau` — двенадцать проверок движения лучников, скрытой защиты здания, ответных потерь, захвата и выхода защищённых лучников из двери.
-- `design/QA_V09_RU.md` — результат проверки версии 0.9; подробные данные — `build/qa-v09-report.json`.
-- `tools/qa_v010.luau` — восемь проверок общей улицы, перекрёстков, развилок, совпавших дорог, захвата промежуточной базы и маршрутов на всех базовых картах.
-- `design/QA_V010_RU.md` — проверка версии 0.10; результаты — `build/qa-v010-report.json`.
-- `design/QA_FULL_RU.md` — общая проверка от 5 октября; подробные результаты сохранены в `build/full-qa-report.json`.
-- `src/MapCatalog.luau` — базовые карты; `GlobalMatchmaker.luau` и `ServerNetwork.luau` — очередь и перенос в закрытые серверы; `MatchLobby.luau` — участники и игровые партии.
-- `design/CONCEPT_V05_ARCHIVE.md` — правила предыдущей версии.
-- `design/CONCEPT_V06_ARCHIVE.md` — правила версии перед исправлением движения и темпа боя.
-- `design/CONCEPT_V07_ARCHIVE.md` — правила версии перед исправлением ширины строя во время боя.
-- `design/CONCEPT_V08_ARCHIVE.md` — правила версии перед изменением движения лучников и защиты гарнизона.
-- `design/CONCEPT_V09_ARCHIVE.md` — правила версии перед объединением видимых дорог и маршрутов; прежний файл игры — `build/pre-v010.bin`.
-- `build/original-place.bin` — резервная копия исходного Roblox-файла до добавления игры.
+- `inex.rbxl` — the single main game file. Game scripts and geometry data are embedded in it.
+- `design/CONCEPT_RU.md` — current agreed rules.
+- `design/CONCEPT_V02_ARCHIVE.md` — the previous concept retained as project history.
+- `src/` — sources of the embedded Luau scripts.
+- `src/Progression.luau`, `PlayerData.luau`, and `AccountServer.luau` — progression rules, atomic persistence, rewards, shop, and receipt processing; `MetaUI.luau` — profile, shop, and leaderboard pages; `LobbyDirectory.luau` — level-bracket lobbies.
+- `assets/blender/skins/army_skins.blend` — three new army sets; FBX, geometry, and `skins.png` are alongside it. Build script: `tools/build_skins.py`.
+- `tools/qa_v011.luau` — 17 progression, purchase, persistence, ranked matchmaking, and lobby checks. Results: `design/QA_V011_RU.md` and `build/qa-v011-report.json`.
+- `design/CONCEPT_V010_ARCHIVE.md` and `build/pre-v011.bin` — rules and game file from before version 0.11.
+- `src/MapNetwork.luau` — grid, schema validation, roads, and routing; `MapEditor.luau` — editor.
+- `design/CONCEPT_V03_ARCHIVE.md` — the previous prototype's concept.
+- `assets/blender/kingdoms_models.blend` — original Blender models, with FBX exports and images alongside.
+- `tools/build_models.py` and `tools/geometry_to_luau.py` — model generation and geometry conversion to Luau.
+- `tools/qa_gameplay.luau` — agreed-rule validation in Studio.
+- `tools/qa_v06.luau` — bridge formations, new maps, melee contact, and the global queue with simulated lobbies and Roblox service failures.
+- `tools/qa_v07.luau` — ownership route gates, alternative paths, 300 people leaving through doors, rear-row closing, and garrison defenders leaving buildings.
+- `tools/qa_v08.luau` — four simultaneous pairs on straight and corner roads, two bridge pairs, row width and spacing, a lone archer, village defenders, and a 300-person siege.
+- `tools/qa_full.luau` — nine matches across all maps and AI difficulties, training only at the final building, starvation, incomplete and mixed rows, invalid maps, and invalid orders.
+- `tools/qa_v09.luau` — twelve checks of archer movement, hidden building defense, retaliatory casualties, capture, and protected archers leaving through doors.
+- `design/QA_V09_RU.md` — version 0.9 validation; detailed data: `build/qa-v09-report.json`.
+- `tools/qa_v010.luau` — eight checks covering shared streets, intersections, junctions, overlapping roads, capture of intermediate bases, and routes on all base maps.
+- `design/QA_V010_RU.md` — version 0.10 validation; results: `build/qa-v010-report.json`.
+- `design/QA_FULL_RU.md` — general validation from October 5; detailed results are saved in `build/full-qa-report.json`.
+- `src/MapCatalog.luau` — base maps; `GlobalMatchmaker.luau` and `ServerNetwork.luau` — queue and reserved-server transfers; `MatchLobby.luau` — participants and matches.
+- `design/CONCEPT_V05_ARCHIVE.md` — rules from the previous version.
+- `design/CONCEPT_V06_ARCHIVE.md` — rules before the movement and combat pacing fixes.
+- `design/CONCEPT_V07_ARCHIVE.md` — rules before the combat formation-width fix.
+- `design/CONCEPT_V08_ARCHIVE.md` — rules before changes to archer movement and garrison defense.
+- `design/CONCEPT_V09_ARCHIVE.md` — rules before visible roads and routing were unified; previous game file: `build/pre-v010.bin`.
+- `build/original-place.bin` — backup of the original Roblox file before the game was added.
 
-## Модели и проверка
+## Models and validation
 
-Модели созданы в Blender. Для каждого из семи типов зданий есть три полные модели уровня: при улучшении видна только соответствующая модель. Высота каждого варианта выровнена по земле; флаги, подписи и стрелки на крыше башни подстраиваются к уровню. Клиент клонирует обычные импортированные MeshPart; EditableMesh во время Play не используется. В версии 0.16 установлены 806 исходных моделей и варианты команд/нейтралов — 1969 шаблонов. Геометрия повторно используется Roblox между клонами, старые предпросмотры освобождаются. Полный новый экспорт содержит 593 392 исходные грани; подробные оригиналы сохранены в Blender.
+Models were created in Blender. Each of the seven building types has three complete level models; only the appropriate model is shown after an upgrade. Every variant is aligned to ground level. Flags, labels, and arrows on the tower roof follow its level. The client clones ordinary imported MeshParts; EditableMesh is not used during Play. Version 0.16 contains 806 source models and team/neutral variants: 1,969 templates. Roblox reuses geometry between clones, and old previews are released. The complete new export contains 593,392 source faces; detailed originals remain in Blender.
 
-Игра опубликована и доступ Public включён; Roblox ограничивает аудиторию пользователями 16+ и доверенными друзьями. Проверены Studio Play, два клиента, новые премиальные модели, редактор и прокрутка магазина в эмуляторе телефона. Физический телефон и настоящая платёжная транзакция ещё не проверены. Оригинальные музыка и звуки загружены в Roblox; галерея — https://frontier-kingdoms-sound-library.kmnv-mykola.chatgpt.site (доступ владельцу). Ролик Shorts/TikTok: `build/release/Frontier-Kingdoms-Shorts.mp4`; Roblox-трейлер: `build/release/Frontier-Kingdoms-Roblox-Trailer.mp4`.
+The game is published and Public access is enabled; Roblox restricts the audience to users aged 16+ and trusted friends. Studio Play, two clients, new premium models, the editor, and shop scrolling in the phone emulator were checked. A physical phone and actual payment transaction have not yet been tested. Original music and effects are uploaded to Roblox. Gallery: https://frontier-kingdoms-sound-library.kmnv-mykola.chatgpt.site (owner access). Shorts/TikTok video: `build/release/Frontier-Kingdoms-Shorts.mp4`; Roblox trailer: `build/release/Frontier-Kingdoms-Roblox-Trailer.mp4`.
 
-В общей проверке прошли все пять наборов игровых проверок и девять партий с ИИ по три игровых минуты. Через интерфейс проверены меню, настройки, управление, редактор и запуск созданной карты; загружены все модели и музыка. Исправлены наложения панели на кнопку информации телефона, положения уведомления после запуска матча и информации на нижний ползунок в маленьком окне ПК. Проверка дополнительных разрешений прекращена по просьбе пользователя. Последнее исправление маленького окна ПК проверено по исходнику, без повторного запуска другого разрешения.
+General validation passed all five gameplay suites and nine AI matches of three game minutes each. UI checks covered menus, settings, controls, editor, and playing a custom map; all models and music loaded. Fixes addressed the panel overlapping the phone information button, notification positioning after match start, and information overlapping the bottom slider in a small PC window. Testing additional resolutions stopped at the user's request. The last small-PC-window fix was checked in source without another resolution run.
 
-В версии 0.11 прошли 17 новых проверок, повторная проверка очереди и игрового процесса, включая девять партий с ИИ. На одном обычном экране ПК проверены магазин, получение наград, покупка и экипировка «Ветеранов», их появление в походе, ранговый поиск/отмена и таблицы лидеров. Подробности и границы проверки указаны в `design/QA_V011_RU.md`.
+Version 0.11 passed 17 new checks and repeated queue and gameplay validation, including nine AI matches. On one ordinary PC screen, checks covered the shop, rewards, purchasing and equipping Veterans, their marching appearance, ranked search/cancellation, and leaderboards. Details and validation limits are in `design/QA_V011_RU.md`.

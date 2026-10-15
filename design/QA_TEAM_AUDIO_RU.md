@@ -1,13 +1,13 @@
-# Цвета команд и локальный звук — 6 октября 2026
+# Team colors and local audio — October 6, 2026
 
-Проверка `tools/run_local_qa.py` завершена: компилируются 827 исходников; проходят все 61 сценарий, включая семь новых сценариев `tools/qa_team_audio.luau`. Результат сохранён в `build/inventory-qa-report.json` и выводе отдельных наборов проверок.
+`tools/run_local_qa.py` completed: 827 sources compile and all 61 scenarios pass, including seven new `tools/qa_team_audio.luau` scenarios. Results are saved in `build/inventory-qa-report.json` and individual suite outputs.
 
-Новые проверки используют настоящие модули `Art`, `Music`, `UI`, `Config` и `SkinStyles`. Для каждой из 25 коллекций и четырёх типов армии загружаются реальные экспортированные палитры моделей. Для обоих зрителей проверяется: собственная ткань и знак команды синие, противник красный, оттенки кожи, оружия и брони сохранены. Цветовые варианты геометрии повторно используют кеш; голова без командной ткани остаётся общей; удаление моделей освобождает неиспользуемые варианты.
+New checks use real `Art`, `Music`, `UI`, `Config`, and `SkinStyles` modules. Real exported model palettes load for each of 25 collections and four army types. For both viewers, friendly fabric/team markings must be blue, enemies red, while skin/weapon/armor shades remain unchanged. Geometry color variants reuse the cache; heads without team fabric remain shared, and deleting models frees unused variants.
 
-Звуковые проверки подтверждают разделение громкости музыки и интерфейса, ограничение частоты повторных кликов, отсутствие звука у отключённой кнопки и переключение контекста меню/бой без перезапуска трека на каждом снимке состояния. Два независимых клиентских окружения не делятся событиями интерфейсного звука или настройками громкости. Модуль использует `SoundService:PlayLocalSound`, а создание аудио на сервере отклоняется. Проверена подстановка загруженного Roblox ID вместо временного ID.
+Audio checks confirm separate music/interface volumes, repeated-click rate limits, silent disabled buttons, and menu/combat context changes without restarting tracks on every snapshot. Two independent client environments do not share interface sound events or volume settings. The module uses `SoundService:PlayLocalSound` and rejects server-side audio creation. Replacing a temporary ID with an uploaded Roblox ID was checked.
 
-При проверке обнаружена неточность тестового заменителя `Instance`: обращение `model.Torso` не находило деталь, переименованную после назначения родителя. Заменитель теперь ищет ребёнка по текущему имени в списке детей, как Roblox. Это исправление относится только к тестам.
+Validation found an inaccurate mock `Instance`: `model.Torso` failed to find a child renamed after parenting. The mock now searches current child names, like Roblox. This fix affects tests only.
 
-Ограничения: проверки CLI подменяют Roblox API, создание mesh, анимацию перехода громкости и воспроизведение звука. Геометрия для подсчёта выделений упрощена, а её палитра взята из настоящих экспортов. Результаты не подтверждают FPS, фактическую загрузку звуков Roblox, разрешения EditableMesh в опубликованной игре или прослушивание двумя настоящими игроками.
+Limits: CLI mocks Roblox APIs, mesh creation, volume-transition animation, and audio playback. Allocation-test geometry is simplified, while palettes come from real exports. Results do not establish FPS, actual Roblox sound loading, published-game EditableMesh permissions, or listening by two real players.
 
-В `src/AudioCatalog.luau` оригинальные записи пока имеют `Id=0`: в игре используются подготовленные временные Roblox-ассеты. Оригинальные WAV доступны в `assets/audio/original`; подключение оригиналов требует их загрузки в Roblox и замены ID. Наличие WAV на диске или прослушивание на сайте само по себе не подключает запись к игре.
+Originals in `src/AudioCatalog.luau` still have `Id=0`; the game uses prepared temporary Roblox assets. Original WAVs are in `assets/audio/original`; connecting them requires Roblox uploads and ID replacement. Disk WAVs or website playback alone do not connect recordings to the game.

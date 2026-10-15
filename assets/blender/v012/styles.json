@@ -1,7 +1,7 @@
 [
   {
     "Id": "Veteran",
-    "Name": "Ветераны",
+    "Name": "Veterans",
     "Cloth": "#526347",
     "Armor": "#7D8780",
     "Trim": "#B88445",
@@ -9,7 +9,7 @@
   },
   {
     "Id": "Royal",
-    "Name": "Королевская гвардия",
+    "Name": "Royal Guard",
     "Cloth": "#ECE3C3",
     "Armor": "#CBD3D7",
     "Trim": "#DAB053",
@@ -17,7 +17,7 @@
   },
   {
     "Id": "Dark",
-    "Name": "Тёмные рыцари",
+    "Name": "Dark Knights",
     "Cloth": "#342F45",
     "Armor": "#414D60",
     "Trim": "#B1ADB9",
@@ -25,7 +25,7 @@
   },
   {
     "Id": "Forest",
-    "Name": "Лесные стражи",
+    "Name": "Forest Wardens",
     "Cloth": "#355942",
     "Armor": "#879B72",
     "Trim": "#D0AF74",
@@ -33,7 +33,7 @@
   },
   {
     "Id": "Sun",
-    "Name": "Орден солнца",
+    "Name": "Order of the Sun",
     "Cloth": "#A95330",
     "Armor": "#D7C8A0",
     "Trim": "#E5B54C",
@@ -41,7 +41,7 @@
   },
   {
     "Id": "Moon",
-    "Name": "Лунный дозор",
+    "Name": "Moon Watch",
     "Cloth": "#454B76",
     "Armor": "#A7B3CB",
     "Trim": "#D1CFEB",
@@ -49,7 +49,7 @@
   },
   {
     "Id": "Frost",
-    "Name": "Ледяная стража",
+    "Name": "Frost Guard",
     "Cloth": "#66A5B2",
     "Armor": "#CCE4E5",
     "Trim": "#89C7DC",
@@ -57,7 +57,7 @@
   },
   {
     "Id": "Ember",
-    "Name": "Пепельный легион",
+    "Name": "Ashen Legion",
     "Cloth": "#733928",
     "Armor": "#595052",
     "Trim": "#E8944E",
@@ -65,7 +65,7 @@
   },
   {
     "Id": "Grove",
-    "Name": "Дубовая дружина",
+    "Name": "Oak Guard",
     "Cloth": "#6C7744",
     "Armor": "#9B9A72",
     "Trim": "#A57C4C",
@@ -73,7 +73,7 @@
   },
   {
     "Id": "Storm",
-    "Name": "Рыцари бури",
+    "Name": "Storm Knights",
     "Cloth": "#3D6479",
     "Armor": "#9AB4C4",
     "Trim": "#EBD172",
@@ -81,7 +81,7 @@
   },
   {
     "Id": "Iron",
-    "Name": "Железный бастион",
+    "Name": "Iron Bastion",
     "Cloth": "#68635B",
     "Armor": "#7C8587",
     "Trim": "#C6B39A",
@@ -89,7 +89,7 @@
   },
   {
     "Id": "Rose",
-    "Name": "Орден розы",
+    "Name": "Order of the Rose",
     "Cloth": "#86495D",
     "Armor": "#CDC1B8",
     "Trim": "#E5AA99",
@@ -97,7 +97,7 @@
   },
   {
     "Id": "Sapphire",
-    "Name": "Сапфировая корона",
+    "Name": "Sapphire Crown",
     "Cloth": "#294D79",
     "Armor": "#ADBCCF",
     "Trim": "#D4C2A3",
@@ -105,7 +105,7 @@
   },
   {
     "Id": "Amber",
-    "Name": "Янтарная дружина",
+    "Name": "Amber Guard",
     "Cloth": "#95663B",
     "Armor": "#AC9A80",
     "Trim": "#E8B450",
@@ -113,7 +113,7 @@
   },
   {
     "Id": "Raven",
-    "Name": "Вороньи плащи",
+    "Name": "Raven Cloaks",
     "Cloth": "#34383F",
     "Armor": "#6C7886",
     "Trim": "#B8BEC6",
@@ -121,7 +121,7 @@
   },
   {
     "Id": "Lion",
-    "Name": "Львиная гвардия",
+    "Name": "Lion Guard",
     "Cloth": "#8A3C33",
     "Armor": "#C8B494",
     "Trim": "#E0BC59",
@@ -129,7 +129,7 @@
   },
   {
     "Id": "Griffin",
-    "Name": "Стражи грифона",
+    "Name": "Griffin Wardens",
     "Cloth": "#667986",
     "Armor": "#D7D5C5",
     "Trim": "#D6AD66",
@@ -137,7 +137,7 @@
   },
   {
     "Id": "Dragon",
-    "Name": "Драконий орден",
+    "Name": "Dragon Order",
     "Cloth": "#506452",
     "Armor": "#738780",
     "Trim": "#C09851",
@@ -145,7 +145,7 @@
   },
   {
     "Id": "Rune",
-    "Name": "Рунные хранители",
+    "Name": "Rune Keepers",
     "Cloth": "#5B5277",
     "Armor": "#939CAD",
     "Trim": "#C2B2D2",
@@ -153,7 +153,7 @@
   },
   {
     "Id": "Oracle",
-    "Name": "Звёздные хранители",
+    "Name": "Star Keepers",
     "Cloth": "#605482",
     "Armor": "#C3B9CF",
     "Trim": "#E2CCA2",
@@ -161,7 +161,7 @@
   },
   {
     "Id": "Crusader",
-    "Name": "Белые знамена",
+    "Name": "White Banners",
     "Cloth": "#DFD5BE",
     "Armor": "#B9C5CE",
     "Trim": "#AA8960",
@@ -169,7 +169,7 @@
   },
   {
     "Id": "Mariner",
-    "Name": "Береговая стража",
+    "Name": "Coastal Guard",
     "Cloth": "#3E6D74",
     "Armor": "#91A8A6",
     "Trim": "#D6B078",
@@ -177,7 +177,7 @@
   },
   {
     "Id": "Nomad",
-    "Name": "Степные всадники",
+    "Name": "Steppe Riders",
     "Cloth": "#AB7950",
     "Armor": "#9E8D73",
     "Trim": "#DCCCA5",
@@ -185,7 +185,7 @@
   },
   {
     "Id": "Stag",
-    "Name": "Серебряный олень",
+    "Name": "Silver Stag",
     "Cloth": "#597067",
     "Armor": "#D4DCD2",
     "Trim": "#C4CFB7",
